@@ -1,0 +1,170 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Evolution API Documentation",
+  "openapi": [
+    "/openapi/viewer.json"
+  ],
+  "feedback": {
+    "suggestEdit": false
+  },
+  "logo": {
+    "dark": "/images/brand/cover-white.png",
+    "light": "/images/brand/cover.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#49BC94",
+    "light": "#49BC94",
+    "dark": "#49BC94",
+    "background": {
+      "dark": "#18181B"
+    },
+    "anchors": {
+      "from": "#FF7F57",
+      "to": "#9563FF"
+    }
+  },
+  "topbarLinks": [],
+  "topbarCtaButton": {
+    "name": "GitHub",
+    "url": "https://github.com/EvolutionAPI/evolution-api",
+    "type": "link"
+  },
+  "primaryTab": {
+    "name": "Português"
+  },
+  "tabs": [
+    {
+      "name": "English",
+      "url": "en"
+    },
+    {
+      "name": "API",
+      "url": "api-reference"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Iniciar",
+      "pages": [
+        "pt/get-started/introduction",
+        {
+          "group": "Instalação",
+          "icon": "wrench",
+          "pages": [
+            "pt/install/docker",
+            "pt/install/nvm"
+          ]
+        },
+        {
+          "group": "Recursos Opcionais",
+          "icon": "toolbox",
+          "pages": [
+            "pt/optional-resources/mongo-db",
+            "pt/optional-resources/rabbitmq",
+            "pt/optional-resources/redis",
+            "pt/optional-resources/websocket"
+          ]
+        },
+        "pt/env",
+        "pt/updates",
+        {
+          "group": "Configuração",
+          "icon": "wrench",
+          "pages": [
+            "pt/configuration/available-resources",
+            "pt/configuration/webhooks"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Getting Started",
+      "pages": [
+        "en/get-started/introduction",
+        {
+          "group": "Install",
+          "icon": "wrench",
+          "pages": [
+            "en/install/docker",
+            "en/install/nvm"
+          ]
+        },
+        {
+          "group": "Optional Resources",
+          "icon": "toolbox",
+          "pages": [
+            "en/optional-resources/mongo-db",
+            "en/optional-resources/rabbitmq",
+            "en/optional-resources/redis",
+            "en/optional-resources/websocket"
+          ]
+        },
+        "en/env",
+        "en/updates",
+        {
+          "group": "Configuration",
+          "icon": "wrench",
+          "pages": [
+            "en/configuration/available-resources",
+            "en/configuration/webhooks"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Início",
+      "pages": [
+        "api-reference/authentication"
+      ]
+    },
+    {
+      "group": "Instances",
+      "pages": [
+        "api-reference/instance-controller/create-instance-basic",
+        "api-reference/instance-controller/fetch-instances",
+        "api-reference/instance-controller/instance-connect",
+        "api-reference/instance-controller/restart-instance",
+        "api-reference/instance-controller/connection-state",
+        "api-reference/instance-controller/logout-instance",
+        "api-reference/instance-controller/delete-instance",
+        "api-reference/instance-controller/set-presence"
+      ]
+    },
+    {
+      "group": "Webhook",
+      "pages": [
+        "api-reference/webhook/set",
+        "api-reference/webhook/get"
+      ]
+    },
+    {
+      "group": "Settings",
+      "pages": [
+        "api-reference/settings/set",
+        "api-reference/settings/get"
+      ]
+    },
+    {
+      "group": "Send Message",
+      "pages": [
+        "api-reference/message-controller/send-template",
+        "api-reference/message-controller/send-text",
+        "api-reference/message-controller/send-status",
+        "api-reference/message-controller/send-media",
+        "api-reference/message-controller/send-audio",
+        "api-reference/message-controller/send-sticker",
+        "api-reference/message-controller/send-location",
+        "api-reference/message-controller/send-contact",
+        "api-reference/message-controller/send-reaction",
+        "api-reference/message-controller/send-poll",
+        "api-reference/message-controller/send-list"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://evolution-api.com",
+    "github": "https://github.com/EvolutionAPI/evolution-api",
+    "whatsapp": "https://chat.whatsapp.com/IilIopfCuooFT7ARbuidaO"
+  }
+}

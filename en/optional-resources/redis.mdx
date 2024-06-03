@@ -1,0 +1,19 @@
+---
+title: Redis
+icon: layer-group
+---
+
+# Setup
+
+Redis is an in-memory data structure store, used as a database, cache, and message broker. It supports data structures such as strings, hashes, lists, sets, and more. Incorporating Redis can significantly improve the performance of Evolution API by enabling faster data access and efficient caching.
+
+Set the Redis environment variables in the `.env` for Docker or the `dev-env.yml` for NPM file as follows:
+
+~~~ shell
+# Set to true to enable Redis.
+REDIS_ENABLED=false
+# Your Redis server URI.
+REDIS_URI=redis://redis:6379
+# Prefix key for Redis data.
+REDIS_PREFIX_KEY=evo
+~~~

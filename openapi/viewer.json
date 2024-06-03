@@ -1,0 +1,2214 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Evolution API",
+		"version": "1.7.1"
+	},
+	"servers": [
+		{
+			"url": "https://{server-url}",
+			"variables": {
+				"server-url": {
+					"default": "evolution-example",
+					"description": "The URL of your EvolutionAPI server"
+				}
+			}
+		}
+	],
+	"paths": {
+		"/instance/create": {
+			"post": {
+				"operationId": "createInstance",
+				"summary": "Create Instance",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": ["instanceName"],
+								"properties": {
+									"instanceName": {
+										"type": "string",
+										"description": "instance (Instance name)"
+									},
+									"token": {
+										"type": "string",
+										"description": "apikey (Enter or leave empty to create dynamically)"
+									},
+									"qrcode": {
+										"type": "boolean",
+										"description": "Create QR Code automatically after creation"
+									},
+									"number": {
+										"type": "string",
+										"description": "559999999999 (Instance owner number with Country Code)"
+									},
+									"integration": {
+										"type": "string",
+										"description": "WhatsApp engine (WHATSAPP-BAILEYS or WHATSAPP-BUSINESS",
+										"enum": ["WHATSAPP-BAILEYS", "WHATSAPP-BUSINESS"]
+									},
+									"webhook": {
+										"type": "string",
+										"description": "Webhook URL"
+									},
+									"webhook_by_events": {
+										"type": "boolean",
+										"description": "Enable Webhook by events"
+									},
+									"events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN",
+												"TYPEBOT_START",
+												"TYPEBOT_CHANGE_STATUS"
+											]
+										},
+										"description": "Events to be sent to the Webhook"
+									},
+									"reject_call": {
+										"type": "boolean",
+										"description": "Reject WhatsApp calls automatically"
+									},
+									"msg_call": {
+										"type": "string",
+										"description": "Message to be sent when a call is rejected automatically"
+									},
+									"groups_ignore": {
+										"type": "boolean",
+										"description": "Ignore group messages"
+									},
+									"always_online": {
+										"type": "boolean",
+										"description": "Keep WhatsApp always online"
+									},
+									"read_messages": {
+										"type": "boolean",
+										"description": "Send read receipts to received messages"
+									},
+									"read_status": {
+										"type": "boolean",
+										"description": "Show sent messages read status"
+									},
+									"websocket_enabled": {
+										"type": "boolean",
+										"description": "Enable websocket"
+									},
+									"websocket_events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN",
+												"TYPEBOT_START",
+												"TYPEBOT_CHANGE_STATUS"
+											]
+										},
+										"description": "Events to be sent to the websocket"
+									},
+									"rabbitmq_enabled": {
+										"type": "boolean",
+										"description": "Enable RabbitMQ"
+									},
+									"rabbitmq_events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN",
+												"TYPEBOT_START",
+												"TYPEBOT_CHANGE_STATUS"
+											]
+										},
+										"description": "Events to be sent to the RabbitMQ"
+									},
+									"sqs_enabled": {
+										"type": "boolean",
+										"description": "Enable SQS"
+									},
+									"sqs_events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN",
+												"TYPEBOT_START",
+												"TYPEBOT_CHANGE_STATUS"
+											]
+										},
+										"description": "Events to be sent to the SQS"
+									},
+									"typebot_url": {
+										"type": "string",
+										"description": "URL for the typebot instance"
+									},
+									"typebot": {
+										"type": "string",
+										"description": "Typebot name TODO"
+									},
+									"typebot_expire": {
+										"type": "integer",
+										"description": "Seconds to expire TODO"
+									},
+									"typebot_keyword_finish": {
+										"type": "string",
+										"description": "Keyword to be sent on typebot finish TODO"
+									},
+									"typebot_delay_message": {
+										"type": "integer",
+										"description": "Default delay for the typebot messages"
+									},
+									"typebot_unknown_message": {
+										"type": "string",
+										"description": "TODO"
+									},
+									"typebot_listening_from_me": {
+										"type": "boolean",
+										"description": "Typebot listen messages sent by the connected number"
+									},
+									"proxy": {
+										"type": "object",
+										"properties": {
+											"host": {
+												"type": "string",
+												"description": "Proxy host"
+											},
+											"port": {
+												"type": "string",
+												"description": "Proxy port"
+											},
+											"protocol": {
+												"type": "string",
+												"description": "Proxy protocol",
+												"enum": ["http", "https"]
+											},
+											"username": {
+												"type": "string",
+												"description": "Proxy username"
+											},
+											"password": {
+												"type": "string",
+												"description": "Proxy password"
+											}
+										}
+									},
+									"chatwoot_account_id": {
+										"type": "integer",
+										"description": "Chatwoot account ID"
+									},
+									"chatwoot_token": {
+										"type": "string",
+										"description": "Chatwoot authentication token"
+									},
+									"chatwoot_url": {
+										"type": "string",
+										"description": "Chatwoot server URL"
+									},
+									"chatwoot_sign_msg": {
+										"type": "boolean",
+										"description": "Send message signature on Chatwoot"
+									},
+									"chatwoot_reopen_conversation": {
+										"type": "boolean",
+										"description": "Reopen conversation on Chatwoot"
+									},
+									"chatwoot_conversation_pending": {
+										"type": "boolean",
+										"description": "TODO"
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/fetchInstances": {
+			"get": {
+				"operationId": "fetchInstances",
+				"summary": "Fetch Instances",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instanceName",
+						"description": "Name of the instance to be fetched",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"description": "Name of the instance to be fetched"
+						}
+					}
+				],
+				"description": "Returns the instance with the name informed in the parameter, or all the instances if empty.",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/connect/{instance}": {
+			"get": {
+				"operationId": "instanceConnect",
+				"summary": "Instances Connect",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					},
+					{
+						"name": "number",
+						"description": "Number to connect (with DDI)",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"description": "Number to connect (with DDI)"
+						}
+					}
+				],
+				"description": "Generates and returns the QR code for WhatsApp connection",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/restart/{instance}": {
+			"put": {
+				"operationId": "restartInstance",
+				"summary": "Restart Instance",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Restarts the instance",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/connectionState/{instance}": {
+			"get": {
+				"operationId": "connectionState",
+				"summary": "Connection State",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Gets the state of the connection",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/logout/{instance}": {
+			"delete": {
+				"operationId": "logoutInstance",
+				"summary": "Logout Instance",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Makes logout on instance",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/delete/{instance}": {
+			"delete": {
+				"operationId": "deleteInstance",
+				"summary": "Delete Instance",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Deletes instance",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/instance/setPresence/{instance}": {
+			"post": {
+				"operationId": "setPresence",
+				"summary": "Set Presence",
+				"tags": [
+					"Instance Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Deletes instance",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": ["presence"],
+								"properties": {
+									"presence": {
+										"type": "string",
+										"enum": ["available", "unavailable"]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/webhook/set/{instance}": {
+			"post": {
+				"operationId": "setWebhook",
+				"summary": "Set Webhook",
+				"tags": [
+					"Webhook Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set Webhook for instance",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"url": {
+										"type": "string",
+										"description": "Webhook URL"
+									},
+									"webhook_by_events": {
+										"type": "boolean",
+										"description": "Enables Webhook by events"
+									},
+									"webhook_base64": {
+										"type": "boolean",
+										"description": "TODO"
+									},
+									"events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN",
+												"TYPEBOT_START",
+												"TYPEBOT_CHANGE_STATUS"
+											]
+										},
+										"description": "Events to be sent to the Webhook"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/webhook/find/{instance}": {
+			"get": {
+				"operationId": "findWebhook",
+				"summary": "Find Webhook",
+				"tags": [
+					"Webhook Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Fetch Webhook configuration",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/settings/set/{instance}": {
+			"post": {
+				"operationId": "setSettings",
+				"summary": "Set Settings",
+				"tags": [
+					"Settings Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set settings",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"reject_call": {
+										"type": "boolean",
+										"description": "Reject calls automatically"
+									},
+									"msg_call": {
+										"type": "string",
+										"description": "Message to send after rejecting a call automatically"
+									},
+									"groups_ignore": {
+										"type": "boolean",
+										"description": "Ignore group messages"
+									},
+									"always_online": {
+										"type": "boolean",
+										"description": "Always show WhatsApp online"
+									},
+									"read_messages": {
+										"type": "boolean",
+										"description": "Send read receipts"
+									},
+									"read_status": {
+										"type": "boolean",
+										"description": "See message status"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/settings/find/{instance}": {
+			"get": {
+				"operationId": "findWebhook",
+				"summary": "Find Webhook",
+				"tags": [
+					"Webhook Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Fetch Webhook configuration",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendTemplate/{instance}": {
+			"post": {
+				"operationId": "sendTemplate",
+				"summary": "Send Template",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send a template message with the Official WhatsApp API",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Message receiver number with country code"
+									},
+									"templateMessage": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string",
+												"description": "Template name"
+											},
+											"language": {
+												"type": "string",
+												"description": "Template language",
+												"example": "pt_BR"
+											},
+											"components": {
+												"type": "array",
+												"description": "Template components",
+												"items": {
+													"type": "object",
+													"properties": {
+														"type": {
+															"type": "string",
+															"enum": ["header", "body", "button"]
+														},
+														"sub_type": {
+															"type": "string",
+															"enum": ["quick_reply", "url", "copy_code", "catalog"]
+														},
+														"index": {
+															"type": "string",
+															"description": "Button index from 0-9"
+														},
+														"parameters": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"type": {
+																		"type": "string",
+																		"description": "Parameter type",
+																		"enum": ["payload", "text", "coupon_code", "currency", "date_time", "image", "document", "video"]
+																	},
+																	"text": {
+																		"type": "string",
+																		"description": "Parameter text"
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendText/{instance}": {
+			"post": {
+				"operationId": "sendText",
+				"summary": "Send Text",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send plain text message",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing", "recording"]
+											},
+											"linkPreview": {
+												"type": "boolean",
+												"description": "TODO"
+											},
+											"quoted": {
+												"type": "object",
+												"properties": {
+													"key": {
+														"type": "object",
+														"properties": {
+															"remoteJid": {
+																"type": "string",
+																"description": "Receiver phone number with country code"
+															},
+															"fromMe": {
+																"type": "boolean",
+																"description": "If the message is from the owner number"
+															},
+															"id": {
+																"type": "string",
+																"description": "Message ID"
+															},
+															"participant": {
+																"type": "string",
+																"description": "TODO"
+															}
+														}
+													},
+													"message": {
+														"type": "object",
+														"properties": {
+															"conversation": {
+																"type": "string",
+																"description": "TODO"
+															}
+														}
+													}
+												}
+											},
+											"mentions": {
+												"type": "object",
+												"properties": {
+													"everyOne": {
+														"type": "boolean",
+														"description": "Mentions everyone"
+													},
+													"mentioned": {
+														"type": "array",
+														"items": {
+															"type": "string",
+															"description": "Receiver phone number with country code"
+														}
+													}
+												}
+											}
+										}
+									},
+									"textMessage": {
+										"type": "object",
+										"properties": {
+											"text": {
+												"type": "string",
+												"description": "Text message content"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendMedia/{instance}": {
+			"post": {
+				"operationId": "sendMedia",
+				"summary": "Send Media",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send media message",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing", "recording"]
+											}
+										}
+									},
+									"mediaMessage": {
+										"type": "object",
+										"properties": {
+											"mediaType": {
+												"type": "string",
+												"description": "Media type",
+												"enum": ["image", "video", "document", "audio"]
+											},
+											"fileName": {
+												"type": "string",
+												"description": "Name of the file (for media type `document` only)",
+												"example": "evolution-api.pdf"
+											},
+											"caption": {
+												"type": "string",
+												"description": "Caption to send with media (except with media type `audio`)"
+											},
+											"media": {
+												"type": "string",
+												"description": "Media URL or file in base64"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendWhatsAppAudio/{instance}": {
+			"post": {
+				"operationId": "sendWhatsAppAudio",
+				"summary": "Send WhatsApp Audio",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send WhatsApp Audio",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["recording"],
+												"default": "recording"
+											},
+											"encoding": {
+												"type": "boolean",
+												"description": "If the audio must be encoded or not"
+											}
+										}
+									},
+									"audioMessage": {
+										"type": "object",
+										"properties": {
+											"audio": {
+												"type": "string",
+												"description": "Audio URL or file in base64"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendSticker/{instance}": {
+			"post": {
+				"operationId": "sendSticker",
+				"summary": "Send Sticker",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send Sticker",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing"],
+												"default": "composing"
+											}
+										}
+									},
+									"stickerMessage": {
+										"type": "object",
+										"properties": {
+											"image": {
+												"type": "string",
+												"description": "Image URL or file in base64"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendStatus/{instance}": {
+			"post": {
+				"operationId": "sendStatus",
+				"summary": "Send Status",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Post WhatsApp status (stories)",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"statusMessage": {
+										"type": "object",
+										"properties": {
+											"type": {
+												"type": "string",
+												"description": "status type",
+												"enum": ["text", "image", "audio"]
+											},
+											"content": {
+												"type": "string",
+												"description": "Text content for type `text` or file URL for type `image` and `audio`"
+											},
+											"caption": {
+												"type": "string",
+												"description": "Text caption for type `image` status"
+											},
+											"backgroundColor": {
+												"type": "string",
+												"description": "Background hex color"
+											},
+											"font": {
+												"type": "integer",
+												"description": "1 - Serif, 2 - Norican Regular, 3 - Bryndan Write, 4 - BebasNeue Regular, 5 - Oswald Heavy"
+											},
+											"allContacts": {
+												"type": "boolean",
+												"description": "true to send to all contacts or false to send to statusJidList"
+											},
+											"statusJidList": {
+												"type": "array",
+												"items": {
+													"type": "string",
+													"description": "Receivers numbers with country code"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendLocation/{instance}": {
+			"post": {
+				"operationId": "sendLocation",
+				"summary": "Send Location",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send Location",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing"],
+												"default": "composing"
+											}
+										}
+									},
+									"locationMessage": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string",
+												"description": "Location name"
+											},
+											"address": {
+												"type": "string",
+												"description": "Location address"
+											},
+											"latitude": {
+												"type": "number",
+												"description": "Location latitude"
+											},
+											"longitude": {
+												"type": "number",
+												"description": "Location longitude"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendContact/{instance}": {
+			"post": {
+				"operationId": "sendContact",
+				"summary": "Send Contact",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send Contact",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing"],
+												"default": "composing"
+											}
+										}
+									},
+									"contact": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"required": ["fullname", "wuid", "phoneNumber"],
+											"properties": {
+												"fullName": {
+													"type": "string",
+													"description": "Contact full name"
+												},
+												"wuid": {
+													"type": "string",
+													"description": "Phone number non-stylized with country code (5531999999999)"
+												},
+												"phoneNumber": {
+													"type": "string",
+													"description": "Phone number stylized (+55 31 9 9999-9999)"
+												},
+												"organization": {
+													"type": "string",
+													"description": "Organization name for the contact"
+												},
+												"email": {
+													"type": "string",
+													"description": "Contact email address"
+												},
+												"url": {
+													"type": "string",
+													"description": "Page URL"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendReaction/{instance}": {
+			"post": {
+				"operationId": "sendReaction",
+				"summary": "Send Reaction",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send Reaction",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"reactionMessage": {
+										"type": "object",
+										"properties": {
+											"key": {
+												"type": "object",
+												"properties": {
+													"remoteJid": {
+														"type": "string",
+														"description": "WhatsApp JID (number with country code plus `@s.whatsapp.net`)"
+													},
+													"fromMe": {
+														"type": "boolean",
+														"description": "If the message was sent by the instance owner or not"
+													},
+													"id": {
+														"type": "string",
+														"description": "Message ID"
+													}
+												}
+											},
+											"reaction": {
+												"type": "string",
+												"description": "Reaction emoji",
+												"example": "🚀"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendPoll/{instance}": {
+			"post": {
+				"operationId": "sendPoll",
+				"summary": "Send Poll",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send Poll",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing", "recording"]
+											}
+										}
+									},
+									"pollMessage": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string",
+												"description": "Name of the poll"
+											},
+											"selectableCount": {
+												"type": "integer",
+												"description": "Amount of options"
+											},
+											"values": {
+												"type": "array",
+												"items":{
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/message/sendList/{instance}": {
+			"post": {
+				"operationId": "sendList",
+				"summary": "Send List",
+				"tags": [
+					"Message Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Send List",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to receive the message (with country code)"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type to show ",
+												"enum": ["composing", "recording"]
+											}
+										}
+									},
+									"listMessage": {
+										"type": "object",
+										"properties": {
+											"title": {
+												"type": "string",
+												"description": "List title"
+											},
+											"description": {
+												"type": "string",
+												"description": "List description"
+											},
+											"buttonText": {
+												"type": "string",
+												"description": "Button text"
+											},
+											"footerText": {
+												"type": "string",
+												"description": "Footer text"
+											},
+											"sections": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"title": {
+															"type": "string",
+															"description": "Section title"
+														},
+														"rows": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"title": {
+																		"type": "string",
+																		"description": "Row title"
+																	},
+																	"description": {
+																		"type": "string",
+																		"description": "Row description"
+																	},
+																	"rowId": {
+																		"type": "string",
+																		"description": "Row ID"
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"ApiKeyAuth": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "apikey",
+				"description": "Your authorization key header"
+			}
+		}
+	}
+}
