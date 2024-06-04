@@ -210,6 +210,15 @@
         "api-reference/group-controller/toggle-ephemeral",
         "api-reference/group-controller/leave-group"
       ]
+    },
+    {
+      "group": "Typebot",
+      "pages": [
+        "api-reference/integrations/typebot/set-typebot",
+        "api-reference/integrations/typebot/start-typebot",
+        "api-reference/integrations/typebot/find-typebot",
+        "api-reference/integrations/typebot/change-session-status"
+      ]
     }
   ],
   "footerSocials": {

@@ -4705,7 +4705,317 @@
 						}
 					}
 				],
-				"description": "Leave group",				"responses": {
+				"description": "Leave group",				
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/typebot/set/{instance}": {
+			"post": {
+				"operationId": "setTypebot",
+				"summary": "Set Typebot",
+				"tags": [
+					"Typebot Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set typebot",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"enabled": {
+										"type": "boolean"
+									},
+									"url": {
+										"type": "string",
+										"description": "Typebot URL"
+									},
+									"typebot": {
+										"type": "string",
+										"description": "Typebot name"
+									},
+									"expire": {
+										"type": "integer",
+										"description": "Time to expire the sessions"
+									},
+									"keyword_finish": {
+										"type": "string",
+										"description": "Key word to finish typebot flow"
+									},
+									"delay_message": {
+										"type": "integer",
+										"description": "Default delay for text messages"
+									},
+									"unknown_message": {
+										"type": "string",
+										"description": "'Unknown message' error message"
+									},
+									"listening_from_me": {
+										"type": "boolean",
+										"description": "Start typebot for your own messages"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/typebot/start/{instance}": {
+			"post": {
+				"operationId": "startTypebot",
+				"summary": "Start Typebot",
+				"tags": [
+					"Typebot Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Start typebot",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"url": {
+										"type": "string",
+										"description": "Typebot URL"
+									},
+									"typebot": {
+										"type": "string",
+										"description": "Typebot name"
+									},
+									"remoteJid": {
+										"type": "string",
+										"description": "Receiver remote JID"
+									},
+									"startSession": {
+										"type": "boolean",
+										"description": "Start a new session"
+									},
+									"variables": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"name": {
+													"type": "string",
+													"description": "Variable name"
+												},
+												"value": {
+													"type": "string",
+													"description": "Variable value"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/typebot/find/{instance}": {
+			"get": {
+				"operationId": "findTypebot",
+				"summary": "Find Typebot",
+				"tags": [
+					"Typebot Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find typebot",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/typebot/changeStatus/{instance}": {
+			"post": {
+				"operationId": "changeTypebotStatus",
+				"summary": "Change Typebot Status",
+				"tags": [
+					"Typebot Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Start typebot",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"remoteJid": {
+										"type": "string",
+										"description": "Receiver remote JID"
+									},
+									"status": {
+										"type": "string",
+										"description": "New typebot status",
+										"enum": ["opened", "closed", "paused"]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
 					"200": {
 						"description": "Successful response TODO",
 						"content": {
