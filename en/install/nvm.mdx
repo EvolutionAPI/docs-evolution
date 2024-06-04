@@ -15,7 +15,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 Now, just point to the NVM directories and install Node:
 
-```bash
+```bash Terminal
 # Load bash source into the environment
 source ~/.bashrc
 
@@ -43,20 +43,20 @@ command -v nvm
 
 Clone the official GitHub repository to your private server.
 
-```bash Terminal
+```bash
 git clone https://github.com/EvolutionAPI/evolution-api.git
 ```
 
 Next, navigate to the folder where the project is located.
 
-```bash Terminal
+```bash
 cd evolution-api
 npm install
 ```
 
 Now, let's copy the `env.yml` file with the settings you need to edit.
 
-```bash Terminal
+```bash
 cp src/dev-env.yml src/env.yml
 nano src/env.yml
 ```
@@ -65,7 +65,7 @@ This command creates a copy of the default environment file.
 
 Next, open the env.yml file in a text editor to enter your configuration settings. You can use nano, a command-line text editor, for this purpose:
 
-```bash Terminal
+```bash
 nano src/env.yml
 ```
 
@@ -77,7 +77,7 @@ In the nano editor, navigate through the file and replace the default values wit
 
 To start the Evolution API, use the following command:
 
-```bash Terminal
+```bash
 npm run start:prod
 ```
 
@@ -139,13 +139,13 @@ If the information "Active: active (running)" appears in green, it means that Ng
 
 First, remove the default site file that comes enabled with Nginx:
 
-```bash Terminal
+```bash
 rm /etc/nginx/sites-enabled/default
 ```
 
 ### Create a new server block file in the directory
 
-```bash Terminal
+```bash
 nano /etc/nginx/conf.d/default.conf
 ```
 
@@ -190,19 +190,19 @@ After making changes to the Nginx settings, it is essential to reload the Nginx 
 
 Run the following command in the terminal to reload Nginx:
 
-```bash Terminal
+```bash
 systemctl reload nginx
 ```
 
 Make the nginx user the owner of the web directory, by default, it is owned by the root user:
 
-```bash Terminal
+```bash
 chown www-data:www-data /usr/share/nginx/html -R
 ```
 
 Now, create a Virtual Host pointing to your subdomain by editing the `api` file:
 
-```bash Terminal
+```bash
 cd ~
 nano /etc/nginx/sites-available/api
 ```
@@ -229,13 +229,13 @@ location / {
 
 Create a symbolic link between the `api` and `sites-enabled` files:
 
-```bash Terminal
+```bash
 ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 ```
 
 Next, validate the Nginx configuration for the subdomain:
 
-```bash Terminal
+```bash
 nginx -t
 ```
 
@@ -246,7 +246,7 @@ nginx -t
 
 Reload Nginx for the changes to take effect.
 
-```bash Terminal
+```bash
 systemctl reload nginx
 ```
 
@@ -254,13 +254,13 @@ systemctl reload nginx
 
 To secure your Evolution API with an SSL certificate, you can use Certbot. Install Certbot using the following command:
 
-```bash Terminal
+```bash
 snap install --classic certbot
 ```
 
 ### Certify the API subdomain
 
-```bash Terminal
+```bash
 certbot --nginx -d replace-this-with-your-cool-domain.com
 ```
 

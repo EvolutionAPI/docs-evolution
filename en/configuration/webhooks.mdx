@@ -19,7 +19,7 @@ Most of the users will prefer the activation by instance, this way is easier to 
 
 Here is an example with some commonly listened events:
 
-```json title="/webhook/instance" showLineNumbers
+```json /webhook/instance
 {
   "url": "{{webhookUrl}}",
     "webhook_by_events": false,
@@ -55,7 +55,7 @@ Before consuming the endpoint, if you have questions about the JSON formatting, 
 Each instance's Webhook URL and events will be requested at the time it is created
 Define a global webhook that will listen for enabled events from all instances
 
-```bash title="Global events env example"
+```bash .env
 WEBHOOK_GLOBAL_URL=''
 WEBHOOK_GLOBAL_ENABLED=false
 
@@ -145,7 +145,7 @@ If necessary, there is an option to find any active webhook on the specific inst
 
 Calling the endpoint will return all the information about the webhook that is being used by the instance.
 
-```json title=Result
+```json Result
 {
   "enabled": true,
   "url": "[url]",

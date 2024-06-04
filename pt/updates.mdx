@@ -20,13 +20,13 @@ Se sua Evolution API foi instalada inicialmente usando Docker Compose via interf
 2. **Puxe a Imagem Mais Recente**: Atualize a imagem da Evolution API para a versão mais recente executando o seguinte comando:
 
 ~~~ shell
-docker-compose pull atendai/evolution-api:latest
+docker compose pull atendai/evolution-api:latest
 ~~~
 
 3. **Pare e Reinicie os Contêineres**: Após puxar a imagem mais recente, pare os contêineres atuais e reinicie-os. Isso pode ser feito usando o seguinte comando:
 
 ~~~ shell
-docker-compose down && docker-compose up -d
+docker compose down && docker compose up -d
 ~~~
 
 ## Atualização com Portainer
@@ -40,7 +40,7 @@ Se você está usando o Portainer para gerenciamento de contêineres, siga estas
 3. **Atualize o Compose**:
     - Localize o campo `image` na sua configuração do Docker Compose.
 
-~~~ yaml
+~~~ yaml stack-file.yml
 # ... (outros serviços e configurações)
   evolution_api:
     # Atualize a versão da imagem da Evolution API aqui
@@ -71,7 +71,7 @@ Atualizar sua instalação da Evolution API via NPM envolve várias etapas para 
 
 1. **Limpar e Parar**: Limpe todos os logs do PM2, útil para resolução de problemas após a atualização, e pare temporariamente a Evolution API para aplicar as atualizações com segurança.
 
-~~~ shell
+~~~ shell Terminal
 # Limpar todos os logs do PM2
 pm2 flush
 
@@ -81,7 +81,7 @@ pm2 stop ApiEvolution
 
 2. **Resetar o repositório local e puxar as atualizações mais recentes**: Garanta que seu código local esteja em sincronia com o commit mais recente e baixe as atualizações mais recentes do repositório. Opcionalmente, mude para uma versão específica se não estiver usando a mais recente. É recomendado para ambientes de produção.
 
-~~~ shell
+~~~ shell Terminal
 # Resetar seu repositório local para o commit mais recente
 git reset --hard HEAD
 
@@ -95,7 +95,7 @@ git checkout 1.x.x
 
 3. **Instalação Limpa**: Remova o `node_modules` existente para evitar possíveis conflitos com novas dependências e instale as dependências necessárias do Node.js para a versão atualizada.
 
-~~~ shell
+~~~ shell Terminal
 # Remover o diretório node_modules atual para garantir uma instalação limpa
 rm -rf node_modules
 

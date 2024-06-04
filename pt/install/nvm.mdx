@@ -15,7 +15,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 Agora apenas aponte os diretórios do NVM e instale o node:
 
-```bash CLI
+```bash Terminal
 # Carrege a fonte do bash para o ambiente
 source ~/.bashrc
 
@@ -43,20 +43,20 @@ command -v nvm
 
 Clone o repositório oficial do Github para seu servidor privado.
 
-```bash title="CLI"
+```bash
 git clone https://github.com/EvolutionAPI/evolution-api.git
 ```
 
 Em seguida, acesse a pasta onde o projeto está
 
-```bash title="CLI"
+```bash
 cd evolution-api
 npm install
 ```
 
 Agora vamos copiar o arquivo `env.yml` com as configurações que você precisa editar.
 
-```bash title="CLI"
+```bash
 cp src/dev-env.yml src/env.yml
 nano src/env.yml
 ```
@@ -65,7 +65,7 @@ Este comando cria uma cópia do arquivo de ambiente padrão.
 
 A seguir, abra o arquivo env.yml em um editor de texto para inserir suas configurações de configuração. Você pode usar o nano, um editor de texto da linha de comando, para este propósito:
 
-```bash title="CLI"
+```bash Terminal
 nano src/env.yml
 ```
 
@@ -77,7 +77,7 @@ No editor nano, navegue pelo arquivo e substitua os valores padrão pelas suas c
 
 Para iniciar a Evolution API, use o seguinte comando:
 
-```bash title="CLI"
+```bash
 npm run start:prod
 ```
 
@@ -85,7 +85,7 @@ npm run start:prod
 
 Use o PM2 para instalar o PM2 e iniciar o gerenciador para o processo da API:
 
-```bash title="CLI"
+```bash Terminal
 npm install pm2 -g
 pm2 start 'npm run start:prod' --name ApiEvolution
 pm2 startup
@@ -107,7 +107,7 @@ pm2 save --force
 
 Se você quiser ter certeza de que a API está em execução, basta usar seu navegador para acessar http://localhost:8080. Esta deve ser a resposta do seu navegador:
 
-```json title="http://localhost:8080/" showLineNumbers
+```json http://localhost:8080/
 {
     "status": 200,
     "message": "Bem-vindo à Evolution API, ela está funcionando!",
@@ -126,7 +126,7 @@ A EvolutionAPI possui uma documentação de ponto de extremidade Swagger integra
 
 Primeiro, vamos instalar, iniciar, habilitar e testar o serviço Nginx em seu servidor privado.
 
-```bash title="CLI"
+```bash Terminal
 apt-get install -y nginx
 systemctl start nginx
 systemctl enable nginx
@@ -139,19 +139,19 @@ Se a informação "Ativo: ativo (em execução)" aparecer em verde, significa qu
 
 Primeiro, remova o arquivo do site padrão que vem habilitado com o Nginx:
 
-```bash title="CLI"
+```bash
 rm /etc/nginx/sites-enabled/default
 ```
 
 ### Criar um novo arquivo de bloco do servidor no diretório
 
-```bash title="CLI" 
+```bash 
 nano /etc/nginx/conf.d/default.conf
 ```
 
 Em seguida, cole a configuração do Nginx no arquivo `default.conf`:
 
-```nginx title="/etc/nginx/conf.d/default.conf" showLineNumbers
+```nginx /etc/nginx/conf.d/default.conf
 server {
   listen 80;
   listen [::]:80;
@@ -190,26 +190,26 @@ Após fazer alterações nas configurações do Nginx, é essencial recarregar o
 
 Execute o seguinte comando no terminal para recarregar o Nginx:
 
-```bash title="CLI"
+```bash
 systemctl reload nginx
 ```
 
 Faça o usuário nginx ser o proprietário do diretório da web, por padrão, ele é de propriedade do usuário root:
 
-```bash title="CLI"
+```bash
 chown www-data:www-data /usr/share/nginx/html -R
 ```
 
 Agora, crie um Virtual Host apontando para seu subdomínio editando o arquivo `api`:
 
-```bash title="CLI"
+```bash
 cd ~
 nano /etc/nginx/sites-available/api
 ```
 
 Em seguida, cole a configuração do Nginx no arquivo `api`:
 
-```nginx title="/etc/nginx/sites-available/api" showLineNumbers
+```nginx /etc/nginx/sites-available/api
 server {
   server_name substitua-isso-pelo-seu-domínio-legal.com;
 
@@ -230,13 +230,13 @@ location / {
 
 Crie um link simbólico entre os arquivos `api` e `sites-enabled`:
 
-```bash title="CLI"
+```bash
 ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 ```
 
 Em seguida, valide a configuração do Nginx para o subdomínio:
 
-```bash title="CLI"
+```bash
 nginx -t
 ```
 
@@ -247,7 +247,7 @@ nginx -t
 
 Recarregue o Nginx para que as alterações se tornem efetivas.
 
-```bash title="CLI"
+```bash
 systemctl reload nginx
 ```
 
@@ -255,13 +255,13 @@ systemctl reload nginx
 
 Para proteger sua Evolution API com um certificado SSL, você pode usar o Certbot. Instale o Certbot usando o seguinte comando:
 
-```bash title="CLI"
+```bash
 snap install --classic certbot
 ```
 
 ### Certificar o subdomínio da API
 
-```bash title="CLI"
+```bash
 certbot --nginx -d substitua-isso-pelo-seu-domínio-legal.com
 ```
 

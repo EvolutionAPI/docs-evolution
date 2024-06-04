@@ -56,7 +56,7 @@ Antes de consumir o endpoint, se tiver dúvidas sobre a formatação JSON, vá p
 Cada URL e eventos de Webhook da instância serão solicitados no momento em que forem criados
 Defina um webhook global que ouvirá eventos habilitados de todas as instâncias
 
-```bash title="Exemplo de eventos globais de env"
+```bash .env
 WEBHOOK_GLOBAL_URL=''
 WEBHOOK_GLOBAL_ENABLED=false
 
@@ -146,7 +146,7 @@ Se necessário, há uma opção para localizar qualquer webhook ativo na instân
 
 Chamando o endpoint retornará todas as informações sobre o webhook que está sendo usado pela instância.
 
-```json title=Resultado
+```json Resultado
 {
   "enabled": true,
   "url": "[url]",

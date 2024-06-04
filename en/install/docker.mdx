@@ -57,7 +57,7 @@ This is a Docker Compose example for standalone environments, i.e., a single run
 ### Standalone
 
 <Warning>
-  Depending on your Docker Compose installation, the commands described here as `docker-compose` may not work and should be replaced with `docker compose`.
+  **Warning:** the commands featured here as `docker compose` might not work on older versions, and must be replaced by `docker-compose`.
 </Warning>
 
 Docker standalone is suitable when your Evolution API will be running on just one machine, and you don't need scalability or other Docker Swarm features for now. It's the most convenient way to use Docker for most people.
@@ -98,21 +98,21 @@ AUTHENTICATION_API_KEY=change-me
 Navigate to the directory containing your docker-compose.yml file and run:
 services defined in the file
 
-~~~ bash Terminal
-docker-compose up -d
+~~~ bash
+docker compose up -d
 ~~~
 
 This command will download the necessary Docker images, create the defined services, networks, and volumes, and start the EvolutionAPI service.
 
 After running the docker-compose up command, you should see logs indicating that the services are running.
 
-~~~ bash Terminal
+~~~ bash
 docker logs evolution_api
 ~~~
 
 To stop the service, use:
-~~~ bash Terminal
-docker-compose down
+~~~ bash
+docker compose down
 ~~~
 
 Open your browser and go to http://localhost:8080 to check if the EvolutionAPI is operational.

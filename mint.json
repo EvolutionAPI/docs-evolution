@@ -24,7 +24,13 @@
       "to": "#9563FF"
     }
   },
-  "topbarLinks": [],
+  "topbarLinks": [
+    {
+      "name": "English",
+      "type": "link",
+      "url": "http://localhost:3000/en/get-started/introduction"
+    }
+  ],
   "topbarCtaButton": {
     "name": "GitHub",
     "url": "https://github.com/EvolutionAPI/evolution-api"
