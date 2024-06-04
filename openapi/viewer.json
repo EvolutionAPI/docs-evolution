@@ -5195,6 +5195,492 @@
 					}
 				}
 			}
+		},
+		"/sqs/set/{instance}": {
+			"post": {
+				"operationId": "setSQS",
+				"summary": "Set SQS",
+				"tags": [
+					"SQS Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set SQS",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"enabled": {
+										"type": "boolean"
+									},
+									"events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN"
+											]
+										},
+										"description": "Events to be sent to the Webhook"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/sqs/find/{instance}": {
+			"get": {
+				"operationId": "findSQS",
+				"summary": "Find SQS",
+				"tags": [
+					"SQS Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find SQS",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rabbitmq/set/{instance}": {
+			"post": {
+				"operationId": "setRabbitMQ",
+				"summary": "Set RabbitMQ",
+				"tags": [
+					"RabbitMQ Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set RabbitMQ",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"enabled": {
+										"type": "boolean"
+									},
+									"events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN"
+											]
+										},
+										"description": "Events to be sent to the Webhook"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rabbitmq/find/{instance}": {
+			"get": {
+				"operationId": "findRabbitMQ",
+				"summary": "Find RabbitMQ",
+				"tags": [
+					"RabbitMQ Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find RabbitMQ",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/websocket/set/{instance}": {
+			"post": {
+				"operationId": "setWebsocket",
+				"summary": "Set Websocket",
+				"tags": [
+					"Websocket Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set Websocket",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"enabled": {
+										"type": "boolean"
+									},
+									"events": {
+										"type": "array",
+										"items": {
+											"type": "string",
+											"enum": [
+												"APPLICATION_STARTUP",
+												"QRCODE_UPDATED",
+												"MESSAGES_SET",
+												"MESSAGES_UPSERT",
+												"MESSAGES_UPDATE",
+												"MESSAGES_DELETE",
+												"SEND_MESSAGE",
+												"CONTACTS_SET",
+												"CONTACTS_UPSERT",
+												"CONTACTS_UPDATE",
+												"PRESENCE_UPDATE",
+												"CHATS_SET",
+												"CHATS_UPSERT",
+												"CHATS_UPDATE",
+												"CHATS_DELETE",
+												"GROUPS_UPSERT",
+												"GROUP_UPDATE",
+												"GROUP_PARTICIPANTS_UPDATE",
+												"CONNECTION_UPDATE",
+												"CALL",
+												"NEW_JWT_TOKEN"
+											]
+										},
+										"description": "Events to be sent to the Webhook"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/websocket/find/{instance}": {
+			"get": {
+				"operationId": "findWebsocket",
+				"summary": "Find Websocket",
+				"tags": [
+					"Websocket Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find Websocket",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/": {
+			"get": {
+				"operationId": "getEvoInfo",
+				"summary": "Get information about your EvolutionAPI",
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Get information about your EvolutionAPI",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {

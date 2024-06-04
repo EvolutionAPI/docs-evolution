@@ -115,7 +115,7 @@
     {
       "group": "Início",
       "pages": [
-        "api-reference/authentication"
+        "api-reference/get-information"
       ]
     },
     {
@@ -225,6 +225,27 @@
       "pages": [
         "api-reference/integrations/chatwoot/set-chatwoot",
         "api-reference/integrations/chatwoot/find-chatwoot"
+      ]
+    },
+    {
+      "group": "SQS",
+      "pages": [
+        "api-reference/integrations/sqs/set-sqs",
+        "api-reference/integrations/sqs/find-sqs"
+      ]
+    },
+    {
+      "group": "RabbitMQ",
+      "pages": [
+        "api-reference/integrations/rabbitmq/set-rabbitmq",
+        "api-reference/integrations/rabbitmq/find-rabbitmq"
+      ]
+    },
+    {
+      "group": "WebSocket",
+      "pages": [
+        "api-reference/integrations/websocket/set-websocket",
+        "api-reference/integrations/websocket/find-websocket"
       ]
     }
   ],
