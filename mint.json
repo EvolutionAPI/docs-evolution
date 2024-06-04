@@ -189,6 +189,27 @@
         "api-reference/profile-settings/fetch-privacy-settings",
         "api-reference/profile-settings/update-privacy-settings"
       ]
+    },
+    {
+      "group": "Profile Settings",
+      "pages": [
+        "api-reference/group-controller/group-create",
+        "api-reference/group-controller/update-group-picture",
+        "api-reference/group-controller/update-group-subject",
+        "api-reference/group-controller/update-group-description",
+        "api-reference/group-controller/fetch-invite-code",
+        "api-reference/group-controller/accept-invite-code",
+        "api-reference/group-controller/revoke-invite-code",
+        "api-reference/group-controller/send-invite-url",
+        "api-reference/group-controller/find-group-by-invite-code",
+        "api-reference/group-controller/find-group-by-jid",
+        "api-reference/group-controller/fetch-all-groups",
+        "api-reference/group-controller/find-participants",
+        "api-reference/group-controller/update-participant",
+        "api-reference/group-controller/update-setting",
+        "api-reference/group-controller/toggle-ephemeral",
+        "api-reference/group-controller/leave-group"
+      ]
     }
   ],
   "footerSocials": {
