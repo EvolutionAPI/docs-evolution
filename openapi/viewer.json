@@ -1918,7 +1918,7 @@
 												"properties": {
 													"remoteJid": {
 														"type": "string",
-														"description": "WhatsApp JID (number with country code plus `@s.whatsapp.net`)"
+														"description": "Chat contact or group remote JID"
 													},
 													"fromMe": {
 														"type": "boolean",
@@ -2174,6 +2174,924 @@
 						}
 					}
 				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/whatsappNumbers/{instance}": {
+			"post": {
+				"operationId": "whatsappNumbers",
+				"summary": "WhatsApp Numbers",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Check if numbers are on WhatsApp",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"numbers": {
+										"type": "array",
+										"description": "Phone numbers (with country code) to be checked",
+										"items": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/markMessageAsRead/{instance}": {
+			"put": {
+				"operationId": "markMessageAsRead",
+				"summary": "Mark Message As Read",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Mark message as read",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"read_messages": {
+										"type": "array",
+										"description": "Messages to be mark as read",
+										"items": {
+											"type": "object",
+											"properties": {
+												"remoteJid": {
+													"type": "string",
+													"description": "Chat contact or group remote JID"
+												},
+												"fromMe": {
+													"type": "boolean",
+													"description": "If the message was sent by the instance owner or the contact"
+												},
+												"id": {
+													"type": "string",
+													"description": "Message ID"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/archiveChat/{instance}": {
+			"put": {
+				"operationId": "archiveChat",
+				"summary": "Archive Chat",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Archive Chat",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"lastMessage": {
+										"type": "object",
+										"description": "Messages to be mark as read",
+										"properties": {
+											"key": {
+												"type": "object",
+												"properties": {
+													"remoteJid": {
+														"type": "string",
+														"description": "Chat contact or group remote JID"
+													},
+													"fromMe": {
+														"type": "boolean",
+														"description": "If the message was sent by the instance owner or the contact"
+													},
+													"id": {
+														"type": "string",
+														"description": "Message ID"
+													}
+												}
+											}
+										}
+									},
+									"archive": {
+										"type": "boolean",
+										"description": "Whether to archive the chat or not"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/deleteMessageForEveryone/{instance}": {
+			"delete": {
+				"operationId": "deleteMessageForEveryone",
+				"summary": "Delete Message For Everyone",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Delete Message For Everyone",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string",
+										"description": "Message ID"
+									},
+									"remoteJid": {
+										"type": "string",
+										"description": "Chat contact or group remote JID"
+									},
+									"fromMe": {
+										"type": "boolean",
+										"description": "If the message was sent by the instance owner or the contact"
+									},
+									"participant": {
+										"type": "string",
+										"description": "Participant for group messages only"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/sendPresence/{instance}": {
+			"post": {
+				"operationId": "deleteMessageForEveryone",
+				"summary": "Delete Message For Everyone",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Delete Message For Everyone",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Receiver phone number with country code"
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"delay": {
+												"type": "integer",
+												"description": "Presence time in milliseconds before sending message"
+											},
+											"presence": {
+												"type": "string",
+												"description": "Presence type",
+												"enum": ["composing", "recording"]
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/fetchProfilePictureUrl/{instance}": {
+			"post": {
+				"operationId": "fetchProfilePictureUrl",
+				"summary": "Fetch Profile Picture URL",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Fetch Profile Picture URL",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Number to fetch profile picture URL"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/findContacts/{instance}": {
+			"post": {
+				"operationId": "findContacts",
+				"summary": "Find Contacts",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find all contacts or just one from ID",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"where": {
+										"type": "object",
+										"properties": {
+											"id": {
+												"type": "string",
+												"description": "Contact number"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/getBase64FromMediaMessage/{instance}": {
+			"post": {
+				"operationId": "getBase64FromMediaMessage",
+				"summary": "Get Base64 From Media Message",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Get base64 from media message",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": ["message"],
+								"properties": {
+									"message": {
+										"type": "object",
+										"properties": {
+											"key": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "string",
+														"description": "Message ID"
+													}
+												}
+											}
+										}
+									},
+									"convertToMp4": {
+										"type": "boolean",
+										"description": "Convert video to MP4, for video only"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/findMessages/{instance}": {
+			"post": {
+				"operationId": "findMessages",
+				"summary": "Find Messages",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find all messages",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"where": {
+										"type": "object",
+										"properties": {
+											"key": {
+												"type": "object",
+												"properties": {
+													"remoteJid": {
+														"type": "string",
+														"description": "Contact or group remote JID"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/findStatusMessage/{instance}": {
+			"post": {
+				"operationId": "findStatusMessage",
+				"summary": "Find Status Message",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find status message",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"where": {
+										"type": "object",
+										"properties": {
+											"_id": {
+												"type": "string",
+												"description": "MongoDB message ID"
+											},
+											"id": {
+												"type": "string",
+												"description": "Message ID (from WhatsApp)"
+											},
+											"remoteJid": {
+												"type": "string",
+												"description": "Contact or group remote JID"
+											},
+											"fromMe": {
+												"type": "boolean",
+												"description": "Whether the message is from the instance owner or not"
+											}
+										}
+									},
+									"limit": {
+										"type": "integer",
+										"description": "Limit for the return"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/updateMessage/{instance}": {
+			"put": {
+				"operationId": "updateMessage",
+				"summary": "Update Message",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Update message",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "integer",
+										"description": "Receiver phone number with country code"
+									},
+									"text": {
+										"type": "string",
+										"description": "New message content"
+									},
+									"key": {
+										"type": "object",
+										"properties": {
+											"remoteJid": {
+												"type": "string",
+												"description": "Chat contact or group remote JID"
+											},
+											"fromMe": {
+												"type": "boolean",
+												"description": "If the message was sent by the instance owner or not"
+											},
+											"id": {
+												"type": "string",
+												"description": "Message ID"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/findChats/{instance}": {
+			"get": {
+				"operationId": "findChats",
+				"summary": "Find Chats",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find all chats",
 				"responses": {
 					"200": {
 						"description": "Successful response TODO",

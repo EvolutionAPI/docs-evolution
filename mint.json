@@ -160,6 +160,22 @@
         "api-reference/message-controller/send-poll",
         "api-reference/message-controller/send-list"
       ]
+    },
+    {
+      "group": "Chat Controller",
+      "pages": [
+        "api-reference/chat-controller/check-is-whatsapp",
+        "api-reference/chat-controller/mark-as-read",
+        "api-reference/chat-controller/archive-chat",
+        "api-reference/chat-controller/delete-message-for-everyone",
+        "api-reference/chat-controller/send-presence",
+        "api-reference/chat-controller/fetch-profilepic-url",
+        "api-reference/chat-controller/find-contacts",
+        "api-reference/chat-controller/find-messages",
+        "api-reference/chat-controller/find-status-message",
+        "api-reference/chat-controller/update-message",
+        "api-reference/chat-controller/find-chats"
+      ]
     }
   ],
   "footerSocials": {
