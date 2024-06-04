@@ -24,13 +24,20 @@
 					"Instance Controller"
 				],
 				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
 								"type": "object",
-								"required": ["instanceName"],
+								"required": [
+									"instanceName"
+								],
 								"properties": {
 									"instanceName": {
 										"type": "string",
@@ -50,8 +57,11 @@
 									},
 									"integration": {
 										"type": "string",
-										"description": "WhatsApp engine (WHATSAPP-BAILEYS or WHATSAPP-BUSINESS",
-										"enum": ["WHATSAPP-BAILEYS", "WHATSAPP-BUSINESS"]
+										"description": "WhatsApp engine",
+										"enum": [
+											"WHATSAPP-BAILEYS",
+											"WHATSAPP-BUSINESS"
+										]
 									},
 									"webhook": {
 										"type": "string",
@@ -267,7 +277,10 @@
 											"protocol": {
 												"type": "string",
 												"description": "Proxy protocol",
-												"enum": ["http", "https"]
+												"enum": [
+													"http",
+													"https"
+												]
 											},
 											"username": {
 												"type": "string",
@@ -308,30 +321,144 @@
 						}
 					}
 				},
-				"security": [
-					{
-						"ApiKeyAuth": []
-					}
-				],
 				"responses": {
-					"200": {
-						"description": "Successful response TODO",
+					"201": {
+						"description": "Created",
 						"content": {
 							"application/json": {
 								"schema": {
 									"type": "object",
 									"properties": {
-										"message": {
-											"type": "string",
-											"example": "<success message>"
+										"instance": {
+											"type": "object",
+											"properties": {
+												"instanceName": {
+													"type": "string",
+													"description": "The name of the instance"
+												},
+												"instanceId": {
+													"type": "string",
+													"description": "The unique identifier for the instance"
+												},
+												"webhook_wa_business": {
+													"type": "string",
+													"description": "The webhook URL for WhatsApp Business integration"
+												},
+												"access_token_wa_business": {
+													"type": "string",
+													"description": "The access token for WhatsApp Business"
+												},
+												"status": {
+													"type": "string",
+													"description": "The current status of the instance"
+												}
+											}
+										},
+										"hash": {
+											"type": "object",
+											"properties": {
+												"apikey": {
+													"type": "string",
+													"description": "The API key for authentication"
+												}
+											}
+										},
+										"settings": {
+											"type": "object",
+											"properties": {
+												"reject_call": {
+													"type": "boolean",
+													"description": "Indicates whether calls are rejected"
+												},
+												"msg_call": {
+													"type": "string",
+													"description": "Message to be sent when a call is rejected"
+												},
+												"groups_ignore": {
+													"type": "boolean",
+													"description": "Indicates whether groups are ignored"
+												},
+												"always_online": {
+													"type": "boolean",
+													"description": "Indicates whether the instance is always online"
+												},
+												"read_messages": {
+													"type": "boolean",
+													"description": "Indicates whether messages are marked as read"
+												},
+												"read_status": {
+													"type": "boolean",
+													"description": "Indicates whether status updates are marked as read"
+												},
+												"sync_full_history": {
+													"type": "boolean",
+													"description": "Indicates whether the full message history is synchronized"
+												}
+											}
 										}
 									},
 									"example": {
-										"message": "<success message>"
+										"instance": {
+											"instanceName": "teste-docs",
+											"instanceId": "af6c5b7c-ee27-4f94-9ea8-192393746ddd",
+											"webhook_wa_business": null,
+											"access_token_wa_business": "",
+											"status": "created"
+										},
+										"hash": {
+											"apikey": "123456"
+										},
+										"settings": {
+											"reject_call": false,
+											"msg_call": "",
+											"groups_ignore": true,
+											"always_online": false,
+											"read_messages": false,
+											"read_status": false,
+											"sync_full_history": false
+										}
+									}
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"status": {
+											"type": "integer",
+											"description": "The HTTP status of the response"
+										},
+										"error": {
+											"type": "string",
+											"description": "The error message indicating the type of error"
+										},
+										"response": {
+											"type": "object",
+											"properties": {
+												"message": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													},
+													"description": "List of detailed error messages"
+												}
+											}
+										}
 									},
-									"required": [
-										"message"
-									]
+									"example": {
+										"status": 403,
+										"error": "Forbidden",
+										"response": {
+											"message": [
+												"This name \"instance-example-name\" is already in use."
+											]
+										}
+									}
 								}
 							}
 						}
@@ -358,28 +485,72 @@
 						"description": "Name of the instance to be fetched",
 						"in": "query",
 						"schema": {
-							"type": "string",
-							"description": "Name of the instance to be fetched"
+							"type": "string"
 						}
 					}
 				],
 				"description": "Returns the instance with the name informed in the parameter, or all the instances if empty.",
 				"responses": {
 					"200": {
-						"description": "Successful response TODO",
+						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
 									"type": "object",
 									"properties": {
-										"message": {
+										"status": {
+											"type": "integer",
+											"description": "The HTTP status of the response"
+										},
+										"error": {
 											"type": "string",
-											"example": "<success message>"
+											"description": "The error message indicating the type of error"
+										},
+										"response": {
+											"type": "object",
+											"properties": {
+												"message": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													},
+													"description": "List of detailed error messages"
+												}
+											}
 										}
 									},
-									"example": {
-										"message": "<success message>"
-									},
+									"example": [
+										{
+											"instance": {
+												"instanceName":"example-name",
+												"instanceId":"421a4121-a3d9-40cc-a8db-c3a1df353126",
+												"owner":"553199999999@s.whatsapp.net",
+												"profileName":"Guilherme Gomes",
+												"profilePictureUrl":null,
+												"profileStatus":"This is the profile status.",
+												"status":"open",
+												"serverUrl":"https://example.evolution-api.com",
+												"apikey":"B3844804-481D-47A4-B69C-F14B4206EB56",
+												"integration": {
+													"integration":"WHATSAPP-BAILEYS",
+													"webhook_wa_business":"https://homolog.atendai.com/webhook/whatsapp/db5e11d3-ded5-4d91-b3fb-48272688f206"
+												}
+											}
+										},
+										{
+											"instance": {
+												"instanceName":"teste-docs",
+												"instanceId":"af6c5b7c-ee27-4f94-9ea8-192393746ddd",
+												"status":"close",
+												"serverUrl":"https://homolog.atendai.com",
+												"apikey":"123456",
+												"integration": {
+													"token":"123456",
+													"webhook_wa_business":"https://homolog.atendai.com/webhook/whatsapp/teste-docs"
+												}
+											}
+										}
+									],
 									"required": [
 										"message"
 									]
@@ -410,16 +581,15 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
 						"name": "number",
-						"description": "Number to connect (with DDI)",
+						"description": "Phone number (with country code) to be connected",
 						"in": "query",
 						"schema": {
-							"type": "string",
-							"description": "Number to connect (with DDI)"
+							"type": "string"
 						}
 					}
 				],
@@ -470,7 +640,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -521,7 +691,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -572,7 +742,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -623,7 +793,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -674,7 +844,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -684,11 +854,16 @@
 						"application/json": {
 							"schema": {
 								"type": "object",
-								"required": ["presence"],
+								"required": [
+									"presence"
+								],
 								"properties": {
 									"presence": {
 										"type": "string",
-										"enum": ["available", "unavailable"]
+										"enum": [
+											"available",
+											"unavailable"
+										]
 									}
 								}
 							}
@@ -741,7 +916,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -847,7 +1022,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -898,7 +1073,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -984,7 +1159,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1035,7 +1210,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1070,11 +1245,20 @@
 													"properties": {
 														"type": {
 															"type": "string",
-															"enum": ["header", "body", "button"]
+															"enum": [
+																"header",
+																"body",
+																"button"
+															]
 														},
 														"sub_type": {
 															"type": "string",
-															"enum": ["quick_reply", "url", "copy_code", "catalog"]
+															"enum": [
+																"quick_reply",
+																"url",
+																"copy_code",
+																"catalog"
+															]
 														},
 														"index": {
 															"type": "string",
@@ -1088,7 +1272,16 @@
 																	"type": {
 																		"type": "string",
 																		"description": "Parameter type",
-																		"enum": ["payload", "text", "coupon_code", "currency", "date_time", "image", "document", "video"]
+																		"enum": [
+																			"payload",
+																			"text",
+																			"coupon_code",
+																			"currency",
+																			"date_time",
+																			"image",
+																			"document",
+																			"video"
+																		]
 																	},
 																	"text": {
 																		"type": "string",
@@ -1153,7 +1346,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1178,7 +1371,10 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing", "recording"]
+												"enum": [
+													"composing",
+													"recording"
+												]
 											},
 											"linkPreview": {
 												"type": "boolean",
@@ -1297,7 +1493,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1322,7 +1518,10 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing", "recording"]
+												"enum": [
+													"composing",
+													"recording"
+												]
 											}
 										}
 									},
@@ -1332,7 +1531,12 @@
 											"mediaType": {
 												"type": "string",
 												"description": "Media type",
-												"enum": ["image", "video", "document", "audio"]
+												"enum": [
+													"image",
+													"video",
+													"document",
+													"audio"
+												]
 											},
 											"fileName": {
 												"type": "string",
@@ -1400,7 +1604,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1425,7 +1629,9 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["recording"],
+												"enum": [
+													"recording"
+												],
 												"default": "recording"
 											},
 											"encoding": {
@@ -1494,7 +1700,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1519,7 +1725,9 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing"],
+												"enum": [
+													"composing"
+												],
 												"default": "composing"
 											}
 										}
@@ -1584,7 +1792,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1601,7 +1809,11 @@
 											"type": {
 												"type": "string",
 												"description": "status type",
-												"enum": ["text", "image", "audio"]
+												"enum": [
+													"text",
+													"image",
+													"audio"
+												]
 											},
 											"content": {
 												"type": "string",
@@ -1683,7 +1895,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1708,7 +1920,9 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing"],
+												"enum": [
+													"composing"
+												],
 												"default": "composing"
 											}
 										}
@@ -1785,7 +1999,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1810,7 +2024,9 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing"],
+												"enum": [
+													"composing"
+												],
 												"default": "composing"
 											}
 										}
@@ -1819,7 +2035,11 @@
 										"type": "array",
 										"items": {
 											"type": "object",
-											"required": ["fullname", "wuid", "phoneNumber"],
+											"required": [
+												"fullname",
+												"wuid",
+												"phoneNumber"
+											],
 											"properties": {
 												"fullName": {
 													"type": "string",
@@ -1899,7 +2119,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -1988,7 +2208,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2013,7 +2233,10 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing", "recording"]
+												"enum": [
+													"composing",
+													"recording"
+												]
 											}
 										}
 									},
@@ -2030,7 +2253,7 @@
 											},
 											"values": {
 												"type": "array",
-												"items":{
+												"items": {
 													"type": "string"
 												}
 											}
@@ -2087,7 +2310,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2112,7 +2335,10 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type to show ",
-												"enum": ["composing", "recording"]
+												"enum": [
+													"composing",
+													"recording"
+												]
 											}
 										}
 									},
@@ -2220,7 +2446,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2289,7 +2515,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2372,7 +2598,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2461,7 +2687,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2539,7 +2765,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2564,7 +2790,10 @@
 											"presence": {
 												"type": "string",
 												"description": "Presence type",
-												"enum": ["composing", "recording"]
+												"enum": [
+													"composing",
+													"recording"
+												]
 											}
 										}
 									}
@@ -2619,7 +2848,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2685,7 +2914,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2756,7 +2985,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2766,7 +2995,9 @@
 						"application/json": {
 							"schema": {
 								"type": "object",
-								"required": ["message"],
+								"required": [
+									"message"
+								],
 								"properties": {
 									"message": {
 										"type": "object",
@@ -2837,7 +3068,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -2913,7 +3144,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3000,7 +3231,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3087,7 +3318,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3138,7 +3369,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3204,7 +3435,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3270,7 +3501,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3336,7 +3567,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3402,7 +3633,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3468,7 +3699,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3519,7 +3750,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3570,7 +3801,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3586,27 +3817,52 @@
 										"properties": {
 											"readreceipts": {
 												"type": "string",
-												"enum": ["all","none"]
+												"enum": [
+													"all",
+													"none"
+												]
 											},
 											"profile": {
 												"type": "string",
-												"enum": ["all", "contacts", "contact_blacklist", "none"]
+												"enum": [
+													"all",
+													"contacts",
+													"contact_blacklist",
+													"none"
+												]
 											},
 											"status": {
 												"type": "string",
-												"enum": ["all", "contacts", "contact_blacklist", "none"]
+												"enum": [
+													"all",
+													"contacts",
+													"contact_blacklist",
+													"none"
+												]
 											},
 											"online": {
 												"type": "string",
-												"enum": ["all", "match_last_seen"]
+												"enum": [
+													"all",
+													"match_last_seen"
+												]
 											},
 											"last": {
 												"type": "string",
-												"enum": ["all", "contacts", "contact_blacklist", "none"]
+												"enum": [
+													"all",
+													"contacts",
+													"contact_blacklist",
+													"none"
+												]
 											},
 											"groupadd": {
 												"type": "string",
-												"enum": ["all", "contacts", "contact_blacklist"]
+												"enum": [
+													"all",
+													"contacts",
+													"contact_blacklist"
+												]
 											}
 										}
 									}
@@ -3661,7 +3917,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -3738,7 +3994,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -3813,7 +4069,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -3888,7 +4144,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -3963,7 +4219,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4023,7 +4279,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4083,7 +4339,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4143,7 +4399,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -4220,7 +4476,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4279,7 +4535,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4339,7 +4595,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4398,7 +4654,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4458,7 +4714,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4480,7 +4736,12 @@
 								"properties": {
 									"action": {
 										"type": "string",
-										"enum": ["add", "remove", "promote", "demote"]
+										"enum": [
+											"add",
+											"remove",
+											"promote",
+											"demote"
+										]
 									},
 									"participants": {
 										"type": "array",
@@ -4540,7 +4801,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4563,7 +4824,12 @@
 									"action": {
 										"type": "string",
 										"description": "Group setting (`announcement` = only admins can send messages; `not_announcement` = everyone can send messages; `locked` = only admins can edit group settings; `unlocked` = everyone can edit group settings",
-										"enum": ["announcement", "not_announcement", "locked", "unlocked"]
+										"enum": [
+											"announcement",
+											"not_announcement",
+											"locked",
+											"unlocked"
+										]
 									}
 								}
 							}
@@ -4616,7 +4882,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4635,7 +4901,9 @@
 						"application/json": {
 							"schema": {
 								"type": "object",
-								"required": ["expiration"],
+								"required": [
+									"expiration"
+								],
 								"properties": {
 									"expiration": {
 										"type": "integer",
@@ -4692,7 +4960,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					},
 					{
@@ -4705,7 +4973,7 @@
 						}
 					}
 				],
-				"description": "Leave group",				
+				"description": "Leave group",
 				"responses": {
 					"200": {
 						"description": "Successful response TODO",
@@ -4752,7 +5020,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -4845,7 +5113,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -4939,7 +5207,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -4990,7 +5258,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5008,7 +5276,11 @@
 									"status": {
 										"type": "string",
 										"description": "New typebot status",
-										"enum": ["opened", "closed", "paused"]
+										"enum": [
+											"opened",
+											"closed",
+											"paused"
+										]
 									}
 								}
 							}
@@ -5061,7 +5333,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5165,7 +5437,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5216,7 +5488,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5311,7 +5583,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5362,7 +5634,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5457,7 +5729,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5508,7 +5780,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5603,7 +5875,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5639,11 +5911,6 @@
 				"operationId": "getEvoInfo",
 				"summary": "Get information about your EvolutionAPI",
 				"deprecated": false,
-				"security": [
-					{
-						"ApiKeyAuth": []
-					}
-				],
 				"parameters": [
 					{
 						"name": "instance",
@@ -5651,7 +5918,7 @@
 						"required": true,
 						"description": "ID of the instance to connect",
 						"schema": {
-						  "type": "string"
+							"type": "string"
 						}
 					}
 				],
@@ -5664,17 +5931,39 @@
 								"schema": {
 									"type": "object",
 									"properties": {
+										"status": {
+											"type": "integer",
+											"description": "The HTTP status of the response"
+										},
 										"message": {
 											"type": "string",
-											"example": "<success message>"
+											"description": "Descriptive message about the current state of the API"
+										},
+										"version": {
+											"type": "string",
+											"description": "The current version of the API"
+										},
+										"swagger": {
+											"type": "string",
+											"description": "URL to the API's Swagger documentation"
+										},
+										"manager": {
+											"type": "string",
+											"description": "URL to the API manager"
+										},
+										"documentation": {
+											"type": "string",
+											"description": "URL to the detailed API documentation"
 										}
 									},
 									"example": {
-										"message": "<success message>"
-									},
-									"required": [
-										"message"
-									]
+										"status": 200,
+										"message": "Welcome to the Evolution API, it is working!",
+										"version": "1.7.4",
+										"swagger": "http://example.evolution-api.com/docs",
+										"manager": "http://example.evolution-api.com/manager",
+										"documentation": "https://doc.evolution-api.com"
+									}
 								}
 							}
 						}
