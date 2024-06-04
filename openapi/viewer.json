@@ -5040,6 +5040,161 @@
 					}
 				}
 			}
+		},
+		"/chatwoot/set/{instance}": {
+			"post": {
+				"operationId": "setChatwoot",
+				"summary": "Set Chatwoot",
+				"tags": [
+					"Chatwoot Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Set Chatwoot",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"enabled": {
+										"type": "boolean"
+									},
+									"account_id": {
+										"type": "string",
+										"description": "Chatwoot account ID"
+									},
+									"token": {
+										"type": "string",
+										"description": "Chatwoot token"
+									},
+									"url": {
+										"type": "string",
+										"description": "Chatwoot server URL"
+									},
+									"sign_msg": {
+										"type": "boolean",
+										"description": "Sign message with user name"
+									},
+									"sign_delimiter": {
+										"type": "string",
+										"description": "Delimiter for sign before the message. Use `\n` for line break"
+									},
+									"reopen_conversation": {
+										"type": "boolean"
+									},
+									"conversation_pending": {
+										"type": "boolean"
+									},
+									"import_contacts": {
+										"type": "boolean"
+									},
+									"import_messages": {
+										"type": "boolean"
+									},
+									"days_limit_import_messages": {
+										"type": "integer",
+										"description": "TODO"
+									},
+									"auto_create": {
+										"type": "boolean"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chatwoot/find/{instance}": {
+			"get": {
+				"operationId": "findChatwoot",
+				"summary": "Find Chatwoot",
+				"tags": [
+					"Chatwoot Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Find Chatwoot",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {

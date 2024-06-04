@@ -219,6 +219,13 @@
         "api-reference/integrations/typebot/find-typebot",
         "api-reference/integrations/typebot/change-session-status"
       ]
+    },
+    {
+      "group": "Chatwoot",
+      "pages": [
+        "api-reference/integrations/chatwoot/set-chatwoot",
+        "api-reference/integrations/chatwoot/find-chatwoot"
+      ]
     }
   ],
   "footerSocials": {
