@@ -3117,6 +3117,529 @@
 					}
 				}
 			}
+		},
+		"/chat/fetchBusinessProfile/{instance}": {
+			"post": {
+				"operationId": "fetchBusinessProfile",
+				"summary": "Fetch Business Profile",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Fetch business profile from phone number",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Phone number with country code"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/fetchProfile/{instance}": {
+			"post": {
+				"operationId": "fetchBusinessProfile",
+				"summary": "Fetch Business Profile",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Fetch business profile from phone number",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"number": {
+										"type": "string",
+										"description": "Phone number with country code"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/updateProfileName/{instance}": {
+			"post": {
+				"operationId": "updateProfileName",
+				"summary": "Update Profile Name",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Update profile name",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string",
+										"description": "New name for profile"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/updateProfileStatus/{instance}": {
+			"post": {
+				"operationId": "updateProfileStatus",
+				"summary": "Update Profile Status",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Update profile status",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"status": {
+										"type": "string",
+										"description": "New status for profile"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/updateProfilePicture/{instance}": {
+			"put": {
+				"operationId": "updateProfilePicture",
+				"summary": "Update Profile Picture",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Update profile picture",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"picture": {
+										"type": "string",
+										"description": "New spicture URL"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/removeProfilePicture/{instance}": {
+			"delete": {
+				"operationId": "removeProfilePicture",
+				"summary": "Remove Profile Picture",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Update profile picture",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/fetchPrivacySettings/{instance}": {
+			"get": {
+				"operationId": "fetchPrivacySettings",
+				"summary": "Fetch Privacy Settings",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Fetch privacy settings",
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chat/updatePrivacySettings/{instance}": {
+			"put": {
+				"operationId": "updatePrivacySettings",
+				"summary": "Update Privacy Settings",
+				"tags": [
+					"Chat Controller"
+				],
+				"deprecated": false,
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "instance",
+						"in": "path",
+						"required": true,
+						"description": "ID of the instance to connect",
+						"schema": {
+						  "type": "string"
+						}
+					}
+				],
+				"description": "Update privacy settings",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"privacySettings": {
+										"type": "object",
+										"properties": {
+											"readreceipts": {
+												"type": "string",
+												"enum": ["all","none"]
+											},
+											"profile": {
+												"type": "string",
+												"enum": ["all", "contacts", "contact_blacklist", "none"]
+											},
+											"status": {
+												"type": "string",
+												"enum": ["all", "contacts", "contact_blacklist", "none"]
+											},
+											"online": {
+												"type": "string",
+												"enum": ["all", "match_last_seen"]
+											},
+											"last": {
+												"type": "string",
+												"enum": ["all", "contacts", "contact_blacklist", "none"]
+											},
+											"groupadd": {
+												"type": "string",
+												"enum": ["all", "contacts", "contact_blacklist"]
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response TODO",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "<success message>"
+										}
+									},
+									"example": {
+										"message": "<success message>"
+									},
+									"required": [
+										"message"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {

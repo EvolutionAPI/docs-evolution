@@ -176,6 +176,19 @@
         "api-reference/chat-controller/update-message",
         "api-reference/chat-controller/find-chats"
       ]
+    },
+    {
+      "group": "Profile Settings",
+      "pages": [
+        "api-reference/profile-settings/fetch-business-profile",
+        "api-reference/profile-settings/fetch-profile",
+        "api-reference/profile-settings/update-profile-name",
+        "api-reference/profile-settings/update-profile-status",
+        "api-reference/profile-settings/update-profile-picture",
+        "api-reference/profile-settings/remove-profile-picture",
+        "api-reference/profile-settings/fetch-privacy-settings",
+        "api-reference/profile-settings/update-privacy-settings"
+      ]
     }
   ],
   "footerSocials": {
