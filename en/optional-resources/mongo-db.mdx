@@ -16,6 +16,16 @@ DATABASE_ENABLED=true
 DATABASE_CONNECTION_URI=mongodb://user:password@database_URL/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
 # Prefix for your database name.
 DATABASE_CONNECTION_DB_PREFIX_NAME=evo
+# Save WhatsApp connection credentials on Mongo
+DATABASE_SAVE_DATA_INSTANCE=false 
+# Save new messages on Mongo
+DATABASE_SAVE_DATA_NEW_MESSAGE=false 
+# Save message updates on Mongo
+DATABASE_SAVE_MESSAGE_UPDATE=false
+# Save imported contacts and new ones
+DATABASE_SAVE_DATA_CONTACTS=false 
+# Save imported chats and new ones
+DATABASE_SAVE_DATA_CHATS=false 
 ~~~
 
 # Migrate your data in NPM or NVM

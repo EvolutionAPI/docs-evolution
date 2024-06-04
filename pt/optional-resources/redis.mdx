@@ -11,9 +11,14 @@ Defina as variáveis de ambiente do Redis no arquivo `.env` para Docker ou no ar
 
 ~~~ shell
 # Defina como true para habilitar o Redis.
-REDIS_ENABLED=false
+CACHE_REDIS_ENABLED=false
 # URI do seu servidor Redis.
-REDIS_URI=redis://redis:6379
+CACHE_REDIS_URI=redis://redis:6379
 # Chave de prefixo para dados do Redis.
-REDIS_PREFIX_KEY=evo
+CACHE_REDIS_PREFIX_KEY=evolution
+# Tempo que os dados são mantidos em cache
+CACHE_REDIS_TTL=604800
+# Salva as credencias de conexão do whatsapp no redis
+CACHE_REDIS_SAVE_INSTANCES=true
 ~~~
+Veja mais em [Variáveis de ambiente](/pt/env#redis).

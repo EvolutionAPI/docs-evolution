@@ -16,6 +16,16 @@ DATABASE_ENABLED=true
 DATABASE_CONNECTION_URI=mongodb://user:password@database_URL/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
 # Prefixo para o nome do banco de dados.
 DATABASE_CONNECTION_DB_PREFIX_NAME=evo
+# Salva as credencias de conexão do whatsapp no mongoDB
+DATABASE_SAVE_DATA_INSTANCE=false 
+# Salva as mensagens novas no mongo
+DATABASE_SAVE_DATA_NEW_MESSAGE=false 
+# Salva as atualizações de mensagens no mongo
+DATABASE_SAVE_MESSAGE_UPDATE=false
+# Salva os contatos importados e novos contatos
+DATABASE_SAVE_DATA_CONTACTS=false 
+# Salva os chats importados e novos
+DATABASE_SAVE_DATA_CHATS=false 
 ~~~
 
 # Migração de dados
