@@ -1,9 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Evolution API Documentation",
-  "openapi": [
-    "/openapi/viewer.json"
-  ],
+  "openapi": ["/openapi/viewer.json"],
   "feedback": {
     "suggestEdit": false
   },
@@ -24,13 +22,6 @@
       "to": "#9563FF"
     }
   },
-  "topbarLinks": [
-    {
-      "name": "English",
-      "type": "link",
-      "url": "http://localhost:3000/en/get-started/introduction"
-    }
-  ],
   "topbarCtaButton": {
     "name": "GitHub",
     "url": "https://github.com/EvolutionAPI/evolution-api"
@@ -56,10 +47,7 @@
         {
           "group": "Instalação",
           "icon": "wrench",
-          "pages": [
-            "pt/install/docker",
-            "pt/install/nvm"
-          ]
+          "pages": ["pt/install/docker", "pt/install/nvm"]
         },
         {
           "group": "Recursos Opcionais",
@@ -90,10 +78,7 @@
         {
           "group": "Install",
           "icon": "wrench",
-          "pages": [
-            "en/install/docker",
-            "en/install/nvm"
-          ]
+          "pages": ["en/install/docker", "en/install/nvm"]
         },
         {
           "group": "Optional Resources",
@@ -119,9 +104,7 @@
     },
     {
       "group": "Início",
-      "pages": [
-        "api-reference/get-information"
-      ]
+      "pages": ["api-reference/get-information"]
     },
     {
       "group": "Instances",
@@ -138,17 +121,11 @@
     },
     {
       "group": "Webhook",
-      "pages": [
-        "api-reference/webhook/set",
-        "api-reference/webhook/get"
-      ]
+      "pages": ["api-reference/webhook/set", "api-reference/webhook/get"]
     },
     {
       "group": "Settings",
-      "pages": [
-        "api-reference/settings/set",
-        "api-reference/settings/get"
-      ]
+      "pages": ["api-reference/settings/set", "api-reference/settings/get"]
     },
     {
       "group": "Send Message",
