@@ -12,7 +12,8 @@
           "default": "evolution-example",
           "description": "The URL of your EvolutionAPI server"
         }
-      }
+      },
+      "description": "Your instance domain"
     }
   ],
   "paths": {
@@ -521,7 +522,7 @@
                         "apikey": "B3844804-481D-47A4-B69C-F14B4206EB56",
                         "integration": {
                           "integration": "WHATSAPP-BAILEYS",
-                          "webhook_wa_business": "https://api.site.com/webhook/whatsapp/db5e11d3-ded5-4d91-b3fb-48272688f206"
+                          "webhook_wa_business": "https://example.evolution-api.com/webhook/whatsapp/db5e11d3-ded5-4d91-b3fb-48272688f206"
                         }
                       }
                     },
@@ -530,11 +531,11 @@
                         "instanceName": "teste-docs",
                         "instanceId": "af6c5b7c-ee27-4f94-9ea8-192393746ddd",
                         "status": "close",
-                        "serverUrl": "https:///api.site.com",
+                        "serverUrl": "https://example.evolution-api.com",
                         "apikey": "123456",
                         "integration": {
                           "token": "123456",
-                          "webhook_wa_business": "https:///api.site.com/webhook/whatsapp/teste-docs"
+                          "webhook_wa_business": "https://example.evolution-api.com/webhook/whatsapp/teste-docs"
                         }
                       }
                     }
@@ -580,23 +581,73 @@
         "description": "Generates and returns the QR code for WhatsApp connection",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "pairingCode": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The unique code used for pairing a device or account."
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "A specific code associated with the pairing process. This may include tokens or other identifiers."
+                    },
+                    "count": {
+                      "type": "integer",
+                      "description": "The count or number of attempts or instances related to the pairing process."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "pairingCode": "WZYEH1YY",
+                    "code": "2@y8eK+bjtEjUWy9/FOM...",
+                    "count": 1
+                  }
                 }
-              }
+              }              
+            }
+          },
+          "404": {
+            "description": "Instance not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "description": "The HTTP status of the response"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "The error message indicating the type of error"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of detailed error messages"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "error": "Not Found",
+                    "response": {
+                      "message": [
+                        "The \"invalid-instance\" instance does not exist"
+                      ]
+                    }
+                  }
+                }
+              }              
             }
           }
         }
@@ -633,17 +684,69 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                    "instance": {
+                      "type": "object",
+                      "properties": {
+                        "instanceName": {
+                          "type": "string",
+                          "description": "The name of the instance."
+                        },
+                        "state": {
+                          "type": "string",
+                          "description": "The state of the instance."
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "instance": {
+                      "instanceName": "teste-docs",
+                      "state": "open"
+                    }
+                  }
                 }
-              }
+              }              
+            }
+          },
+          "404": {
+            "description": "Instance not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "description": "The HTTP status of the response"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "The error message indicating the type of error"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of detailed error messages"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "error": "Not Found",
+                    "response": {
+                      "message": [
+                        "The \"invalid-instance\" instance does not exist"
+                      ]
+                    }
+                  }
+                }
+              }              
             }
           }
         }
@@ -680,17 +783,69 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                    "instance": {
+                      "type": "object",
+                      "properties": {
+                        "instanceName": {
+                          "type": "string",
+                          "description": "The name of the instance."
+                        },
+                        "state": {
+                          "type": "string",
+                          "description": "The state of the instance."
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "instance": {
+                      "instanceName": "teste-docs",
+                      "state": "open"
+                    }
+                  }
                 }
-              }
+              }              
+            }
+          },
+          "404": {
+            "description": "Instance not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "description": "The HTTP status of the response"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "The error message indicating the type of error"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of detailed error messages"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "error": "Not Found",
+                    "response": {
+                      "message": [
+                        "The \"invalid-instance\" instance does not exist"
+                      ]
+                    }
+                  }
+                }
+              }              
             }
           }
         }
@@ -727,17 +882,74 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "status": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The status of the response."
+                    },
+                    "error": {
+                      "type": "boolean",
+                      "description": "Indicates whether an error occurred."
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "A message related to the response."
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "status": "SUCCESS",
+                    "error": false,
+                    "response": {
+                      "message": "Instance logged out"
+                    }
+                  }
                 }
-              }
+              }              
+            }
+          },
+          "404": {
+            "description": "Instance not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "description": "The HTTP status of the response"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "The error message indicating the type of error"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of detailed error messages"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "error": "Not Found",
+                    "response": {
+                      "message": [
+                        "The \"invalid-instance\" instance does not exist"
+                      ]
+                    }
+                  }
+                }
+              }              
             }
           }
         }
@@ -774,17 +986,74 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "status": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The status of the response."
+                    },
+                    "error": {
+                      "type": "boolean",
+                      "description": "Indicates whether an error occurred."
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "A message related to the response."
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "status": "SUCCESS",
+                    "error": false,
+                    "response": {
+                      "message": "Instance deleted"
+                    }
+                  }
                 }
-              }
+              }              
+            }
+          },
+          "404": {
+            "description": "Instance not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "description": "The HTTP status of the response"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "The error message indicating the type of error"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of detailed error messages"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "error": "Not Found",
+                    "response": {
+                      "message": [
+                        "The \"invalid-instance\" instance does not exist"
+                      ]
+                    }
+                  }
+                }
+              }              
             }
           }
         }
@@ -832,22 +1101,47 @@
         "responses": {
           "200": {
             "description": "Successful response TODO",
+            "content": {}
+          },
+          "404": {
+            "description": "Instance not found",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "status": {
+                      "type": "integer",
+                      "description": "The HTTP status of the response"
+                    },
+                    "error": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The error message indicating the type of error"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of detailed error messages"
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "status": 404,
+                    "error": "Not Found",
+                    "response": {
+                      "message": [
+                        "The \"invalid-instance\" instance does not exist"
+                      ]
+                    }
+                  }
                 }
-              }
+              }              
             }
           }
         }
