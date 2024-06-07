@@ -235,7 +235,7 @@
                   },
                   "typebot": {
                     "type": "string",
-                    "description": "Typebot name TODO"
+                    "description": "Typebot flow name"
                   },
                   "typebot_expire": {
                     "type": "integer",
@@ -678,7 +678,7 @@
         "description": "Restarts the instance",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
@@ -777,7 +777,7 @@
         "description": "Gets the state of the connection",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
@@ -876,7 +876,7 @@
         "description": "Makes logout on instance",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
@@ -980,7 +980,7 @@
         "description": "Deletes instance",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
@@ -1100,7 +1100,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {}
           },
           "404": {
@@ -1175,6 +1175,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "url",
+                  "events"
+                ],
                 "properties": {
                   "url": {
                     "type": "string",
@@ -1186,10 +1190,11 @@
                   },
                   "webhook_base64": {
                     "type": "boolean",
-                    "description": "TODO"
+                    "description": "Sends files in base64 when available"
                   },
                   "events": {
                     "type": "array",
+                    "minItems": 1,
                     "items": {
                       "type": "string",
                       "enum": [
@@ -1226,24 +1231,57 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                    "webhook": {
+                      "type": "object",
+                      "properties": {
+                        "instanceName": {
+                          "type": "string",
+                          "description": "The name of the instance."
+                        },
+                        "webhook": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string",
+                              "description": "The URL of the webhook."
+                            },
+                            "events": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "List of events the webhook is subscribed to."
+                            },
+                            "enabled": {
+                              "type": "boolean",
+                              "description": "Indicates whether the webhook is enabled."
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "webhook": {
+                      "instanceName": "teste-docs",
+                      "webhook": {
+                        "url": "https://example.com",
+                        "events": [
+                          "APPLICATION_STARTUP"
+                        ],
+                        "enabled": true
+                      }
+                    }
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -1274,23 +1312,37 @@
         "description": "Fetch Webhook configuration",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "enabled": {
+                      "type": "boolean",
+                      "description": "Indicates whether the webhook is enabled."
+                    },
+                    "url": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The URL of the webhook."
+                    },
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of events the webhook is subscribed to."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "enabled": true,
+                    "url": "https://example.com",
+                    "events": [
+                      "APPLICATION_STARTUP"
+                    ]
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -1324,6 +1376,14 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "reject_call",
+                  "groups_ignore",
+                  "always_online",
+                  "read_messages",
+                  "read_status",
+                  "sync_full_history"
+                ],
                 "properties": {
                   "reject_call": {
                     "type": "boolean",
@@ -1331,7 +1391,7 @@
                   },
                   "msg_call": {
                     "type": "string",
-                    "description": "Message to send after rejecting a call automatically"
+                    "description": "Message to be sent when a call is rejected automatically"
                   },
                   "groups_ignore": {
                     "type": "boolean",
@@ -1348,6 +1408,10 @@
                   "read_status": {
                     "type": "boolean",
                     "description": "See message status"
+                  },
+                  "sync_full_history": {
+                    "type": "boolean",
+                    "description": "Syncronize full WhatsApp history with EvolutionAPI"
                   }
                 }
               }
@@ -1355,24 +1419,67 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                    "settings": {
+                      "type": "object",
+                      "properties": {
+                        "instanceName": {
+                          "type": "string",
+                          "description": "The name of the instance."
+                        },
+                        "settings": {
+                          "type": "object",
+                          "properties": {
+                            "reject_call": {
+                              "type": "boolean",
+                              "description": "Indicates whether to reject incoming calls."
+                            },
+                            "groups_ignore": {
+                              "type": "boolean",
+                              "description": "Indicates whether to ignore group messages."
+                            },
+                            "always_online": {
+                              "type": "boolean",
+                              "description": "Indicates whether to always keep the instance online."
+                            },
+                            "read_messages": {
+                              "type": "boolean",
+                              "description": "Indicates whether to mark messages as read."
+                            },
+                            "read_status": {
+                              "type": "boolean",
+                              "description": "Indicates whether to read status updates."
+                            },
+                            "sync_full_history": {
+                              "type": "boolean",
+                              "description": "Indicates whether to synchronize full message history."
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "settings": {
+                      "instanceName": "teste-docs",
+                      "settings": {
+                        "reject_call": true,
+                        "groups_ignore": true,
+                        "always_online": true,
+                        "read_messages": true,
+                        "read_status": true,
+                        "sync_full_history": false
+                      }
+                    }
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -1403,23 +1510,47 @@
         "description": "Fetch Webhook configuration",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                    "reject_call": {
+                      "type": "boolean",
+                      "description": "Indicates whether to reject incoming calls."
+                    },
+                    "groups_ignore": {
+                      "type": "boolean",
+                      "description": "Indicates whether to ignore group messages."
+                    },
+                    "always_online": {
+                      "type": "boolean",
+                      "description": "Indicates whether to always keep the instance online."
+                    },
+                    "read_messages": {
+                      "type": "boolean",
+                      "description": "Indicates whether to mark messages as read."
+                    },
+                    "read_status": {
+                      "type": "boolean",
+                      "description": "Indicates whether to read status updates."
+                    },
+                    "sync_full_history": {
+                      "type": "boolean",
+                      "description": "Indicates whether to synchronize full message history."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "reject_call": true,
+                    "groups_ignore": true,
+                    "always_online": true,
+                    "read_messages": true,
+                    "read_status": true,
+                    "sync_full_history": false
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -1581,6 +1712,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "textMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -1600,7 +1735,7 @@
                       },
                       "linkPreview": {
                         "type": "boolean",
-                        "description": "TODO"
+                        "description": "Shows a preview of the target website if there's a link within the message"
                       },
                       "quoted": {
                         "type": "object",
@@ -1631,7 +1766,7 @@
                             "properties": {
                               "conversation": {
                                 "type": "string",
-                                "description": "TODO"
+                                "description": "Quoted message content"
                               }
                             }
                           }
@@ -1670,24 +1805,69 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      }
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "extendedTextMessage": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "The text message."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE594145F4C59B4"
+                    },
+                    "message": {
+                      "extendedTextMessage": {
+                        "text": "Olá!"
+                      }
+                    },
+                    "messageTimestamp": "1717689097",
+                    "status": "PENDING"
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -1721,6 +1901,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "mediaMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -1769,22 +1953,130 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "imageMessage": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string",
+                              "description": "The URL of the image."
+                            },
+                            "mimetype": {
+                              "type": "string",
+                              "description": "The MIME type of the image."
+                            },
+                            "caption": {
+                              "type": "string",
+                              "description": "The caption text of the image."
+                            },
+                            "fileSha256": {
+                              "type": "string",
+                              "description": "The SHA-256 hash of the image file."
+                            },
+                            "fileLength": {
+                              "type": "string",
+                              "description": "The length of the image file."
+                            },
+                            "height": {
+                              "type": "integer",
+                              "description": "The height of the image."
+                            },
+                            "width": {
+                              "type": "integer",
+                              "description": "The width of the image."
+                            },
+                            "mediaKey": {
+                              "type": "string",
+                              "description": "The media key of the image."
+                            },
+                            "fileEncSha256": {
+                              "type": "string",
+                              "description": "The SHA-256 hash of the encrypted image file."
+                            },
+                            "directPath": {
+                              "type": "string",
+                              "description": "The direct path to the image."
+                            },
+                            "mediaKeyTimestamp": {
+                              "type": "string",
+                              "description": "The timestamp of the media key."
+                            },
+                            "jpegThumbnail": {
+                              "type": "string",
+                              "description": "The JPEG thumbnail of the image."
+                            },
+                            "contextInfo": {
+                              "type": "object",
+                              "description": "Additional context information."
+                            }
+                          },
+                          "description": "Details of the image message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE5F5A632EAE722"
+                    },
+                    "message": {
+                      "imageMessage": {
+                        "url": "https://mmg.whatsapp.net/o1/v/t62.7118-2...",
+                        "mimetype": "image/png",
+                        "caption": "Caption text",
+                        "fileSha256": "VbCGkGBv5SZStLD5PHdkBWpQav/lNsXcY...",
+                        "fileLength": "1305757",
+                        "height": 1080,
+                        "width": 1920,
+                        "mediaKey": "aFQK9Ocw5tE7Nf0iBA42Xcb4Dee6G1k/pLL...",
+                        "fileEncSha256": "bGVtYeR3458RwC0p1tsGDNuj+vOu/...",
+                        "directPath": "/o1/v/t62.7118-24/f1/m232/up-oil...",
+                        "mediaKeyTimestamp": "1717775573",
+                        "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATG...",
+                        "contextInfo": {}
+                      }
+                    },
+                    "messageTimestamp": "1717775575",
+                    "status": "PENDING"
+                  }
                 }
               }
             }
@@ -1820,6 +2112,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "audioMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -1860,21 +2156,114 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "audioMessage": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string",
+                              "description": "The URL of the audio message."
+                            },
+                            "mimetype": {
+                              "type": "string",
+                              "description": "The MIME type of the audio message."
+                            },
+                            "fileSha256": {
+                              "type": "string",
+                              "description": "The SHA-256 hash of the audio file."
+                            },
+                            "fileLength": {
+                              "type": "string",
+                              "description": "The length of the audio file."
+                            },
+                            "seconds": {
+                              "type": "integer",
+                              "description": "The duration of the audio message in seconds."
+                            },
+                            "ptt": {
+                              "type": "boolean",
+                              "description": "Indicates whether the audio message is a push-to-talk (PTT) message."
+                            },
+                            "mediaKey": {
+                              "type": "string",
+                              "description": "The media key of the audio message."
+                            },
+                            "fileEncSha256": {
+                              "type": "string",
+                              "description": "The SHA-256 hash of the encrypted audio file."
+                            },
+                            "directPath": {
+                              "type": "string",
+                              "description": "The direct path to the audio file."
+                            },
+                            "mediaKeyTimestamp": {
+                              "type": "string",
+                              "description": "The timestamp of the media key."
+                            }
+                          },
+                          "description": "Details of the audio message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, audio, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE5EFED2AB0BB9F"
+                    },
+                    "message": {
+                      "audioMessage": {
+                        "url": "https://mmg.whatsapp.net/v/t62.7114-24/21428511_985284763127087_5662928...",
+                        "mimetype": "audio/mp4",
+                        "fileSha256": "DJPBnRns6QADzZNH2j0R88mUtFQ4aiOm9aZf6dio2G0=",
+                        "fileLength": "670662",
+                        "seconds": 42,
+                        "ptt": true,
+                        "mediaKey": "+A3X1Tuyzeh87cCVZpfuKpL3Y4RYdYr3sCDurjSlBTY=",
+                        "fileEncSha256": "s4tKvHOXIZAw5668/Xcy4zoFba4vW8klmNYC78yOPZs=",
+                        "directPath": "/v/t62.7114-24/21428511_985284763127087_5662928477636351284_n.enc...",
+                        "mediaKeyTimestamp": "1717776942"
+                      }
+                    },
+                    "messageTimestamp": "1717776942",
+                    "status": "PENDING"
+                  }
                 }
               }
             }
@@ -1910,6 +2299,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "stickerMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -1996,9 +2389,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["statusMessage"],
                 "properties": {
                   "statusMessage": {
                     "type": "object",
+                    "required": [
+                      "type"
+                    ],
                     "properties": {
                       "type": {
                         "type": "string",
@@ -2040,24 +2437,87 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "extendedTextMessage": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "The text content of the message."
+                            },
+                            "backgroundArgb": {
+                              "type": "integer",
+                              "description": "The background color of the text message, represented as ARGB integer value."
+                            },
+                            "font": {
+                              "type": "string",
+                              "description": "The font used in the text message."
+                            }
+                          },
+                          "description": "Details of the extended text message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
+                    },
+                    "participant": {
+                      "type": "string",
+                      "description": "The participant in the chat to whom the message was sent."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "status@broadcast",
+                      "fromMe": true,
+                      "id": "BAE5FAB9E65A3DA8"
+                    },
+                    "message": {
+                      "extendedTextMessage": {
+                        "text": "example",
+                        "backgroundArgb": 4294910617,
+                        "font": "FB_SCRIPT"
+                      }
+                    },
+                    "messageTimestamp": "1717691767",
+                    "status": "PENDING",
+                    "participant": "553199999999:17@s.whatsapp.net"
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -2091,6 +2551,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "locationMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -2113,6 +2577,10 @@
                   },
                   "locationMessage": {
                     "type": "object",
+                    "required": [
+                      "latitude",
+                      "longitude"
+                    ],
                     "properties": {
                       "name": {
                         "type": "string",
@@ -2138,22 +2606,92 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "locationMessage": {
+                          "type": "object",
+                          "properties": {
+                            "degreesLatitude": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "The latitude of the location."
+                            },
+                            "degreesLongitude": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "The longitude of the location."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the location."
+                            },
+                            "address": {
+                              "type": "string",
+                              "description": "The address of the location."
+                            },
+                            "contextInfo": {
+                              "type": "object",
+                              "description": "Additional context information."
+                            }
+                          },
+                          "description": "Details of the location message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, location, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE51B6FF4470AF9"
+                    },
+                    "message": {
+                      "locationMessage": {
+                        "degreesLatitude": -19.93359,
+                        "degreesLongitude": -43.93851,
+                        "name": "Palácio da Liberdade",
+                        "address": "Praça da Liberdade, Belo Horizonte, MG 30140-050",
+                        "contextInfo": {}
+                      }
+                    },
+                    "messageTimestamp": "1717779606",
+                    "status": "PENDING"
+                  }
                 }
               }
             }
@@ -2189,6 +2727,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "contactMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -2209,8 +2751,9 @@
                       }
                     }
                   },
-                  "contact": {
+                  "contactMessage": {
                     "type": "array",
+                    "minItems": 1,
                     "items": {
                       "type": "object",
                       "required": ["fullname", "wuid", "phoneNumber"],
@@ -2248,22 +2791,80 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "contactMessage": {
+                          "type": "object",
+                          "properties": {
+                            "displayName": {
+                              "type": "string",
+                              "description": "The display name of the contact."
+                            },
+                            "vcard": {
+                              "type": "string",
+                              "description": "The vCard format contact information."
+                            },
+                            "contextInfo": {
+                              "type": "object",
+                              "description": "Additional context information."
+                            }
+                          },
+                          "description": "Details of the contact message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, contact, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE58DA6CBC941BC"
+                    },
+                    "message": {
+                      "contactMessage": {
+                        "displayName": "Guilherme Gomes",
+                        "vcard": "BEGIN:VCARD\nVERSION:3.0\nN:Guilherme Gomes\nFN:Guilherme Gomes\nORG:AtendAI;\nEMAIL:...",
+                        "contextInfo": {}
+                      }
+                    },
+                    "messageTimestamp": "1717780437",
+                    "status": "PENDING"
+                  }
                 }
               }
             }
@@ -2333,22 +2934,98 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "reactionMessage": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "object",
+                              "properties": {
+                                "remoteJid": {
+                                  "type": "string",
+                                  "description": "The remote Jid of the original message."
+                                },
+                                "fromMe": {
+                                  "type": "boolean",
+                                  "description": "Indicates whether the original message was sent by the user."
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "description": "The ID of the original message."
+                                }
+                              },
+                              "description": "The key of the original message to which the reaction is linked."
+                            },
+                            "text": {
+                              "type": "string",
+                              "description": "The reaction text or emoji."
+                            },
+                            "senderTimestampMs": {
+                              "type": "string",
+                              "description": "The timestamp when the reaction was sent, in milliseconds."
+                            }
+                          },
+                          "description": "Details of the reaction message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, reaction, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE569F0E38F858D"
+                    },
+                    "message": {
+                      "reactionMessage": {
+                        "key": {
+                          "remoteJid": "553199999999@s.whatsapp.net",
+                          "fromMe": true,
+                          "id": "BAE58DA6CBC941BC"
+                        },
+                        "text": "🚀",
+                        "senderTimestampMs": "1717781105034"
+                      }
+                    },
+                    "messageTimestamp": "1717781105",
+                    "status": "PENDING"
+                  }
                 }
               }
             }
@@ -2384,6 +3061,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "number",
+                  "pollMessage"
+                ],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -2405,6 +3086,11 @@
                   },
                   "pollMessage": {
                     "type": "object",
+                    "required": [
+                      "name",
+                      "selectableCount",
+                      "values"
+                    ],
                     "properties": {
                       "name": {
                         "type": "string",
@@ -2412,10 +3098,12 @@
                       },
                       "selectableCount": {
                         "type": "integer",
-                        "description": "Amount of options"
+                        "minimum": 1,
+                        "description": "How many options each person can select"
                       },
                       "values": {
                         "type": "array",
+                        "minItems": 1,
                         "items": {
                           "type": "string"
                         }
@@ -2428,22 +3116,106 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "messageContextInfo": {
+                          "type": "object",
+                          "properties": {
+                            "messageSecret": {
+                              "type": "string",
+                              "description": "The secret of the message context."
+                            }
+                          },
+                          "description": "Information about the context of the message."
+                        },
+                        "pollCreationMessage": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the poll."
+                            },
+                            "options": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "optionName": {
+                                    "type": "string",
+                                    "description": "The name of the poll option."
+                                  }
+                                }
+                              },
+                              "description": "The options available in the poll."
+                            },
+                            "selectableOptionsCount": {
+                              "type": "integer",
+                              "description": "The number of options that can be selected in the poll."
+                            }
+                          },
+                          "description": "Details of the poll creation message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, poll creation, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE53EC8D8E1FD8A"
+                    },
+                    "message": {
+                      "messageContextInfo": {
+                        "messageSecret": "lX/+cLHHNfnTTKZi+88mrhoyi6KNuUzWjgfaB0bTfOY="
+                      },
+                      "pollCreationMessage": {
+                        "name": "Poll Name",
+                        "options": [
+                          { "optionName": "Option 1" },
+                          { "optionName": "Option 2" },
+                          { "optionName": "Option 3" }
+                        ],
+                        "selectableOptionsCount": 1
+                      }
+                    },
+                    "messageTimestamp": "1717781848",
+                    "status": "PENDING"
+                  }
                 }
               }
             }
@@ -2557,20 +3329,154 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "listMessage": {
+                          "type": "object",
+                          "properties": {
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the list message."
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The description of the list message."
+                            },
+                            "buttonText": {
+                              "type": "string",
+                              "description": "The text of the button in the list message."
+                            },
+                            "listType": {
+                              "type": "string",
+                              "description": "The type of the list."
+                            },
+                            "sections": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string",
+                                    "description": "The title of the section."
+                                  },
+                                  "rows": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "title": {
+                                          "type": "string",
+                                          "description": "The title of the row."
+                                        },
+                                        "description": {
+                                          "type": "string",
+                                          "description": "The description of the row."
+                                        },
+                                        "rowId": {
+                                          "type": "string",
+                                          "description": "The ID of the row."
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "description": "The sections in the list message."
+                            },
+                            "contextInfo": {
+                              "type": "object",
+                              "description": "Additional context information."
+                            }
+                          },
+                          "description": "Details of the list message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, list, etc."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
+                    "key": {
+                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE5096096C5E261"
+                    },
+                    "message": {
+                      "listMessage": {
+                        "title": "List Title",
+                        "description": "List description",
+                        "buttonText": "Click Me",
+                        "listType": "PRODUCT_LIST",
+                        "sections": [
+                          {
+                            "title": "Section title",
+                            "rows": [
+                              {
+                                "title": "Row 1",
+                                "description": "Row 1 description",
+                                "rowId": "1"
+                              },
+                              {
+                                "title": "Row 2",
+                                "description": "Row 2 description",
+                                "rowId": "2"
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Section 2",
+                            "rows": [
+                              {
+                                "title": "Row 1",
+                                "description": "Row 1 description",
+                                "rowId": "1"
+                              },
+                              {
+                                "title": "Row 2",
+                                "description": "Row 2 description",
+                                "rowId": "2"
+                              }
+                            ]
+                          }
+                        ],
+                        "contextInfo": {}
+                      }
+                    },
+                    "messageTimestamp": "1717782429",
+                    "status": "PENDING"
                   },
                   "required": ["message"]
                 }
@@ -5846,7 +6752,7 @@
         "description": "Get information about your EvolutionAPI",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
