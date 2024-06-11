@@ -1,0 +1,63 @@
+---
+title: MongoDB
+icon: database
+---
+
+# Setup
+
+MongoDB, um banco de dados NoSQL, é conhecido por seu alto desempenho e escalabilidade. Ele é ideal para lidar com altos volumes de dados na EvolutionAPI.
+
+Defina as variáveis de ambiente do MongoDB no arquivo `.env` para Docker ou o `dev-env.yml` para NPM da seguinte forma:
+
+~~~ shell
+# Defina como true para habilitar o MongoDB.
+DATABASE_ENABLED=true
+# Sua string de conexão do MongoDB.
+DATABASE_CONNECTION_URI=mongodb://user:password@database_URL/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
+# Prefixo para o nome do banco de dados.
+DATABASE_CONNECTION_DB_PREFIX_NAME=evo
+# Salva as credencias de conexão do whatsapp no mongoDB
+DATABASE_SAVE_DATA_INSTANCE=false 
+# Salva as mensagens novas no mongo
+DATABASE_SAVE_DATA_NEW_MESSAGE=false 
+# Salva as atualizações de mensagens no mongo
+DATABASE_SAVE_MESSAGE_UPDATE=false
+# Salva os contatos importados e novos contatos
+DATABASE_SAVE_DATA_CONTACTS=false 
+# Salva os chats importados e novos
+DATABASE_SAVE_DATA_CHATS=false 
+~~~
+
+# Migração de dados
+
+Alternar entre o armazenamento local para o MongoDB não transfere automaticamente suas instâncias do WhatsApp que estão atualmente sincronizadas com o local storage original.
+
+<Note>Certifique-se de já ter uma instância do MongoDB em execução com um banco de dados criado.</Note>
+
+Claro, aqui está a tradução da documentação para o português:
+
+# Migre seus dados no NPM ou NVM
+
+Pare a execução do PM2:
+
+**Flush e Stop**: Limpa todos os logs do PM2, útil para solução de problemas após a atualização e para parar temporariamente a Evolution API para aplicar atualizações com segurança.
+
+~~~ shell
+# Limpar todos os logs do PM2
+pm2 flush
+
+# Parar o processo atual da Evolution API
+pm2 stop ApiEvolution
+~~~
+
+**Diretório da Evolution API**: acesse o diretório de instalação com o seguinte comando:
+~~~
+cd evolution-api
+~~~
+
+**Comando de migração**: Execute o comando de migração no diretório de instalação:
+~~~
+npx evolution-manager api migrate-to-mongo
+~~~
+
+Siga os passos do script e migre instâncias específicas do WhatsApp ou todas as suas instâncias.

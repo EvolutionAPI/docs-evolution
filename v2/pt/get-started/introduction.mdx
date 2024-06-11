@@ -1,0 +1,67 @@
+---
+sidebarTitle: 'Introdução'
+title: 'Introdução'
+icon: hand-wave
+---
+
+
+
+**Evolution API** é um projeto dedicado a capacitar pequenas empresas, empreendedores, freelancers e indivíduos com recursos limitados.
+
+Nossa missão é fornecer uma solução de mensagens de **WhatsApp™** via API, permitindo que esses grupos reforcem seus negócios locais ou online.
+
+O melhor de tudo é que o nosso serviço é **totalmente gratuito**, concebido para apoiar aqueles que se esforçam para ter sucesso num cenário de mercado competitivo.
+
+Acesse nosso [repositório](https://github.com/EvolutionAPI/evolution-api) e faça parte da nossa [comunidade](https://evolution-api.com) para fazer parte do projeto.
+
+## Início Rápido
+
+<Note>
+Você precisará ter o Docker instalado em sua máquina, veja a [Documentação Oficial do Docker](https://docs.docker.com/engine/install/)
+</Note>
+Para executar a versão de teste e testar as principais funcionalidades da API, copie o comando abaixo, modifique o valor de `AUTHENTICATION_API_KEY` para um de sua preferência, e execute o comando:
+~~~ sh
+docker run -d \
+    --name evolution_api \
+    -p 8080:8080 \
+    -e AUTHENTICATION_API_KEY=mude-me \
+    atendai/evolution-api:latest
+~~~
+
+<Note>A execução via CLI é recomendada para implantações rápidas, principalmente para testes ou desenvolvimento. Não deve ser usada em produção. Em vez disso, recomendamos que você use o docker-compose para facilitar a implantação e manutenção.</Note>
+
+Isso executará um contêiner Docker expondo a aplicação na porta 8080 e você poderá começar a testar e solicitar o código QR do WhatsApp usando o conteúdo da variável de autenticação com o cabeçalho apikey definido.
+
+Para garantir que a API está em execução, acesse http://localhost:8080 em seu navegador. Esta deve ser a resposta do seu navegador:
+
+~~~ json
+{
+   "status":200,
+   "message":"Welcome to the Evolution API, it is working!",
+   "version":"1.x.x",
+   "swagger":"http://localhost:8080/docs",
+   "manager":"http://localhost:8080/manager",
+   "documentation":"https://doc.evolution-api.com"
+}
+~~~
+
+## Instalação
+Veja como instalar a versão completa em:
+
+<CardGroup cols={2}>
+  <Card title="Instalação com Docker" icon="docker" href="/pt/install/docker">
+    Veja como instalar a EvolutionAPI completa pelo Docker
+  </Card>
+  <Card title="NVM" icon="js" href="https://www.postman.com/agenciadgcode/workspace/evolution-api">
+    Utilize a coleção oficial da API para Postman.
+  </Card>
+</CardGroup>
+
+<CardGroup cols={2}>
+  <Card title="Documentação da API" icon="book" href="/pt/definitions/connections">
+    Veja a documentação da API com exemplos de código
+  </Card>
+  <Card title="Coleção Postman" icon="webhook" href="https://www.postman.com/agenciadgcode/workspace/evolution-api">
+    Utilize a coleção oficial da API para Postman.
+  </Card>
+</CardGroup>

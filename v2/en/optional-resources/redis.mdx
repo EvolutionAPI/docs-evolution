@@ -1,0 +1,24 @@
+---
+title: Redis
+icon: layer-group
+---
+
+# Setup
+
+Redis is an in-memory data structure store, used as a database, cache, and message broker. It supports data structures such as strings, hashes, lists, sets, and more. Incorporating Redis can significantly improve the performance of Evolution API by enabling faster data access and efficient caching.
+
+Set the Redis environment variables in the `.env` for Docker or the `dev-env.yml` for NPM file as follows:
+
+~~~ shell
+# Set to true to enable Redis.
+CACHE_REDIS_ENABLED=false
+# Redis server URI
+CACHE_REDIS_URI=redis://redis:6379
+# Prefix key word for redis data
+CACHE_REDIS_PREFIX_KEY=evolution
+# Time to keep data cached
+CACHE_REDIS_TTL=604800
+# Save WhatsApp credentials on Redis
+CACHE_REDIS_SAVE_INSTANCES=true
+~~~
+Checkout more on [Environment Variables](/en/env#redis).

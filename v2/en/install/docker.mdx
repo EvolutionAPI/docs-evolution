@@ -1,0 +1,118 @@
+---
+title: Docker
+icon: docker
+---
+
+<Note>
+  These installation instructions assume you have already installed Docker on your machine. You can find
+  information on how to install Docker in the
+  [Official Docker Documentation](https://docs.docker.com/engine/install/).
+</Note>
+
+EvolutionAPI is Docker-ready and can be easily deployed with Docker in both standalone and swarm modes. The official EvolutionAPI repository contains all the necessary compose files to install the API.
+
+## Docker Run
+### Quick Start
+
+<Warning>
+  CLI installation is recommended for quick deployment, mainly for testing or development. It should not be
+  used for production. Instead, we recommend that you [use docker-compose](#docker-compose) for
+  easier deployment and maintenance.
+</Warning>
+
+The fastest way to deploy EvolutionAPI with Docker is by using `docker run` on the command line interface.
+
+~~~ bash Terminal
+docker run -d \
+    --name evolution-api \
+    -p 8080:8080 \
+    -e AUTHENTICATION_API_KEY=change-me \
+    atendai/evolution-api
+~~~
+
+This will run a Docker container exposing the application on port 8080, and you can start testing and requesting the WhatsApp QR code using the authentication variable content with the `apikey` header set.
+
+### Quick Start with Volumes
+
+You can also deploy using Docker volumes to keep your EvolutionAPI's persistent data and all WhatsApp instances on your local machine, avoiding issues with container restarts by using `docker run` on the command line interface.
+
+Run the following command to deploy EvolutionAPI with the necessary volumes. This command maps the `evolution_store` and `evolution_instances` volumes to their respective directories inside the container.
+
+~~~ bash Terminal
+docker run -d \
+    --name evolution-api \
+    -p 8080:8080 \
+    -e AUTHENTICATION_API_KEY=change-me \
+    -v evolution_store:/evolution/store \
+    -v evolution_instances:/evolution/instances \
+    atendai/evolution-api
+~~~
+
+## Docker Compose
+
+Deploying EvolutionAPI using Docker Compose simplifies the setup and management of your Docker containers. It allows you to define your Docker environment in a `docker-compose.yaml` file and then use a single command to start everything.
+
+This is a Docker Compose example for standalone environments, i.e., a single running server. For synchronization of two servers in parallel, use Swarm. This is for more advanced Docker users.
+
+### Standalone
+
+<Warning>
+  **Warning:** the commands featured here as `docker compose` might not work on older versions, and must be replaced by `docker-compose`.
+</Warning>
+
+Docker standalone is suitable when your Evolution API will be running on just one machine, and you don't need scalability or other Docker Swarm features for now. It's the most convenient way to use Docker for most people.
+
+Create a `docker-compose.yml` file with this content:
+
+~~~ yaml docker-compose.yml
+version: '3'
+services:
+  evolution-api:
+    container_name: evolution_api
+    image: atendai/evolution-api
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - evolution_store:/evolution/store
+      - evolution_instances:/evolution/instances
+
+volumes:
+  evolution_store:
+  evolution_instances:
+~~~
+
+Create a `.env` file in the same directory with the following:
+
+~~~ bash .env
+AUTHENTICATION_API_KEY=change-me
+~~~
+<Note>
+  For more configurations, take the example file from the
+  [official repository](https://github.com/EvolutionAPI/evolution-api/blob/main/Docker/.env.example). And see the
+  guide [here](/en/install/env).
+</Note>
+
+Navigate to the directory containing your docker-compose.yml file and run:
+services defined in the file
+
+~~~ bash
+docker compose up -d
+~~~
+
+This command will download the necessary Docker images, create the defined services, networks, and volumes, and start the EvolutionAPI service.
+
+After running the docker-compose up command, you should see logs indicating that the services are running.
+
+~~~ bash
+docker logs evolution_api
+~~~
+
+To stop the service, use:
+~~~ bash
+docker compose down
+~~~
+
+Open your browser and go to http://localhost:8080 to check if the EvolutionAPI is operational.
