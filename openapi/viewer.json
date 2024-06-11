@@ -243,7 +243,7 @@
                   },
                   "typebot_keyword_finish": {
                     "type": "string",
-                    "description": "Keyword to be sent on typebot finish TODO"
+                    "description": "Keyword to finish the typebot flow"
                   },
                   "typebot_delay_message": {
                     "type": "integer",
@@ -513,7 +513,7 @@
                       "instance": {
                         "instanceName": "example-name",
                         "instanceId": "421a4121-a3d9-40cc-a8db-c3a1df353126",
-                        "owner": "553199999999@s.whatsapp.net",
+                        "owner": "553198296801@s.whatsapp.net",
                         "profileName": "Guilherme Gomes",
                         "profilePictureUrl": null,
                         "profileStatus": "This is the profile status.",
@@ -1662,24 +1662,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -1854,7 +1838,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE594145F4C59B4"
                     },
@@ -2053,7 +2037,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE5F5A632EAE722"
                     },
@@ -2243,7 +2227,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE5EFED2AB0BB9F"
                     },
@@ -2339,24 +2323,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -2514,7 +2482,7 @@
                     },
                     "messageTimestamp": "1717691767",
                     "status": "PENDING",
-                    "participant": "553199999999:17@s.whatsapp.net"
+                    "participant": "553198296801:17@s.whatsapp.net"
                   }
                 }
               }              
@@ -2676,7 +2644,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE51B6FF4470AF9"
                     },
@@ -2764,7 +2732,7 @@
                         },
                         "wuid": {
                           "type": "string",
-                          "description": "Phone number non-stylized with country code (5531999999999)"
+                          "description": "Phone number non-stylized with country code (553198296801)"
                         },
                         "phoneNumber": {
                           "type": "string",
@@ -2851,7 +2819,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE58DA6CBC941BC"
                     },
@@ -3008,14 +2976,14 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE569F0E38F858D"
                     },
                     "message": {
                       "reactionMessage": {
                         "key": {
-                          "remoteJid": "553199999999@s.whatsapp.net",
+                          "remoteJid": "553198296801@s.whatsapp.net",
                           "fromMe": true,
                           "id": "BAE58DA6CBC941BC"
                         },
@@ -3195,7 +3163,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE53EC8D8E1FD8A"
                     },
@@ -3430,7 +3398,7 @@
                   },
                   "example": {
                     "key": {
-                      "remoteJid": "553199999999@s.whatsapp.net",
+                      "remoteJid": "553198296801@s.whatsapp.net",
                       "fromMe": true,
                       "id": "BAE5096096C5E261"
                     },
@@ -3529,23 +3497,38 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "exists": {
+                        "type": "boolean",
+                        "description": "Indicates whether the WhatsApp account exists."
+                      },
+                      "jid": {
+                        "type": "string",
+                        "description": "The JID of the WhatsApp account."
+                      },
+                      "number": {
+                        "type": "string",
+                        "description": "The phone number associated with the WhatsApp account."
+                      }
                     }
                   },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                  "description": "Array of objects representing WhatsApp account existence information.",
+                  "example": [
+                    {
+                      "exists": true,
+                      "jid": "553198296801@s.whatsapp.net",
+                      "number": "553198296801"
+                    }
+                  ]
                 }
-              }
+              }              
             }
           }
         }
@@ -3607,8 +3590,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -3616,15 +3599,19 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "A brief message describing the action performed."
+                    },
+                    "read": {
+                      "type": "string",
+                      "description": "The status of the read action."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "message": "Read messages",
+                    "read": "success"
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -3658,13 +3645,16 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["lastMessage", "archive"],
                 "properties": {
                   "lastMessage": {
                     "type": "object",
                     "description": "Messages to be mark as read",
+                    "required": ["key"],
                     "properties": {
                       "key": {
                         "type": "object",
+                        "required": ["remoteJid", "fromMe", "id"],
                         "properties": {
                           "remoteJid": {
                             "type": "string",
@@ -3692,24 +3682,28 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "chatId": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The ID of the chat."
+                    },
+                    "archived": {
+                      "type": "boolean",
+                      "description": "Indicates whether the chat is archived."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "chatId": "553198296801@s.whatsapp.net",
+                    "archived": true
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -3743,6 +3737,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["id", "remoteJid", "fromMe"],
                 "properties": {
                   "id": {
                     "type": "string",
@@ -3758,7 +3753,7 @@
                   },
                   "participant": {
                     "type": "string",
-                    "description": "Participant for group messages only"
+                    "description": "Participant for group messages only TODO"
                   }
                 }
               }
@@ -3766,24 +3761,96 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote JID (Jabber ID) of the WhatsApp account."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key that identifies the message in the chat."
+                    },
                     "message": {
+                      "type": "object",
+                      "properties": {
+                        "protocolMessage": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "object",
+                              "properties": {
+                                "remoteJid": {
+                                  "type": "string",
+                                  "description": "The remote JID (Jabber ID) of the WhatsApp account in the referenced message."
+                                },
+                                "fromMe": {
+                                  "type": "boolean",
+                                  "description": "Indicates whether the referenced message was sent by the user."
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "description": "The ID of the referenced message."
+                                }
+                              },
+                              "description": "The key that identifies the referenced message."
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "The type of protocol message, e.g., 'REVOKE'."
+                            }
+                          },
+                          "description": "Details of the protocol message."
+                        }
+                      },
+                      "description": "The content of the message."
+                    },
+                    "messageTimestamp": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
                     }
                   },
+                  "description": "Schema representing a WhatsApp protocol message, including the key, message content, timestamp, and status.",
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "key": {
+                      "remoteJid": "553198296801@s.whatsapp.com",
+                      "fromMe": true,
+                      "id": "BAE5EABBD912C4E2"
+                    },
+                    "message": {
+                      "protocolMessage": {
+                        "key": {
+                          "remoteJid": "553198296801@s.whatsapp.com",
+                          "fromMe": true,
+                          "id": "BAE52B567D0E3DD8"
+                        },
+                        "type": "REVOKE"
+                      }
+                    },
+                    "messageTimestamp": "1718108455",
+                    "status": "PENDING"
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -3791,8 +3858,8 @@
     },
     "/chat/sendPresence/{instance}": {
       "post": {
-        "operationId": "deleteMessageForEveryone",
-        "summary": "Delete Message For Everyone",
+        "operationId": "sendPresence",
+        "summary": "Send Presence",
         "tags": ["Chat Controller"],
         "deprecated": false,
         "security": [
@@ -3811,12 +3878,13 @@
             }
           }
         ],
-        "description": "Delete Message For Everyone",
+        "description": "Send Presence (typing...)",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["number", "options"],
                 "properties": {
                   "number": {
                     "type": "string",
@@ -3824,10 +3892,11 @@
                   },
                   "options": {
                     "type": "object",
+                    "required": ["delay", "presence"],
                     "properties": {
                       "delay": {
                         "type": "integer",
-                        "description": "Presence time in milliseconds before sending message"
+                        "description": "Presence display time in milliseconds"
                       },
                       "presence": {
                         "type": "string",
@@ -3842,25 +3911,9 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+          "201": {
+            "description": "Created",
+            "content": {}
           }
         }
       }
@@ -3905,23 +3958,27 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "wuid": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The WhatsApp User ID (WUID)."
+                    },
+                    "profilePictureUrl": {
+                      "type": "string",
+                      "description": "URL of the user's profile picture."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "wuid": "553198296801@s.whatsapp.net",
+                    "profilePictureUrl": "https://pps.whatsapp.net/v/t61.2..."
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -3972,24 +4029,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4049,24 +4090,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4121,24 +4146,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4204,24 +4213,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4287,24 +4280,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4334,24 +4311,8 @@
         "description": "Find all chats",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4396,24 +4357,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4458,24 +4403,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4520,24 +4449,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4582,24 +4495,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4644,24 +4541,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4691,24 +4572,8 @@
         "description": "Update profile picture",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4738,24 +4603,8 @@
         "description": "Fetch privacy settings",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4825,24 +4674,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4898,24 +4731,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -4969,24 +4786,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5040,24 +4841,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5111,24 +4896,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5167,23 +4936,27 @@
         "description": "Fetch group invite code",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "inviteUrl": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The URL for the WhatsApp group invite."
+                    },
+                    "inviteCode": {
+                      "type": "string",
+                      "description": "The code for the WhatsApp group invite."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "inviteUrl": "https://chat.whatsapp.com/DgQvyfXzY01B6rGrpZpYze",
+                    "inviteCode": "DgQvyfXzY01B6rGrpZpYze"
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -5223,24 +4996,8 @@
         "description": "Fetch group invite code",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5279,24 +5036,8 @@
         "description": "Fetch group invite code",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5329,6 +5070,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["groupJid", "numbers"],
                 "properties": {
                   "groupJid": {
                     "type": "string",
@@ -5352,23 +5094,27 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "send": {
+                      "type": "boolean",
+                      "description": "Indicates if the invite was sent successfully."
+                    },
+                    "inviteUrl": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The URL for the WhatsApp group invite."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "send": true,
+                    "inviteUrl": "https://chat.whatsapp.com/DgQvyfXzY01B6rGrpZpYze"
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -5407,24 +5153,8 @@
         "description": "Find group by invite code",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5463,23 +5193,100 @@
         "description": "Find group by remote JID",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "id": {
                       "type": "string",
-                      "example": "<success message>"
+                      "description": "The ID of the group."
+                    },
+                    "subject": {
+                      "type": "string",
+                      "description": "The subject (name) of the group."
+                    },
+                    "subjectOwner": {
+                      "type": "string",
+                      "description": "The ID of the user who set the subject."
+                    },
+                    "subjectTime": {
+                      "type": "integer",
+                      "description": "The timestamp when the subject was set."
+                    },
+                    "pictureUrl": {
+                      "type": "string",
+                      "description": "URL of the group's profile picture."
+                    },
+                    "size": {
+                      "type": "integer",
+                      "description": "The number of participants in the group."
+                    },
+                    "creation": {
+                      "type": "integer",
+                      "description": "The timestamp when the group was created."
+                    },
+                    "owner": {
+                      "type": "string",
+                      "description": "The ID of the group owner."
+                    },
+                    "desc": {
+                      "type": "string",
+                      "description": "The description of the group."
+                    },
+                    "descId": {
+                      "type": "string",
+                      "description": "The ID of the description message."
+                    },
+                    "restrict": {
+                      "type": "boolean",
+                      "description": "Indicates if the group is restricted (only admins can send messages)."
+                    },
+                    "announce": {
+                      "type": "boolean",
+                      "description": "Indicates if the group is an announcement group (only admins can send messages)."
+                    },
+                    "participants": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of the participant."
+                          },
+                          "admin": {
+                            "type": "string",
+                            "description": "The role of the participant (e.g., 'admin', 'superadmin')."
+                          }
+                        }
+                      },
+                      "description": "List of participants in the group."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "id": "120363295648424210@g.us",
+                    "subject": "Example Group",
+                    "subjectOwner": "553198296801@s.whatsapp.net",
+                    "subjectTime": 1714769954,
+                    "pictureUrl": null,
+                    "size": 1,
+                    "creation": 1714769954,
+                    "owner": "553198296801@s.whatsapp.net",
+                    "desc": "optional",
+                    "descId": "BAE57E16498982ED",
+                    "restrict": false,
+                    "announce": false,
+                    "participants": [
+                      {
+                        "id": "553198296801@s.whatsapp.net",
+                        "admin": "superadmin"
+                      }
+                    ]
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -5509,6 +5316,7 @@
           {
             "name": "getParticipants",
             "in": "query",
+            "required": true,
             "description": "Whether to get the group members or not",
             "schema": {
               "type": "boolean"
@@ -5518,23 +5326,84 @@
         "description": "Fetch all groups",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "The ID of the group."
+                      },
+                      "subject": {
+                        "type": "string",
+                        "description": "The subject (name) of the group."
+                      },
+                      "subjectOwner": {
+                        "type": "string",
+                        "description": "The ID of the user who set the subject."
+                      },
+                      "subjectTime": {
+                        "type": "integer",
+                        "description": "The timestamp when the subject was set."
+                      },
+                      "pictureUrl": {
+                        "type": "string",
+                        "description": "URL of the group's profile picture."
+                      },
+                      "size": {
+                        "type": "integer",
+                        "description": "The number of participants in the group."
+                      },
+                      "creation": {
+                        "type": "integer",
+                        "description": "The timestamp when the group was created."
+                      },
+                      "owner": {
+                        "type": "string",
+                        "description": "The ID of the group owner."
+                      },
+                      "desc": {
+                        "type": "string",
+                        "description": "The description of the group."
+                      },
+                      "descId": {
+                        "type": "string",
+                        "description": "The ID of the description message."
+                      },
+                      "restrict": {
+                        "type": "boolean",
+                        "description": "Indicates if the group is restricted (only admins can send messages)."
+                      },
+                      "announce": {
+                        "type": "boolean",
+                        "description": "Indicates if the group is an announcement group (only admins can send messages)."
+                      }
+                    },
+                    "required": ["id", "subject", "subjectOwner", "subjectTime", "size", "creation", "owner", "restrict", "announce"]
+                  },
+                  "description": "Array of objects representing WhatsApp group details.",
+                  "example": [
+                    {
+                      "id": "120363295648424210@g.us",
+                      "subject": "Example Group",
+                      "subjectOwner": "553198296801@s.whatsapp.net",
+                      "subjectTime": 1714769954,
+                      "pictureUrl": null,
+                      "size": 1,
+                      "creation": 1714769954,
+                      "owner": "553198296801@s.whatsapp.net",
+                      "desc": "optional",
+                      "descId": "BAE57E16498982ED",
+                      "restrict": false,
+                      "announce": false
                     }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                  ]
                 }
-              }
+              }              
             }
           }
         }
@@ -5567,30 +5436,48 @@
             "required": true,
             "description": "Group remote JID",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             }
           }
         ],
         "description": "Fetch all group members",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
+            "description": "Ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
+                    "participants": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of the participant."
+                          },
+                          "admin": {
+                            "type": "string",
+                            "description": "The role of the participant (e.g., 'admin', 'superadmin')."
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      "description": "List of participants in the group."
                     }
                   },
                   "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
+                    "participants": [
+                      {
+                        "id": "553198296801@s.whatsapp.net",
+                        "admin": "superadmin"
+                      }
+                    ]
+                  }
                 }
-              }
+              }              
             }
           }
         }
@@ -5652,24 +5539,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5729,24 +5600,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5801,24 +5656,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5857,24 +5696,8 @@
         "description": "Leave group",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -5946,24 +5769,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6036,24 +5843,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6083,24 +5874,8 @@
         "description": "Find typebot",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6150,24 +5925,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6250,24 +6009,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6297,24 +6040,8 @@
         "description": "Find Chatwoot",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6388,24 +6115,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6435,24 +6146,8 @@
         "description": "Find SQS",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6526,24 +6221,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6573,24 +6252,8 @@
         "description": "Find RabbitMQ",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6664,24 +6327,8 @@
         },
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -6711,24 +6358,8 @@
         "description": "Find Websocket",
         "responses": {
           "200": {
-            "description": "Successful response TODO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "<success message>"
-                    }
-                  },
-                  "example": {
-                    "message": "<success message>"
-                  },
-                  "required": ["message"]
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
