@@ -1,0 +1,160 @@
+---
+title: NVM 
+icon: js  
+---
+
+## Pré-requisitos
+
+Antes de iniciar a instalação da Evolution API v2, certifique-se de que você já configurou os serviços necessários, como PostgreSQL e Redis. Siga os links abaixo para mais detalhes:
+
+- [Configuração do Banco de Dados](/v2/pt/requirements/database)
+- [Configuração do Redis](/v2/pt/requirements/redis)
+
+## Instalação do NVM
+
+A Evolution API pode ser facilmente instalada usando o Node Version Manager (NVM). Siga estas etapas para configurar seu ambiente e iniciar a Evolution API em seu servidor.
+
+### Instalar NVM
+
+Primeiro, baixe e instale o Node.js com os seguintes comandos:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
+
+Agora, carregue o ambiente e instale o Node.js:
+
+```bash
+# Carregar o NVM no ambiente atual
+source ~/.bashrc
+
+# Instalar e usar a versão necessária do Node.js
+nvm install v20.10.0 && nvm use v20.10.0
+```
+
+Confirme que o NVM foi instalado com sucesso:
+
+```bash
+command -v nvm
+```
+
+<Info>  
+Se você ainda não configurou, também pode configurar o fuso horário do seu servidor com o comando:
+
+```bash
+dpkg-reconfigure tzdata
+```
+</Info>
+
+## Clonando o Repositório e Instalando Dependências
+
+Clone o repositório oficial da Evolution API v2 a partir da branch correta:
+
+```bash
+git clone -b v2.0.0 https://github.com/EvolutionAPI/evolution-api.git
+```
+
+Acesse o diretório do projeto e instale as dependências:
+
+```bash
+cd evolution-api
+npm install
+```
+
+## Configuração de Variáveis de Ambiente
+
+Agora vamos configurar as variáveis de ambiente. Primeiro, copie o arquivo `.env.example` para `.env`:
+
+```bash
+cp ./.env.example ./.env
+```
+
+Edite o arquivo `.env` com suas configurações específicas:
+
+```bash
+nano ./.env
+```
+
+Substitua os valores padrão pelas suas configurações, como strings de conexão de banco de dados, chaves de API, portas do servidor, etc.
+
+<Info>  
+Acesse a [seção de variáveis de ambiente](/v2/pt/env) para instruções detalhadas sobre como configurar seu arquivo `.env`.
+</Info>
+
+## Geração e Deploy do Banco de Dados
+
+Após configurar o ambiente, você precisará realizar a geração dos arquivos do cliente Prisma e o deploy das migrations no banco de dados. Utilize os comandos abaixo, dependendo do banco de dados que você está utilizando (PostgreSQL ou MySQL):
+
+### Para PostgreSQL:
+
+1. Gerar os arquivos do cliente Prisma:
+
+    ```bash
+    npm run db:generate:postgres
+    ```
+
+2. Realizar o deploy das migrations:
+
+    ```bash
+    npm run db:deploy:postgres
+    ```
+
+### Para MySQL:
+
+1. Gerar os arquivos do cliente Prisma:
+
+    ```bash
+    npm run db:generate:mysql
+    ```
+
+2. Realizar o deploy das migrations:
+
+    ```bash
+    npm run db:deploy:mysql
+    ```
+
+## Inicializando a Evolution API
+
+Após a configuração, você pode iniciar a Evolution API com o seguinte comando:
+
+```bash
+npm run start:prod
+```
+
+## Instalação e Configuração do PM2
+
+Use o PM2 para gerenciar o processo da API:
+
+```bash
+npm install pm2 -g
+pm2 start 'npm run start:prod' --name ApiEvolution
+pm2 startup
+pm2 save --force
+```
+
+<Info>  
+Se o seu servidor tiver mais memória, considere configurar o PM2 para utilizar mais recursos:
+
+```bash
+pm2 start 'npm run start:prod' --name ApiEvolution -- start --node-args="--max-old-space-size=4096" --max-memory-restart 4G
+```
+
+Isso é recomendado para servidores com pelo menos 4GB de RAM disponíveis exclusivamente para a Evolution API.
+</Info>
+
+Para verificar se a API está em execução, acesse [http://localhost:8080](http://localhost:8080). Você deve ver a seguinte resposta:
+
+```json
+{
+  "status": 200,
+  "message": "Welcome to the Evolution API, it is working!",
+  "version": "2.0.9-rc",
+  "clientName": "evolution01",
+  "manager": "https://evo2.site.com/manager",
+  "documentation": "https://doc.evolution-api.com"
+}
+```
+
+<Tip>  
+Facilite sua vida com a extensão JSON Formatter no [Google Chrome](https://chromewebstore.google.com/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb?hl=pt-BR) ou [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl).
+</Tip>

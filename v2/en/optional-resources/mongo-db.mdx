@@ -1,0 +1,55 @@
+---
+title: MongoDB
+icon: database
+---
+
+# Setup
+
+MongoDB, a NoSQL database, is known for high performance and scalability. It's ideal for handling large data volumes in the Evolution API.
+
+Set the MongoDB environment variables in the `.env` for Docker or the `dev-env.yml` for NPM file as follows:
+
+~~~ shell .env or dev-env.yml
+# Set to true to enable MongoDB.
+DATABASE_ENABLED=true
+# Your MongoDB connection string.
+DATABASE_CONNECTION_URI=mongodb://user:password@database_URL/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
+# Prefix for your database name.
+DATABASE_CONNECTION_DB_PREFIX_NAME=evo
+# Save WhatsApp connection credentials on Mongo
+DATABASE_SAVE_DATA_INSTANCE=false 
+# Save new messages on Mongo
+DATABASE_SAVE_DATA_NEW_MESSAGE=false 
+# Save message updates on Mongo
+DATABASE_SAVE_MESSAGE_UPDATE=false
+# Save imported contacts and new ones
+DATABASE_SAVE_DATA_CONTACTS=false 
+# Save imported chats and new ones
+DATABASE_SAVE_DATA_CHATS=false 
+~~~
+
+# Migrate your data in NPM or NVM
+
+Stop the PM2 execution:
+
+**Flush and Stop**: Clears all logs from PM2, useful for troubleshooting after the update and temporarily stops the Evolution API to safely apply updates.
+
+~~~ shell
+# Clear all PM2 logs
+pm2 flush
+
+# Stop the current Evolution API process
+pm2 stop ApiEvolution
+~~~
+
+**Evolution API directory**: access your directory installation with the following command:
+~~~
+cd evolution-api
+~~~
+
+**Migrate command**: Run the migration command in the installation directory:
+~~~
+npx evolution-manager api migrate-to-mongo
+~~~
+
+Follow the script steps and migrate specific WhatsApp instances or all your instances.

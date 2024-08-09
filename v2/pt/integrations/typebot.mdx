@@ -1,0 +1,193 @@
+---
+title: Typebot
+icon: robot
+---
+
+A Evolution API permite integrar bots do **Typebot** para automatizar interações e responder a mensagens do WhatsApp com base em triggers configurados. A seguir, você encontrará as instruções detalhadas sobre como configurar, gerenciar sessões, inicializar bots manualmente e utilizar variáveis predefinidas.
+
+## 1. Configuração de Bots no Typebot
+
+Você pode configurar diversos bots no Typebot utilizando triggers para iniciar as interações. A configuração do bot pode ser feita através do endpoint `/typebot/create/{{instance}}`.
+
+### Endpoint para Configuração de Bots
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/typebot/create/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de corpo JSON para configurar um bot:
+
+~~~json
+{
+    "enabled": true,
+    "url": "https://bot.dgcode.com.br",
+    "typebot": "my-typebot-uoz1rg9",
+    "triggerType": "keyword",
+    "triggerOperator": "regex",
+    "triggerValue": "^atend.*",
+    "expire": 20,
+    "keywordFinish": "#SAIR",
+    "delayMessage": 1000,
+    "unknownMessage": "Mensagem não reconhecida",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 10
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`enabled`**: Ativa (`true`) ou desativa (`false`) o bot.
+- **`url`**: URL da API do Typebot (sem a `/` no final).
+- **`typebot`**: Nome público do bot no Typebot.
+- **`triggerType`**: Tipo de trigger para iniciar o bot (`keyword`, `all`, `none`).
+- **`triggerOperator`**: Operador utilizado para avaliar o trigger (`contains`, `equals`, `startsWith`, `endsWith`, `regex`).
+- **`triggerValue`**: Valor utilizado no trigger (por exemplo, uma palavra-chave ou regex).
+- **`expire`**: Tempo em minutos após o qual o bot expira, reiniciando se a sessão expirou.
+- **`keywordFinish`**: Palavra-chave que, quando recebida, encerra a sessão do bot.
+- **`delayMessage`**: Delay (em milissegundos) para simular a digitação antes de enviar uma mensagem.
+- **`unknownMessage`**: Mensagem enviada quando a entrada do usuário não é reconhecida.
+- **`listeningFromMe`**: Define se o bot deve escutar as mensagens enviadas pelo próprio usuário (`true` ou `false`).
+- **`stopBotFromMe`**: Define se o bot deve parar quando o próprio usuário envia uma mensagem (`true` ou `false`).
+- **`keepOpen`**: Mantém a sessão aberta, evitando que o bot seja reiniciado para o mesmo contato.
+- **`debounceTime`**: Tempo (em segundos) para juntar várias mensagens em uma só.
+
+## 2. Gerenciamento de Sessões do Typebot
+
+Você pode gerenciar as sessões do Typebot para cada contato específico, alterando o status da sessão entre aberta, pausada ou fechada.
+
+### Endpoint para Gerenciamento de Sessões
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/typebot/changeStatus/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de como gerenciar o status da sessão:
+
+~~~json
+{
+    "remoteJid": "5511912345678@s.whatsapp.net",
+    "status": "closed"
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`remoteJid`**: JID (identificador) do contato no WhatsApp.
+- **`status`**: Status da sessão (`opened`, `paused`, `closed`).
+
+## 3. Configuração Padrão do Typebot
+
+Você pode definir configurações padrão que serão aplicadas caso os parâmetros não sejam passados durante a criação do bot.
+
+### Configuração Padrão
+
+Aqui está um exemplo de configuração padrão:
+
+~~~json
+{
+    "expire": 20,
+    "keywordFinish": "#SAIR",
+    "delayMessage": 1000,
+    "unknownMessage": "Mensagem não reconhecida",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 10,
+    "ignoreJids": [],
+    "typebotIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`expire`**: Tempo em minutos após o qual o bot expira.
+- **`keywordFinish`**: Palavra-chave que encerra a sessão do bot.
+- **`delayMessage`**: Delay para simular a digitação antes de enviar uma mensagem.
+- **`unknownMessage`**: Mensagem enviada quando a entrada do usuário não é reconhecida.
+- **`listeningFromMe`**: Define se o bot deve escutar as mensagens enviadas pelo próprio usuário.
+- **`stopBotFromMe`**: Define se o bot deve parar quando o próprio usuário envia uma mensagem.
+- **`keepOpen`**: Mantém a sessão aberta, evitando que o bot seja reiniciado para o mesmo contato.
+- **`debounceTime`**: Tempo para juntar várias mensagens em uma só.
+- **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
+- **`typebotIdFallback`**: ID do bot de fallback que será utilizado caso nenhum trigger seja ativado.
+
+## 4. Inicialização Ativa de um Bot
+
+Além de usar triggers, você pode inicializar um bot de forma ativa para um contato específico usando o endpoint `/typebot/start/{{instance}}`.
+
+### Endpoint para Inicialização Ativa
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/typebot/start/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de como iniciar um bot de forma ativa:
+
+~~~json
+{
+    "url": "https://bot.dgcode.com.br",
+    "typebot": "fluxo-unico-3uuso28",
+    "remoteJid": "557499879409@s.whatsapp.net",
+    "startSession": false,
+    "variables": [
+        {
+            "name": "pushName",
+            "value": "Davidson Gomes"
+        }
+    ]
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`url`**: URL da API do Typebot (sem a `/` no final).
+- **`typebot`**: Nome público do bot no Typebot.
+- **`remoteJid`**: JID (identificador) do contato no WhatsApp.
+- **`startSession`**: Define se a sessão deve ser iniciada com o bot (`true` ou `false`).
+- **`variables`**: Variáveis personalizadas que podem ser passadas ao bot (por exemplo, nome do usuário).
+
+### Variáveis Predefinidas
+
+Quando uma sessão do Typebot é iniciada, algumas variáveis predefinidas são automaticamente enviadas:
+
+~~~json
+const prefilledVariables = {
+    remoteJid: "JID do contato",
+    pushName: "Nome do contato",
+    instanceName: "Nome da instância",
+    serverUrl: "URL do servidor da API",
+    apiKey: "Chave de API da Evolution",
+    ownerJid: "JID do número conectado à instância"
+};
+~~~
+
+#### Explicação das Variáveis Predefinidas
+
+- **`remoteJid`**: JID do contato com quem o bot está interagindo.
+- **`pushName`**: Nome do contato no WhatsApp.
+- **`instanceName`**: Nome da instância que está executando o bot.
+- **`serverUrl`**: URL do servidor onde a Evolution API está hospedada.
+- **`apiKey`**: Chave de API usada para autenticar as requisições.
+- **`ownerJid`**: JID do número de telefone conectado à instância.
+
+### Interação com Variáveis Passadas no `startTypebot`
+
+Quando você utiliza o endpoint `startTypebot`, as variáveis passadas no corpo da requisição são combinadas com as variáveis predefinidas. Isso permite que você adicione ou sobrescreva informações específicas para personalizar ainda mais a interação do bot.
+
+### Considerações Finais
+
+A integração da Evolution API com o Typebot oferece uma maneira poderosa e flexível de automatizar interações no WhatsApp. Com variáveis predefinidas e a capacidade de iniciar bots de forma ativa, você pode personalizar a experiência do usuário final e otimizar o fluxo de atendimento.

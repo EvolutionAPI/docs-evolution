@@ -1,0 +1,394 @@
+---
+title: Docker
+icon: docker
+---
+
+<Note>  
+  **Pré-requisitos:** Antes de prosseguir com a instalação da Evolution API v2 utilizando Docker, certifique-se de que você já tenha configurado os serviços necessários, como PostgreSQL e Redis. Siga os links abaixo para mais detalhes:
+  
+  - [Configuração do Banco de Dados](/v2/pt/requirements/database)
+  - [Configuração do Redis](/v2/pt/requirements/redis)
+</Note>
+
+<Note>  
+  Estas instruções de instalação assumem que você já instalou o Docker em sua máquina. Você pode encontrar
+  informações sobre como instalar o Docker na  
+  [Documentação Oficial do Docker](https://docs.docker.com/engine/install/).
+</Note>
+
+A Evolution API v2 está pronta para o Docker e pode ser facilmente implantada com Docker no modo standalone ou swarm. 
+O repositório oficial do Evolution API contém todos os arquivos de composição necessários para instalar e executar a API.
+
+## Docker Compose
+
+Implantar a Evolution API v2 usando o Docker Compose simplifica a configuração e o gerenciamento de seus contêineres Docker. 
+Ele permite que você defina seu ambiente Docker em um arquivo `docker-compose.yaml` e, em seguida, use um único comando para iniciar tudo.
+
+### Arquivo Docker Compose
+
+O exemplo a seguir ilustra como configurar o Docker Compose para ambientes standalone, ou seja, um único servidor em execução. 
+Para a sincronização de dois servidores em paralelo ou maior escalabilidade, utilize o Docker Swarm, recomendado para usuários mais avançados.
+
+#### Configuração Standalone
+
+<Warning>  
+  **Atenção:** Os comandos aqui descritos como `docker compose`, podem não funcionar em versões mais antigas do Docker. 
+  Caso você esteja usando uma versão mais antiga, substitua por `docker-compose`.
+</Warning>
+
+O Docker standalone é adequado quando a Evolution API será executada em apenas uma máquina, sem a necessidade de escalabilidade imediata. 
+Esta é a forma mais conveniente para a maioria dos usuários.
+
+Para começar, crie um arquivo `docker-compose.yml` com o seguinte conteúdo:
+
+~~~ yaml
+version: '3.9'
+services:
+  evolution-api:
+    container_name: evolution_api
+    image: atendai/evolution-api:v2.0.9-rc
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - evolution_instances:/evolution/instances
+
+volumes:
+  evolution_instances:
+~~~
+
+Em seguida, crie um arquivo `.env` no mesmo diretório com o seguinte conteúdo mínimo:
+
+~~~ bash
+AUTHENTICATION_API_KEY=mude-me
+~~~
+
+<Note>  
+  Para mais configurações, você pode pegar o arquivo de exemplo no
+  [repositório oficial](https://github.com/EvolutionAPI/evolution-api/blob/main/.env.example). Confira também o guia de variáveis de ambiente [aqui](/v2/pt/env).
+</Note>
+
+### Inicializando a API
+
+Navegue até o diretório que contém o arquivo `docker-compose.yml` e execute o seguinte comando para iniciar os serviços definidos no arquivo:
+
+~~~ bash
+docker compose up -d
+~~~
+
+Esse comando baixará as imagens Docker necessárias, criará os serviços, redes e volumes definidos, e iniciará o serviço da Evolution API.
+
+### Verificando os Logs
+
+Após executar o comando `docker compose up`, você pode verificar os logs para confirmar se os serviços estão em execução corretamente:
+
+~~~ bash
+docker logs evolution_api
+~~~
+
+### Parando o Serviço
+
+Para parar o serviço, utilize o comando:
+
+~~~ bash
+docker compose down
+~~~
+
+### Acessando a API
+
+Abra seu navegador e acesse [http://localhost:8080](http://localhost:8080) para verificar se a Evolution API está operacional.
+
+## Docker Swarm
+
+Para configurar e gerenciar um cluster Docker Swarm para a Evolution API v2, siga as instruções abaixo. O Docker Swarm é ideal para ambientes que exigem escalabilidade e alta disponibilidade.
+
+### Instalação do Docker Swarm
+
+
+#### Configurando o Servidor Manager
+
+Se estiver utilizando um servidor da Hetzner, execute:
+
+~~~ bash
+sudo apt-get update && apt-get install -y apparmor-utils
+~~~
+
+**Etapa 1: Configuração do Hostname**
+
+1. Mude o hostname da máquina para identificá-la no cluster:
+
+~~~ bash
+hostnamectl set-hostname manager1
+~~~
+
+2. Edite o arquivo `/etc/hosts` para adicionar o novo nome:
+
+~~~ bash
+nano /etc/hosts
+~~~
+
+Adicione a linha:
+
+~~~ bash
+127.0.0.1    manager1
+~~~
+
+3. Reinicie o sistema para aplicar as alterações:
+
+~~~ bash
+reboot
+~~~
+
+4. Verifique o hostname:
+
+~~~ bash
+hostnamectl
+~~~
+
+**Etapa 2: Instalação do Docker**
+
+Instale o Docker executando:
+
+~~~ bash
+curl -fsSL https://get.docker.com | bash
+~~~
+
+**Etapa 3: Iniciando o Swarm**
+
+Inicie o Docker Swarm:
+
+~~~ bash
+docker swarm init --advertise-addr IP_SERVER
+~~~
+
+**Etapa 4: Configuração da Rede do Docker Swarm**
+
+Crie a rede overlay para o Docker Swarm:
+
+~~~ bash
+docker network create --driver=overlay network_public
+~~~
+
+Anote o comando gerado para registrar os Workers:
+
+~~~ bash
+docker swarm join --token HASH IP_SERVER:2377
+~~~
+
+#### Configurando o Servidor Worker
+
+Se estiver utilizando um servidor da Hetzner, execute:
+
+~~~ bash
+sudo apt-get update && apt-get install -y apparmor-utils
+~~~
+
+**Etapa 1: Configuração do Hostname**
+
+1. Mude o hostname da máquina para identificá-la no cluster:
+
+~~~ bash
+hostnamectl set-hostname worker1
+~~~
+
+2. Edite o arquivo `/etc/hosts` para adicionar o novo nome:
+
+~~~ bash
+nano /etc/hosts
+~~~
+
+Adicione a linha:
+
+~~~ bash
+127.0.0.1    worker1
+~~~
+
+3. Reinicie o sistema para aplicar as alterações:
+
+~~~ bash
+reboot
+~~~
+
+**Etapa 2: Instalação do Docker**
+
+Instale o Docker executando:
+
+~~~ bash
+curl -fsSL https://get.docker.com | bash
+~~~
+
+**Etapa 3: Adicionar o Worker ao Cluster**
+
+Execute o comando obtido anteriormente para adicionar o Worker ao cluster:
+
+~~~ bash
+docker swarm join --token HASH IP_SERVER:2377
+~~~
+
+### Pré-requisitos para a Evolution API via Swarm
+
+#### Instalação do Traefik
+
+Para instalar o Traefik no Docker Swarm, siga as instruções abaixo:
+
+1. No servidor manager, crie um arquivo `traefik.yaml`:
+
+~~~ bash
+nano traefik.yaml
+~~~
+
+2. Adicione o seguinte conteúdo ao arquivo:
+
+~~~ yaml
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik:2.11.2
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=network_public"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencryptresolver.acme.email=seu@email.com"
+      - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
+      - "--log.level=DEBUG"
+      - "--log.format=common"
+      - "--log.filePath=/var/log/traefik/traefik.log"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/var/log/traefik/access-log"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
+        - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+        - "traefik.http.routers.http-catchall.entrypoints=web"
+        - "traefik.http.routers.http-catchall.middlewares=redirect-https@docker"
+        - "traefik.http.routers.http-catchall.priority=1"
+    volumes:
+      - "/var/run
+
+/docker.sock:/var/run/docker.sock:ro"
+      - "vol_certificates:/etc/traefik/letsencrypt"
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+      - target: 443
+        published: 443
+        mode: host
+    networks:
+      - network_public
+
+volumes:
+  vol_certificates:
+    external: true
+    name: volume_swarm_certificates
+
+networks:
+  network_public:
+    external: true
+    name: network_public
+~~~
+
+3. Execute o comando abaixo para fazer o deploy da stack Traefik:
+
+~~~ bash
+docker stack deploy --prune --resolve-image always -c traefik.yaml traefik
+~~~
+
+### Deploy da Evolution API v2
+
+Finalmente, para implantar a Evolution API v2 no Docker Swarm, use o arquivo de configuração disponível [aqui](https://github.com/EvolutionAPI/evolution-api/blob/v2.0.0/Docker/swarm/evolution_api_v2.yaml) com o seguinte conteúdo:
+
+~~~ yaml
+version: "3.7"
+
+services:
+  evolution_v2:
+    image: atendai/evolution-api:v2.0.9-rc
+    volumes:
+      - evolution_instances:/evolution/instances
+    networks:
+      - network_public
+    environment:
+      - SERVER_URL=https://evo2.site.com
+      - DEL_INSTANCE=false
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://postgres:SENHA@postgres:5432/evolution
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_MESSAGE_UPDATE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
+      - DATABASE_SAVE_DATA_LABELS=true
+      - DATABASE_SAVE_DATA_HISTORIC=true
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution_v2
+      - RABBITMQ_ENABLED=false
+      - RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/default
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://evo_redis:6379/1
+      - CACHE_REDIS_PREFIX_KEY=evolution_v2
+      - CACHE_REDIS_SAVE_INSTANCES=false
+      - CACHE_LOCAL_ENABLED=false
+      - S3_ENABLED=true
+      - S3_ACCESS_KEY=
+      - S3_SECRET_KEY=
+      - S3_BUCKET=evolution
+      - S3_PORT=443
+      - S3_ENDPOINT=files.site.com
+      - S3_USE_SSL=true
+      - AUTHENTICATION_API_KEY=429683C4C977415CAAFCCE10F7D57E11
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == evolution-manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.evolution_v2.rule=Host(`evo2.site.com`)
+        - traefik.http.routers.evolution_v2.entrypoints=websecure
+        - traefik.http.routers.evolution_v2.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evolution_v2.service=evolution_v2
+        - traefik.http.services.evolution_v2.loadbalancer.server.port=8080
+        - traefik.http.services.evolution_v2.loadbalancer.passHostHeader=true
+
+volumes:
+  evolution_instances:
+    external: true
+    name: evolution_v2_data
+
+networks:
+  network_public:
+    external: true
+    name: network_public
+~~~
+
+Após configurar e salvar o arquivo, faça o deploy da stack com o comando:
+
+~~~ bash
+docker stack deploy --prune --resolve-image always -c evolution_api_v2.yaml evolution_v2
+~~~
+
+### Acessando a API
+
+Abra seu navegador e acesse [https://evo2.site.com](https://evo2.site.com) para verificar se a Evolution API está operacional.

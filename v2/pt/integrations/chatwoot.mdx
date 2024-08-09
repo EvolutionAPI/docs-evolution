@@ -1,0 +1,118 @@
+---
+title: Chatwoot  
+icon: comment  
+---
+
+A Evolution API permite uma integração direta com o **Chatwoot**, uma plataforma de suporte ao cliente que centraliza comunicações de múltiplos canais. Esta documentação detalha como configurar essa integração tanto durante a criação de uma nova instância quanto em uma instância já existente.
+
+## Configuração da Integração com Chatwoot
+
+### 1. Configuração na Criação da Instância
+
+Você pode configurar o Chatwoot diretamente ao criar uma nova instância na Evolution API. Use o seguinte corpo de requisição para o endpoint `/instance/create`:
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/instance/create
+~~~
+
+#### Corpo da Requisição
+
+~~~json
+{
+    "instanceName": "NOME DA INSTANCIA",
+    "number": "NUMERO DO WHATSAPP PARA GERAR O PAIRING CODE",
+    "qrcode": true,
+    "integration": "WHATSAPP-BAILEYS",
+    "chatwootAccountId": "1",
+    "chatwootToken": "TOKEN",
+    "chatwootUrl": "https://chatwoot.com",
+    "chatwootSignMsg": true,
+    "chatwootReopenConversation": true,
+    "chatwootConversationPending": false,
+    "chatwootImportContacts": true,
+    "chatwootNameInbox": "evolution",
+    "chatwootMergeBrazilContacts": true,
+    "chatwootImportMessages": true,
+    "chatwootDaysLimitImportMessages": 3,
+    "chatwootOrganization": "Evolution Bot",
+    "chatwootLogo": "https://evolution-api.com/files/evolution-api-favicon.png"
+}
+~~~
+
+### 2. Configuração para Instâncias Existentes
+
+Se você já tem uma instância criada e deseja configurar ou alterar a integração com o Chatwoot, utilize o endpoint `/chatwoot/set/{{instance}}` com o seguinte formato de requisição:
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/chatwoot/set/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de como deve ser o corpo da requisição para configurar a integração:
+
+~~~json
+{
+    "enabled": true,
+    "accountId": "1",
+    "token": "TOKEN",
+    "url": "https://chatwoot.com",
+    "signMsg": true,
+    "reopenConversation": true,
+    "conversationPending": false,
+    "nameInbox": "evolution",
+    "mergeBrazilContacts": true,
+    "importContacts": true,
+    "importMessages": true,
+    "daysLimitImportMessages": 2,
+    "signDelimiter": "\n",
+    "autoCreate": true,
+    "organization": "BOT",
+    "logo": "link_da_sua_logo"
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`enabled`**: Ativa (`true`) ou desativa (`false`) a integração do Chatwoot para a instância.
+- **`accountId`**: ID da conta do Chatwoot associada à integração.
+- **`token`**: Token de autenticação do usuário administrador da conta no Chatwoot.
+- **`url`**: URL base do Chatwoot. Importante: Não incluir a `/` no final da URL.
+- **`signMsg`**: Quando ativado (`true`), adiciona a assinatura com o nome do atendente nas mensagens enviadas.
+- **`reopenConversation`**: Define se a integração deve sempre reabrir a mesma conversa (`true`) ou criar uma nova.
+- **`conversationPending`**: Inicia as conversas como pendentes (`true`), aguardando ação de um atendente.
+- **`nameInbox`**: Nome customizado da inbox no Chatwoot. Se não fornecido, a instância usará o nome da instância.
+- **`mergeBrazilContacts`**: Faz merge de contatos brasileiros que possuem o dígito `9` adicional em seus números (`true`).
+- **`importContacts`**: Importa os contatos da agenda do WhatsApp para o Chatwoot (`true`).
+- **`importMessages`**: Importa as mensagens do WhatsApp para o Chatwoot (`true`).
+- **`daysLimitImportMessages`**: Define o número limite de dias para importação de mensagens antigas do WhatsApp.
+- **`signDelimiter`**: Delimitador usado para separar a assinatura do corpo da mensagem.
+- **`autoCreate`**: Se ativado (`true`), cria automaticamente a configuração da inbox no Chatwoot.
+- **`organization`**: Nome do contato do bot de comandos, usado para personalizar a interação.
+- **`logo`**: URL da imagem a ser usada como foto de perfil do contato do bot de comandos.
+
+## Passos para Configurar a Integração
+
+1. **Obtenha as Credenciais e URLs**:
+   - Acesse o painel do Chatwoot e obtenha o `accountId` e o `token` do usuário administrador.
+   - Verifique a URL base do seu Chatwoot e configure sem a `/` final.
+
+2. **Crie ou Configure a Instância**:
+   - Use o endpoint `/instance/create` para configurar o Chatwoot durante a criação da instância.
+   - Use o endpoint `/chatwoot/set/{{instance}}` para configurar o Chatwoot em uma instância já existente.
+
+3. **Verifique a Configuração**:
+   - Acesse o Chatwoot para garantir que a inbox foi criada e que as configurações estão corretas.
+   - Teste o envio e recebimento de mensagens para confirmar a integração.
+
+## Considerações Finais
+
+A integração da Evolution API com o Chatwoot permite centralizar e automatizar a comunicação do WhatsApp diretamente na sua plataforma de atendimento ao cliente. Com opções de personalização, importação de contatos e mensagens, e a possibilidade de reabrir conversas existentes, esta integração oferece flexibilidade para atender às necessidades específicas do seu fluxo de trabalho.
+
+<Info>  
+Para mais detalhes sobre outras integrações e configurações, consulte a [seção de variáveis de ambiente](/v2/pt/env).
+</Info>

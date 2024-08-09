@@ -1,0 +1,108 @@
+---
+title: WebSocket
+icon: plug
+---
+
+A Evolution API utiliza o `socket.io` para emitir eventos em tempo real, aproveitando a tecnologia WebSocket. Isso torna o desenvolvimento de integrações mais eficiente e direto para os desenvolvedores. O WebSocket fornece um canal de comunicação full-duplex sobre uma única conexão duradoura, permitindo o fluxo de dados em tempo real entre o cliente e o servidor.
+
+<Info>  
+Para ativar os WebSockets, defina a variável de ambiente `WEBSOCKET_ENABLED` como `true`. Veja mais detalhes em [Variáveis de Ambiente](/v2/pt/env).
+</Info>
+
+## Modos de Operação do WebSocket
+
+### Modo Global
+
+No **modo global**, a variável de ambiente `WEBSOCKET_GLOBAL_EVENTS` deve ser definida como `true`. Nesse modo, o WebSocket é inicializado no start do serviço e envia eventos de todas as instâncias, independentemente dos canais. Isso significa que qualquer cliente conectado ao WebSocket receberá eventos globais, abrangendo todas as instâncias da Evolution API configuradas no sistema.
+
+- **Ativação**: Configure no arquivo `.env`:
+
+    ```plaintext
+    WEBSOCKET_GLOBAL_EVENTS=true
+    ```
+
+- **Funcionamento**: Ideal para cenários onde você deseja monitorar ou processar eventos de todas as instâncias simultaneamente, sem precisar estabelecer uma conexão separada para cada instância.
+
+- **Conexão**: No modo global, a conexão ao WebSocket **não** requer o uso do `/nome_instancia` na URL. A URL de conexão será simplesmente:
+
+    ```plaintext
+    wss://api.seusite.com
+    ```
+
+### Modo Tradicional
+
+No **modo tradicional**, o WebSocket só pode ser conectado após a execução do comando `set` na instância. Isso permite que o WebSocket seja específico para cada instância, e a comunicação em tempo real é restrita àquela instância.
+
+- **Ativação**: Certifique-se de que `WEBSOCKET_GLOBAL_EVENTS` esteja definido como `false` ou não esteja configurado, e siga o fluxo tradicional de configuração da instância.
+
+- **Funcionamento**: Ideal para cenários onde você deseja uma comunicação em tempo real mais isolada, focada em uma única instância, permitindo maior controle e segmentação dos eventos.
+
+- **Conexão**: No modo tradicional, a conexão ao WebSocket requer o uso do `/nome_instancia` na URL:
+
+    ```plaintext
+    wss://api.seusite.com/nome_instancia
+    ```
+
+## Conexão ao WebSocket
+
+### Modo Global
+
+No modo global, a URL de conexão é mais simples e não requer o nome da instância:
+
+~~~plaintext
+wss://api.seusite.com
+~~~
+
+### Modo Tradicional
+
+No modo tradicional, utilize o seguinte formato de URL:
+
+~~~plaintext
+wss://api.seusite.com/nome_instancia
+~~~
+
+Substitua `api.seusite.com` pelo domínio real da sua API e `nome_instancia` pelo nome da sua instância específica.
+
+### Exemplo de Estabelecimento de Conexão WebSocket
+
+Aqui está um exemplo básico de como estabelecer uma conexão WebSocket usando JavaScript:
+
+~~~javascript
+const socket = io('wss://api.seusite.com/nome_instancia', {
+  transports: ['websocket']
+});
+
+socket.on('connect', () => {
+  console.log('Conectado ao WebSocket da Evolution API');
+});
+
+// Escutando eventos
+socket.on('nome_evento', (data) => {
+  console.log('Evento recebido:', data);
+});
+
+// Lidando com desconexão
+socket.on('disconnect', () => {
+  console.log('Desconectado do WebSocket da Evolution API');
+});
+~~~
+
+Neste exemplo, substitua `nome_evento` pelo evento específico que você deseja escutar.
+
+## Manipulação de Eventos
+
+Uma vez conectado, você pode escutar vários eventos emitidos pelo servidor. Cada evento pode carregar dados relevantes para o contexto do evento. Por exemplo, se estiver ouvindo atualizações de mensagens, você pode receber dados contendo o conteúdo da mensagem atualizada e metadados.
+
+## Fechamento da Conexão
+
+Para fechar a conexão WebSocket, utilize o método `disconnect`:
+
+~~~javascript
+socket.disconnect();
+~~~
+
+Lembre-se de manipular a conexão de forma responsável, desconectando quando sua aplicação ou componente for desmontado para evitar vazamentos de memória e garantir o uso eficiente de recursos.
+
+## Considerações Finais
+
+A Evolution API oferece uma forma poderosa de interação em tempo real através dos WebSockets, proporcionando uma experiência contínua tanto para desenvolvedores quanto para usuários finais. Seja no modo global, monitorando todas as instâncias simultaneamente, ou no modo tradicional, focado em uma única instância, a flexibilidade do sistema permite a adaptação às necessidades específicas do seu projeto.
