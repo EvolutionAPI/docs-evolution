@@ -20,7 +20,7 @@ Se sua Evolution API foi instalada inicialmente usando Docker Compose via interf
 2. **Puxe a Imagem Mais Recente**: Atualize a imagem da Evolution API para a versão mais recente executando o seguinte comando:
 
 ~~~ shell
-docker compose pull atendai/evolution-api:latest
+docker compose pull atendai/evolution-api:v2.0.9-rc
 ~~~
 
 3. **Pare e Reinicie os Contêineres**: Após puxar a imagem mais recente, pare os contêineres atuais e reinicie-os. Isso pode ser feito usando o seguinte comando:
@@ -45,15 +45,15 @@ Se você está usando o Portainer para gerenciamento de contêineres, siga estas
   evolution_api:
     # Atualize a versão da imagem da Evolution API aqui
     # Use 'atendai/evolution-api:latest' para a versão mais recente
-    # Ou especifique uma versão específica como 'atendai/evolutionapi:v1.6.0'
-    image: atendai/evolution-api:v1.x.x
+    # Ou especifique uma versão específica como 'atendai/evolutionapi:v2.0.9-rc'
+    image: atendai/evolution-api:v2.x.x
     networks:
       - your_network
 
 # ... (restante da configuração do Docker Compose)
 ~~~
 
-    - Atualize o valor para `atendai/evolution-api:latest` para a versão mais recente, ou use `atendai/evolutionapi:v1.x.x` para uma versão específica.
+    - Atualize o valor para `atendai/evolution-api:v2.0.9-rc` para a versão mais recente, ou use `atendai/evolutionapi:v2.x.x` para uma versão específica.
     - Após fazer as alterações, clique no botão 'Deploy' no final da janela de edição do compose.
 
 4. **Verifique a Atualização**: Após recriar o contêiner, verifique se a Evolution API está executando a versão mais recente. Isso pode ser verificado tipicamente através do endpoint de versão da API ou dos logs.

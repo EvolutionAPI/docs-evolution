@@ -6,50 +6,24 @@ icon: hand-wave
 
 
 
-**Evolution API** é um projeto dedicado a capacitar pequenas empresas, empreendedores, freelancers e indivíduos com recursos limitados.
+**Evolution API v2** é uma plataforma robusta dedicada a capacitar pequenas empresas, empreendedores, freelancers e indivíduos com recursos limitados, 
+indo além de uma simples solução de mensagens via **WhatsApp™**.
 
-Nossa missão é fornecer uma solução de mensagens de **WhatsApp™** via API, permitindo que esses grupos reforcem seus negócios locais ou online.
+Nossa missão é fornecer uma API abrangente que permite a esses grupos reforçarem seus negócios, seja localmente ou online, integrando-se com **múltiplas plataformas e serviços**.
 
 O melhor de tudo é que o nosso serviço é **totalmente gratuito**, concebido para apoiar aqueles que se esforçam para ter sucesso num cenário de mercado competitivo.
 
+Originalmente, a **Evolution API** começou como uma API de controle de WhatsApp baseada no CodeChat, utilizando a biblioteca Baileys. Com o tempo, a plataforma se expandiu para 
+suportar não apenas o WhatsApp, mas também integrações com serviços como **Typebot, Chatwoot, Dify e OpenAI**. 
+Além disso, a Evolution API suporta tanto a API de WhatsApp baseada no Baileys quanto a API oficial do WhatsApp Business, com suporte futuro planejado para Instagram e Messenger.
+
 Acesse nosso [repositório](https://github.com/EvolutionAPI/evolution-api) e faça parte da nossa [comunidade](https://evolution-api.com) para fazer parte do projeto.
-
-## Início Rápido
-
-<Note>
-Você precisará ter o Docker instalado em sua máquina, veja a [Documentação Oficial do Docker](https://docs.docker.com/engine/install/)
-</Note>
-Para executar a versão de teste e testar as principais funcionalidades da API, copie o comando abaixo, modifique o valor de `AUTHENTICATION_API_KEY` para um de sua preferência, e execute o comando:
-~~~ sh
-docker run -d \
-    --name evolution_api \
-    -p 8080:8080 \
-    -e AUTHENTICATION_API_KEY=mude-me \
-    atendai/evolution-api:latest
-~~~
-
-<Note>A execução via CLI é recomendada para implantações rápidas, principalmente para testes ou desenvolvimento. Não deve ser usada em produção. Em vez disso, recomendamos que você use o docker-compose para facilitar a implantação e manutenção.</Note>
-
-Isso executará um contêiner Docker expondo a aplicação na porta 8080 e você poderá começar a testar e solicitar o código QR do WhatsApp usando o conteúdo da variável de autenticação com o cabeçalho apikey definido.
-
-Para garantir que a API está em execução, acesse http://localhost:8080 em seu navegador. Esta deve ser a resposta do seu navegador:
-
-~~~ json
-{
-   "status":200,
-   "message":"Welcome to the Evolution API, it is working!",
-   "version":"1.x.x",
-   "swagger":"http://localhost:8080/docs",
-   "manager":"http://localhost:8080/manager",
-   "documentation":"https://doc.evolution-api.com"
-}
-~~~
 
 ## Instalação
 Veja como instalar a versão completa em:
 
 <CardGroup cols={2}>
-  <Card title="Instalação com Docker" icon="docker" href="/pt/install/docker">
+  <Card title="Instalação com Docker" icon="docker" href="/v2/pt/install/docker">
     Veja como instalar a EvolutionAPI completa pelo Docker
   </Card>
   <Card title="NVM" icon="js" href="https://www.postman.com/agenciadgcode/workspace/evolution-api">
@@ -58,10 +32,10 @@ Veja como instalar a versão completa em:
 </CardGroup>
 
 <CardGroup cols={2}>
-  <Card title="Documentação da API" icon="book" href="/pt/definitions/connections">
+  <Card title="Documentação da API" icon="book" href="/v2/pt/definitions/connections">
     Veja a documentação da API com exemplos de código
   </Card>
-  <Card title="Coleção Postman" icon="webhook" href="https://www.postman.com/agenciadgcode/workspace/evolution-api">
+  <Card title="Coleção Postman" icon="webhook" href="https://www.postman.com/agenciadgcode/evolution-api/collection/gqr041s/evolution-api-v2-0">
     Utilize a coleção oficial da API para Postman.
   </Card>
 </CardGroup>

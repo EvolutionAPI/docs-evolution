@@ -69,18 +69,28 @@
       "pages": [
         "v2/pt/get-started/introduction",
         {
-          "group": "Instalação",
-          "icon": "wrench",
-          "pages": ["v2/pt/install/docker", "v2/pt/install/nvm"]
+          "group": "Pré-requisitos",
+          "icon": "triangle-exclamation",
+          "pages": ["v2/pt/requirements/database", "v2/pt/requirements/redis"]
         },
         {
-          "group": "Recursos Opcionais",
+          "group": "Instalação",
+          "icon": "wrench",
+          "pages": ["v2/pt/install/docker", "v2/pt/install/nvm", "v2/pt/install/nginx"]
+        },
+        {
+          "group": "Integrações",
           "icon": "toolbox",
           "pages": [
-            "v2/pt/optional-resources/mongo-db",
-            "v2/pt/optional-resources/rabbitmq",
-            "v2/pt/optional-resources/redis",
-            "v2/pt/optional-resources/websocket"
+            "v2/pt/integrations/cloudapi",
+            "v2/pt/integrations/websocket",
+            "v2/pt/integrations/rabbitmq",
+            "v2/pt/integrations/sqs",
+            "v2/pt/integrations/chatwoot",
+            "v2/pt/integrations/typebot",
+            "v2/pt/integrations/openai",
+            "v2/pt/integrations/dify",
+            "v2/pt/integrations/s3minio"
           ]
         },
         "v2/pt/env",
