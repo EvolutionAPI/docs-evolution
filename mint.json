@@ -48,11 +48,6 @@
       "version": "v1"
     },
     {
-      "name": "English",
-      "url": "v2/en",
-      "version": "v2"
-    },
-    {
       "name": "API",
       "url": "v1/api-reference",
       "version": "v1"
