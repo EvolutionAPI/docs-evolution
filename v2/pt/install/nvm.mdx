@@ -85,34 +85,18 @@ Acesse a [seção de variáveis de ambiente](/v2/pt/env) para instruções detal
 
 Após configurar o ambiente, você precisará realizar a geração dos arquivos do cliente Prisma e o deploy das migrations no banco de dados. Utilize os comandos abaixo, dependendo do banco de dados que você está utilizando (PostgreSQL ou MySQL):
 
-### Para PostgreSQL:
-
 1. Gerar os arquivos do cliente Prisma:
 
     ```bash
-    npm run db:generate:postgres
+    npm run db:generate
     ```
 
 2. Realizar o deploy das migrations:
 
     ```bash
-    npm run db:deploy:postgres
+    npm run db:deploy
     ```
-
-### Para MySQL:
-
-1. Gerar os arquivos do cliente Prisma:
-
-    ```bash
-    npm run db:generate:mysql
-    ```
-
-2. Realizar o deploy das migrations:
-
-    ```bash
-    npm run db:deploy:mysql
-    ```
-
+    
 ## Inicializando a Evolution API
 
 Após a configuração, você pode iniciar a Evolution API com o seguinte comando:
