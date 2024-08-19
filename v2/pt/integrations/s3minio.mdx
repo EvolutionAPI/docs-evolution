@@ -19,6 +19,7 @@ S3_BUCKET=evolution
 S3_PORT=443
 S3_ENDPOINT=s3.eu-west-3.amazonaws.com
 S3_USE_SSL=true
+S3_REGION=eu-west-3
 ```
 
 ### Explicação das Variáveis
@@ -30,6 +31,7 @@ S3_USE_SSL=true
 - **`S3_PORT`**: Porta utilizada para a conexão. Normalmente `443` para conexões SSL.
 - **`S3_ENDPOINT`**: Endpoint do serviço S3 ou Minio. Para Amazon S3, é necessário incluir a região no formato `region: s3.[region].amazonaws.com`, por exemplo, `s3.eu-west-3.amazonaws.com`.
 - **`S3_USE_SSL`**: Define se a conexão deve usar SSL (`true` ou `false`).
+- **`S3_REGION`**: A região do bucket S3 (padrão é `us-east-1`).
 
 ### Exemplos de Configuração
 
@@ -45,6 +47,7 @@ S3_BUCKET=my-s3-bucket
 S3_PORT=443
 S3_ENDPOINT=s3.eu-west-3.amazonaws.com
 S3_USE_SSL=true
+S3_REGION=eu-west-3
 ```
 
 #### Minio
