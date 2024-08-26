@@ -1,0 +1,215 @@
+---
+title: OpenAI  
+icon: robot
+---
+
+The Evolution API allows for the creation and management of bots using OpenAI technology, enabling automated and personalized interactions through virtual assistants or chat completion models. Below, you will find detailed instructions on how to configure credentials, create bots, manage sessions, and set default configurations, including the use of speech-to-text recognition.
+
+## 1. Creating OpenAI Credentials
+
+Before creating bots, you need to configure the OpenAI API credentials. This is done using the `/openai/creds/{{instance}}` endpoint.
+
+### Endpoint for Credential Creation
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/openai/creds/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of how to register a new OpenAI credential:
+
+~~~json
+{
+    "name": "apikey",
+    "apiKey": "sk-proj-..."
+}
+~~~
+
+### Parameters Explanation
+
+- **`name`**: Identifier name for the credential.
+- **`apiKey`**: API key provided by OpenAI.
+
+## 2. Creating Bots with OpenAI
+
+After configuring the credentials, you can create various bots that use the trigger system to initiate interactions. This can be done through the `/openai/create/{{instance}}` endpoint.
+
+### Endpoint for Bot Creation
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/openai/create/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of how to create a bot using OpenAI:
+
+~~~json
+{
+    "enabled": true,
+    "openaiCredsId": "clyrx36wj0001119ucjjzxik1",
+    "botType": "assistant", 
+    // for assistants
+    "assistantId": "asst_LRNyh6qC4qq8NTyPjHbcJjSp",
+    "functionUrl": "https://n8n.site.com", 
+    // for chat completion
+    "model": "gpt-4",
+    "systemMessages": [
+        "You are a helpful assistant."
+    ],
+    "assistantMessages": [
+        "\n\nHello there, how may I assist you today?"
+    ],
+    "userMessages": [
+        "Hello!"
+    ],
+    "maxTokens": 300,
+    // options
+    "triggerType": "keyword", 
+    "triggerOperator": "equals", 
+    "triggerValue": "test",
+    "expire": 20,
+    "keywordFinish": "#EXIT",
+    "delayMessage": 1000,
+    "unknownMessage": "Message not recognized",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 10,
+    "ignoreJids": []
+}
+~~~
+
+### Parameters Explanation
+
+- **`enabled`**: Enables (`true`) or disables (`false`) the bot.
+- **`openaiCredsId`**: ID of the previously registered credential.
+- **`botType`**: Type of bot (`assistant` or `chatCompletion`).
+  - **For Assistants (`assistant`)**:
+    - **`assistantId`**: ID of the OpenAI assistant.
+    - **`functionUrl`**: URL that will be called if the assistant needs to perform an action.
+  - **For Chat Completion (`chatCompletion`)**:
+    - **`model`**: OpenAI model to be used (e.g., `gpt-4`).
+    - **`systemMessages`**: Messages that configure the bot's behavior.
+    - **`assistantMessages`**: Initial messages from the bot.
+    - **`userMessages`**: Example user messages.
+    - **`maxTokens`**: Maximum number of tokens used in the response.
+- **Options**:
+  - **`triggerType`**: Type of trigger to start the bot (`all` or `keyword`).
+  - **`triggerOperator`**: Operator used to evaluate the trigger (`contains`, `equals`, `startsWith`, `endsWith`, `regex`, `none`).
+  - **`triggerValue`**: Value used in the trigger (e.g., a keyword or regex).
+  - **`expire`**: Time in minutes after which the bot expires, restarting if the session has expired.
+  - **`keywordFinish`**: Keyword that ends the bot session.
+  - **`delayMessage`**: Delay (in milliseconds) to simulate typing before sending a message.
+  - **`unknownMessage`**: Message sent when the user's input is not recognized.
+  - **`listeningFromMe`**: Defines if the bot should listen to messages sent by the user (`true` or `false`).
+  - **`stopBotFromMe`**: Defines if the bot should stop when the user sends a message (`true` or `false`).
+  - **`keepOpen`**: Keeps the session open, preventing the bot from restarting for the same contact.
+  - **`debounceTime`**: Time (in seconds) to combine multiple messages into one.
+  - **`ignoreJids`**: List of JIDs of contacts that will not activate the bot.
+
+## 3. Managing OpenAI Sessions
+
+You can manage the bot sessions by changing the status between open, paused, or closed for each specific contact.
+
+### Endpoint for Session Management
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/openai/changeStatus/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of how to manage the session status:
+
+~~~json
+{
+    "remoteJid": "5511912345678@s.whatsapp.net",
+    "status": "closed"
+}
+~~~
+
+### Parameters Explanation
+
+- **`remoteJid`**: JID (identifier) of the contact on WhatsApp.
+- **`status`**: Session status (`opened`, `paused`, `closed`).
+
+## 4. OpenAI Default Settings
+
+You can define default settings that will be applied if parameters are not passed during bot creation. This also includes the option to use speech-to-text recognition.
+
+### Endpoint for Default Settings
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/openai/settings/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of default settings:
+
+~~~json
+{
+    "openaiCredsId": "clyja4oys0a3uqpy7k3bd7swe",
+    "expire": 20,
+    "keywordFinish": "#EXIT",
+    "delayMessage": 1000,
+    "unknownMessage": "Message not recognized",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": [],
+    "openaiIdFallback": "clyja4oys0a3uqpy7k3bd7swe",
+    "speechToText": true
+}
+~~~
+
+### Parameters Explanation
+
+- **`openaiCredsId`**: ID of the OpenAI credential to be used as default.
+- **`expire`**: Time in minutes after which the bot expires.
+- **`keywordFinish`**: Keyword that ends the bot session.
+- **`delayMessage`**: Delay to simulate typing before sending a message.
+- **`unknownMessage`**: Message sent when the user's input is not recognized.
+- **`listeningFromMe`**: Defines if the bot should listen to messages sent by the user.
+- **`stopBotFromMe`**: Defines if the bot should stop when the user sends a message.
+- **`keepOpen`**: Keeps the session open, preventing the bot from restarting for the same contact.
+- **`debounceTime`**: Time to combine multiple messages into one.
+- **`ignoreJids`**: List of JIDs of contacts that will not activate the bot.
+- **`openaiIdFallback`**: Fallback bot ID that will be used if no trigger is activated.
+- **`speechToText`**: Defines if the speech-to-text recognition feature should be activated using the default credential.
+
+### Webhook with `speechToText`
+
+When the `speechToText` parameter is enabled, the Evolution API automatically converts received audio to text using the OpenAI credential. The audio transcription is then included in the webhook sent by the API.
+
+#### Example of Webhook with `speechToText`
+
+~~~json
+{
+    "event": "message",
+    "data": {
+        "message": {
+            "id": "message-id",
+            "from": "sender-number",
+            "to": "receiver-number",
+            "content": "Text message",
+            "speechToText": "This is the transcribed text from the audio."
+        }
+    }
+}
+~~~
+
+## Final Considerations
+
+The integration of Evolution API with OpenAI offers a powerful way to automate interactions on WhatsApp, using artificial intelligence to provide dynamic and personalized responses. With the right settings, you can create highly efficient virtual assistants, manage sessions, and set default configurations, including the use of speech recognition to automatically convert audio to text.

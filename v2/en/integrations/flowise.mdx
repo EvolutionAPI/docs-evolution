@@ -1,0 +1,177 @@
+---
+title: Flowise
+icon: robot
+---
+
+Evolution API allows the creation and management of bots using Flowise technology, providing advanced automation and interactivity through different types of interactions. Below, you will find detailed instructions on how to configure bots, manage sessions, and set default configurations.
+
+## 1. Creating Bots in Flowise
+
+You can configure various bots in Flowise using triggers to initiate interactions. Bot configuration can be done through the `/flowise/create/{{instance}}` endpoint.
+
+### Endpoint for Bot Creation
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/flowise/create/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of a JSON body to configure a bot in Flowise:
+
+~~~json
+{
+    "enabled": true,
+    "apiUrl": "http://flowise.site.com/v1",
+    "apiKey": "app-123456", // optional
+    // options
+    "triggerType": "keyword", /* all or keyword */
+    "triggerOperator": "equals", /* contains, equals, startsWith, endsWith, regex, none */
+    "triggerValue": "test",
+    "expire": 0,
+    "keywordFinish": "#EXIT",
+    "delayMessage": 1000,
+    "unknownMessage": "Message not recognized",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": []
+}
+~~~
+
+### Parameters Explanation
+
+- **`enabled`**: Enables (`true`) or disables (`false`) the bot.
+- **`apiUrl`**: Flowise API URL (without a trailing `/`).
+- **`apiKey`**: API key provided by Flowise (optional).
+- **Options**:
+  - **`triggerType`**: Type of trigger to start the bot (`all` or `keyword`).
+  - **`triggerOperator`**: Operator used to evaluate the trigger (`contains`, `equals`, `startsWith`, `endsWith`, `regex`, `none`).
+  - **`triggerValue`**: Value used in the trigger (e.g., a keyword or regex).
+  - **`expire`**: Time in minutes after which the bot expires, restarting if the session has expired.
+  - **`keywordFinish`**: Keyword that ends the bot session.
+  - **`delayMessage`**: Delay (in milliseconds) to simulate typing before sending a message.
+  - **`unknownMessage`**: Message sent when the user's input is not recognized.
+  - **`listeningFromMe`**: Defines if the bot should listen to messages sent by the user (`true` or `false`).
+  - **`stopBotFromMe`**: Defines if the bot should stop when the user sends a message (`true` or `false`).
+  - **`keepOpen`**: Keeps the session open, preventing the bot from restarting for the same contact.
+  - **`debounceTime`**: Time (in seconds) to combine multiple messages into one.
+  - **`ignoreJids`**: List of JIDs of contacts that will not activate the bot.
+
+## 2. Flowise Default Settings
+
+You can define default settings that will be applied if parameters are not passed during bot creation.
+
+### Endpoint for Default Settings
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/flowise/settings/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of default settings:
+
+~~~json
+{
+    "expire": 20,
+    "keywordFinish": "#EXIT",
+    "delayMessage": 1000,
+    "unknownMessage": "Message not recognized",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": [],
+    "flowiseIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+}
+~~~
+
+### Parameters Explanation
+
+- **`expire`**: Time in minutes after which the bot expires.
+- **`keywordFinish`**: Keyword that ends the bot session.
+- **`delayMessage`**: Delay to simulate typing before sending a message.
+- **`unknownMessage`**: Message sent when the user's input is not recognized.
+- **`listeningFromMe`**: Defines if the bot should listen to messages sent by the user.
+- **`stopBotFromMe`**: Defines if the bot should stop when the user sends a message.
+- **`keepOpen`**: Keeps the session open, preventing the bot from restarting for the same contact.
+- **`debounceTime`**: Time to combine multiple messages into one.
+- **`ignoreJids`**: List of JIDs of contacts that will not activate the bot.
+- **`flowiseIdFallback`**: Fallback bot ID that will be used if no trigger is activated.
+
+## 3. Managing Flowise Sessions
+
+You can manage the bot sessions by changing the status between open, paused, or closed for each specific contact.
+
+### Endpoint for Session Management
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/flowise/changeStatus/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of how to manage the session status:
+
+~~~json
+{
+    "remoteJid": "5511912345678@s.whatsapp.net",
+    "status": "closed"
+}
+~~~
+
+### Parameters Explanation
+
+- **`remoteJid`**: JID (identifier) of the contact on WhatsApp.
+- **`status`**: Session status (`opened`, `paused`, `closed`).
+
+## 4. Automatic and Special Variables in Flowise
+
+When a Flowise session is started, some predefined variables are automatically sent:
+
+~~~json
+inputs: {
+    remoteJid: "Contact JID",
+    pushName: "Contact name",
+    instanceName: "Instance name",
+    serverUrl: "API server URL",
+    apiKey: "Evolution API Key"
+};
+~~~
+
+### Explanation of Automatic Variables
+
+- **`remoteJid`**: JID of the contact the bot is interacting with.
+- **`pushName`**: Contact's name on WhatsApp.
+- **`instanceName`**: Name of the instance running the bot.
+- **`serverUrl`**: URL of the server where Evolution API is hosted.
+- **`apiKey`**: API key used to authenticate requests.
+
+### Special Variables for Workflows
+
+In the case of **workflow** bots, the received message is sent in the `query` variable within the inputs. This allows the workflow to process the message directly based on the content of the `query` variable.
+
+### Example of Variables for Workflow
+
+~~~json
+inputs: {
+    remoteJid: "Contact JID",
+    pushName: "Contact name",
+    instanceName: "Instance name",
+    serverUrl: "API server URL",
+    apiKey: "Evolution API Key",
+    query: "Received message content"
+}
+~~~
+
+## Final Considerations
+
+The integration of Evolution API with Flowise offers a robust way to automate interactions on WhatsApp, using different types of bots to meet the specific needs of your business. With the ability to configure triggers, manage sessions, and use automatic variables, you can optimize the workflow and improve the end-user experience.

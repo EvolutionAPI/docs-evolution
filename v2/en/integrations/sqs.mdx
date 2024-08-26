@@ -1,0 +1,93 @@
+---
+title: Amazon SQS  
+icon: aws
+---
+
+The Evolution API allows integration with **Amazon SQS (Simple Queue Service)** to manage events and message queues in a scalable and reliable way. Similar to RabbitMQ, SQS in the Evolution API can be configured globally or for individual instances.
+
+## Global SQS Configuration
+
+To enable SQS and configure centralized event processing, use the following environment variables:
+
+### Environment Variable Configuration
+
+```plaintext
+SQS_ENABLED=true
+SQS_ACCESS_KEY_ID=your-access-key-id
+SQS_SECRET_ACCESS_KEY=your-secret-access-key
+SQS_ACCOUNT_ID=your-account-id
+SQS_REGION=your-region
+```
+
+### Explanation of Variables
+
+- **`SQS_ENABLED`**: Enables (`true`) or disables (`false`) integration with Amazon SQS.
+- **`SQS_ACCESS_KEY_ID`**: AWS access key for authentication.
+- **`SQS_SECRET_ACCESS_KEY`**: Secret key corresponding to the access key for authentication.
+- **`SQS_ACCOUNT_ID`**: AWS account ID where SQS is configured.
+- **`SQS_REGION`**: AWS region where your SQS queues are located (e.g., `us-east-1`).
+
+### How It Works
+
+- **Queue by Event**: In global mode, all events are queued in specific queues by event type. This means that events from different instances are centralized in unified event queues, simplifying processing and monitoring.
+
+## SQS Configuration for Individual Instances
+
+Although global configuration is recommended for centralized event processing, you can configure SQS for individual instances if you need to segment queues by instance.
+
+### Endpoint for Individual Configuration
+
+To configure SQS for a specific WhatsApp instance in the Evolution API, use the following endpoint:
+
+~~~ http
+POST [baseUrl]/sqs/set/[instance_name]
+~~~
+
+### Request Body
+
+Here is an example of the JSON body to configure events in a specific instance:
+
+~~~ json
+{
+    "enabled": true,
+    "events": [
+        "APPLICATION_STARTUP",
+        "QRCODE_UPDATED",
+        "MESSAGES_SET",
+        "MESSAGES_UPSERT",
+        "MESSAGES_UPDATE",
+        "MESSAGES_DELETE",
+        "SEND_MESSAGE",
+        "CONTACTS_SET",
+        "CONTACTS_UPSERT",
+        "CONTACTS_UPDATE",
+        "PRESENCE_UPDATE",
+        "CHATS_SET",
+        "CHATS_UPSERT",
+        "CHATS_UPDATE",
+        "CHATS_DELETE",
+        "GROUPS_UPSERT",
+        "GROUP_UPDATE",
+        "GROUP_PARTICIPANTS_UPDATE",
+        "CONNECTION_UPDATE",
+        "CALL",
+        "NEW_JWT_TOKEN"
+    ]
+}
+~~~
+
+<Note>  
+Remove unused events to optimize SQS resource usage.
+</Note>
+
+### How It Works
+
+- **Instance Segmentation**: When configuring SQS for individual instances, each instance can have its specific queues for the configured events. This allows for greater control and segmentation of events if you need to separate processing by instance.
+
+## Final Considerations
+
+Integration with Amazon SQS in the Evolution API offers a powerful solution for managing events in a scalable and reliable way, both centrally and segmented by instance. Use the global configuration to simplify processing in complex environments, or configure individually for more granular control.
+
+<Info>  
+For more details on environment variables and other advanced configurations, refer to the [environment variables section](/v2/pt/env#sqs).
+</Info>

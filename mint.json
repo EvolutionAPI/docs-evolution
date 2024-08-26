@@ -44,6 +44,11 @@
     },
     {
       "name": "English",
+      "url": "v2/en",
+      "version": "v2"
+    },
+    {
+      "name": "English",
       "url": "v1/en",
       "version": "v1"
     },
@@ -91,7 +96,7 @@
               ]
             },
             {
-              "group": "Chatbot",
+              "group": "Chatbots",
               "icon": "robot",
               "pages": [
                 "v2/pt/integrations/chatwoot",
@@ -103,7 +108,7 @@
               ]
             },
             {
-              "group": "Canal",
+              "group": "Canais",
               "icon": "message",
               "pages": [
                 "v2/pt/integrations/cloudapi",
@@ -135,18 +140,57 @@
       "pages": [
         "v2/en/get-started/introduction",
         {
-          "group": "Install",
-          "icon": "wrench",
-          "pages": ["v2/en/install/docker", "v2/en/install/nvm"]
+          "group": "Requirements",
+          "icon": "triangle-exclamation",
+          "pages": ["v2/en/requirements/database", "v2/en/requirements/redis"]
         },
         {
-          "group": "Optional Resources",
+          "group": "Install",
+          "icon": "wrench",
+          "pages": [
+            "v2/en/install/docker",
+            "v2/en/install/nvm",
+            "v2/en/install/nginx"
+          ]
+        },
+        {
+          "group": "Integrations",
           "icon": "toolbox",
           "pages": [
-            "v2/en/optional-resources/mongo-db",
-            "v2/en/optional-resources/rabbitmq",
-            "v2/en/optional-resources/redis",
-            "v2/en/optional-resources/websocket"
+            {
+              "group": "Events",
+              "icon": "calendar",
+              "pages": [
+                "v2/en/integrations/websocket",
+                "v2/en/integrations/rabbitmq",
+                "v2/en/integrations/sqs"
+              ]
+            },
+            {
+              "group": "Chatbots",
+              "icon": "robot",
+              "pages": [
+                "v2/en/integrations/chatwoot",
+                "v2/en/integrations/evolution-bot",
+                "v2/en/integrations/typebot",
+                "v2/en/integrations/openai",
+                "v2/en/integrations/dify",
+                "v2/en/integrations/flowise"
+              ]
+            },
+            {
+              "group": "Channels",
+              "icon": "message",
+              "pages": [
+                "v2/en/integrations/cloudapi",
+                "v2/en/integrations/evolution-channel"
+              ]
+            },
+            {
+              "group": "Storage",
+              "icon": "database",
+              "pages": ["v2/en/integrations/s3minio"]
+            }
           ]
         },
         "v2/en/env",

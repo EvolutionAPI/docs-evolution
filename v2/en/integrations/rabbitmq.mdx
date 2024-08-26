@@ -1,0 +1,117 @@
+---
+title: RabbitMQ  
+icon: rabbit
+---
+
+The Evolution API allows integration with **RabbitMQ** to manage events and message queues, facilitating efficient and scalable task communication and processing. Below, you will find information on how to configure RabbitMQ both globally and for individual instances.
+
+## Global RabbitMQ Configuration
+
+With the new global configuration, it's possible to centralize event processing in unified queues, rather than configuring separate queues for each instance. This simplifies event management as all system events are routed through specific queues based on the event type.
+
+### Environment Variable Configuration
+
+Here are the necessary environment variables to enable and configure RabbitMQ globally:
+
+```plaintext
+RABBITMQ_ENABLED=true
+RABBITMQ_URI=amqp://admin:admin@localhost:5672/default
+RABBITMQ_EXCHANGE_NAME=evolution_exchange
+RABBITMQ_GLOBAL_ENABLED=true
+```
+
+### Configurable Events
+
+With global mode enabled (`RABBITMQ_GLOBAL_ENABLED=true`), all events are queued in specific queues by event type rather than by instance. Here is a list of events you can activate globally:
+
+```plaintext
+RABBITMQ_EVENTS_APPLICATION_STARTUP=true
+RABBITMQ_EVENTS_INSTANCE_CREATE=true
+RABBITMQ_EVENTS_INSTANCE_DELETE=true
+RABBITMQ_EVENTS_QRCODE_UPDATED=true
+RABBITMQ_EVENTS_MESSAGES_SET=true
+RABBITMQ_EVENTS_MESSAGES_UPSERT=true
+RABBITMQ_EVENTS_MESSAGES_EDITED=true
+RABBITMQ_EVENTS_MESSAGES_UPDATE=true
+RABBITMQ_EVENTS_MESSAGES_DELETE=true
+RABBITMQ_EVENTS_SEND_MESSAGE=true
+RABBITMQ_EVENTS_CONTACTS_SET=true
+RABBITMQ_EVENTS_CONTACTS_UPSERT=true
+RABBITMQ_EVENTS_CONTACTS_UPDATE=true
+RABBITMQ_EVENTS_PRESENCE_UPDATE=true
+RABBITMQ_EVENTS_CHATS_SET=true
+RABBITMQ_EVENTS_CHATS_UPSERT=true
+RABBITMQ_EVENTS_CHATS_UPDATE=true
+RABBITMQ_EVENTS_CHATS_DELETE=true
+RABBITMQ_EVENTS_GROUPS_UPSERT=true
+RABBITMQ_EVENTS_GROUP_UPDATE=true
+RABBITMQ_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
+RABBITMQ_EVENTS_CONNECTION_UPDATE=true
+RABBITMQ_EVENTS_CALL=true
+RABBITMQ_EVENTS_TYPEBOT_START=true
+RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=true
+```
+
+### Operation
+
+- **Queue by Event**: In global mode, events are queued in specific queues for each event type. For example, all message update events (`MESSAGES_UPDATE`) will be queued in the same queue, regardless of the originating instance.
+- **Ease of Management**: This approach simplifies the management and monitoring of events, allowing for centralized operations and simplifying the logic for message consumption in your system.
+
+## RabbitMQ Configuration for Individual Instances
+
+While global configuration is recommended for centralizing event processing, it's still possible to configure RabbitMQ for individual instances if segmentation by instance is needed.
+
+### Endpoint for Individual Configuration
+
+To configure RabbitMQ for a specific WhatsApp instance in the Evolution API, use the following endpoint:
+
+~~~ http
+POST [baseUrl]/rabbitmq/set/[instance_name]
+~~~
+
+### Request Body
+
+Here is an example of a JSON request body to configure events for a specific instance:
+
+~~~ json
+{
+    "enabled": true,
+    "events": [
+        "APPLICATION_STARTUP",
+        "QRCODE_UPDATED",
+        "MESSAGES_SET",
+        "MESSAGES_UPSERT",
+        "MESSAGES_UPDATE",
+        "MESSAGES_DELETE",
+        "SEND_MESSAGE",
+        "CONTACTS_SET",
+        "CONTACTS_UPSERT",
+        "CONTACTS_UPDATE",
+        "PRESENCE_UPDATE",
+        "CHATS_SET",
+        "CHATS_UPSERT",
+        "CHATS_UPDATE",
+        "CHATS_DELETE",
+        "GROUPS_UPSERT",
+        "GROUP_UPDATE",
+        "GROUP_PARTICIPANTS_UPDATE",
+        "CONNECTION_UPDATE",
+        "CALL",
+        "NEW_JWT_TOKEN"
+    ]
+}
+~~~
+
+<Note>  
+Remove unused events to optimize RabbitMQ resource usage.
+</Note>
+
+When configuring RabbitMQ integration for individual instances, adjust the event array in the JSON body to include only the events relevant to that instance.
+
+## Final Considerations
+
+RabbitMQ configuration in the Evolution API offers flexibility to manage events centrally with global configuration or segmented by instance, depending on your system's needs. Use the global configuration to simplify event management in complex environments, or configure it individually for more granular control.
+
+<Info>  
+For more details on RabbitMQ environment variables and other advanced configurations, consult the [environment variables section](/v2/pt/env#rabbitmq).
+</Info>

@@ -3,66 +3,66 @@ title: 'Webhooks'
 icon: webhook
 ---
 
-Webhooks enable real-time integration between the Evolution API and WhatsApp™, allowing automated data synchronization and sharing.
+Webhooks allow real-time integration between the Evolution API and WhatsApp™, enabling automated data synchronization and sharing.
 
-It is exactly this feature that enables the creation of self-service bots and multi-service systems.
+This feature is exactly what makes it possible to create self-service bots and multi-service systems.
 
-## Activating webhooks
+## Enabling Webhooks
 
-There is two ways to activate the webhook:
-  - In the `.env` with global events
-  - By calling the endpoint `/webhook/instance`
+There are two ways to enable the webhook:
+  - In the `.env` file with global events
+  - By calling the `/webhook/instance` endpoint
 
-### Instance webhook events
+### Instance Webhook Events
 
-Most of the users will prefer the activation by instance, this way is easier to control the events that are received, however in some cases a global webhook is needed this could be done by using the global webhook variable.
+Most users will prefer instance-based activation, as it makes it easier to control the received events. However, in some cases, a global webhook is necessary. This can be done using the global webhook variable.
 
-Here is an example with some commonly listened events:
+Here is an example with some common events being listened to:
 
 ```json /webhook/instance
 {
   "url": "{{webhookUrl}}",
-    "webhook_by_events": false,
-    "webhook_base64": false,
-    "events": [
-        "QRCODE_UPDATED",
-        "MESSAGES_UPSERT",
-        "MESSAGES_UPDATE",
-        "MESSAGES_DELETE",
-        "SEND_MESSAGE",
-        "CONNECTION_UPDATE",
-        "TYPEBOT_START",
-        "TYPEBOT_CHANGE_STATUS"
-    ]    
+  "webhook_by_events": false,
+  "webhook_base64": false,
+  "events": [
+      "QRCODE_UPDATED",
+      "MESSAGES_UPSERT",
+      "MESSAGES_UPDATE",
+      "MESSAGES_DELETE",
+      "SEND_MESSAGE",
+      "CONNECTION_UPDATE",
+      "TYPEBOT_START",
+      "TYPEBOT_CHANGE_STATUS"
+  ]    
 }
 ```
 ### Parameters
 
-| Parameter         | Type      | Required  | Description |
-| ----------------- | --------- | --------- | ----------- |
-| enabled           | boolean   | Required  | Enter "true" to create or change Webhook data, or "false" if you want to stop using it. |
-| url               | string    | Required  | Webhook URL to receive event data. |
-| webhook_by_events | boolean   | Optional  | Want to generate a specific Webhook URL for each of your events. |
-| events            | array     | Optional  | List of events to be processed. If you don't want to use some of these events, just remove them from the list. |
+| Parameter         | Type    | Required  | Description                                                                                                       |
+| ----------------- | ------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
+| enabled           | boolean | Yes       | Enter "true" to create or change Webhook data, or "false" if you want to stop using it.                           |
+| url               | string  | Yes       | Webhook URL to receive event data.                                                                                |
+| webhook_by_events | boolean | No        | Whether to generate a specific Webhook URL for each of your events.                                               |
+| events            | array   | No        | List of events to be processed. If you don't want to use some of these events, simply remove them from the list.  |
 
 <Note>
-It is extremely necessary that the payload obey the rules for creating a JSON file, considering the correct arrangement of items, formatting, square brackets, braces and commas, etc.
-Before consuming the endpoint, if you have questions about the JSON formatting, go to https://jsonlint.com/ and validate.
+It is extremely necessary that the payload follows the rules to create a JSON file, considering the correct arrangement of items, formatting, brackets, braces, commas, etc.
+Before consuming the endpoint, if you have doubts about the JSON formatting, go to https://jsonlint.com/ and validate.
 </Note>
 
-### Global Webhook events 
+### Global Webhook Events
 
-Each instance's Webhook URL and events will be requested at the time it is created
-Define a global webhook that will listen for enabled events from all instances
+Each instance's Webhook URL and events will be requested when they are created.
+Set up a global webhook that will listen to enabled events from all instances.
 
 ```bash .env
 WEBHOOK_GLOBAL_URL=''
 WEBHOOK_GLOBAL_ENABLED=false
 
-# With this option activated, you work with a url per webhook event, respecting the global url and the name of each event
+# With this option enabled, you work with one URL per webhook event, respecting the global URL and each event's name
 WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
 
-## Set the events you want to hear, all listed events below are supported
+## Set the events you want to listen to; all events listed below are supported
 WEBHOOK_EVENTS_APPLICATION_STARTUP=false
 WEBHOOK_EVENTS_QRCODE_UPDATED=true
 
@@ -70,47 +70,47 @@ WEBHOOK_EVENTS_QRCODE_UPDATED=true
 WEBHOOK_EVENTS_ERRORS=false
 WEBHOOK_EVENTS_ERRORS_WEBHOOK=
 ```
-## Supported events
+## Supported Events
 
 These are the available and supported webhook events:
 
-| **Environment variable**   | **URL**                    | **Description** |
+| **Environment Variable**   | **URL**                    | **Description** |
 | -------------------------- | -------------------------- | --------------- |
-| APPLICATION_STARTUP        | /application-startup       | Notifies you when an application startup |
-| QRCODE_UPDATED             | /qrcode-updated            | Sends the base64 of the qrcode for reading |
-| CONNECTION_UPDATE          | /connection-update         | Informs the status of the connection with WhatsApp |
-| MESSAGES_SET               | /messages-set              | Sends a list of all your messages uploaded on WhatsApp. This event occurs only once |
-| MESSAGES_UPSERT            | /messages-upsert           | Notifies you when a message is received |
-| MESSAGES_UPDATE            | /messages-update           | Tells you when a message is updated |
-| MESSAGES_DELETE            | /messages-delete           | Tells you when a message is deleted |
+| APPLICATION_STARTUP        | /application-startup       | Notifies when an application startup occurs |
+| QRCODE_UPDATED             | /qrcode-updated            | Sends the QR code in base64 format for scanning |
+| CONNECTION_UPDATE          | /connection-update         | Informs the status of the WhatsApp connection |
+| MESSAGES_SET               | /messages-set              | Sends a list of all messages loaded in WhatsApp. This event occurs only once |
+| MESSAGES_UPSERT            | /messages-upsert           | Notifies when a message is received |
+| MESSAGES_UPDATE            | /messages-update           | Informs when a message is updated |
+| MESSAGES_DELETE            | /messages-delete           | Informs when a message is deleted |
 | SEND_MESSAGE               | /send-message              | Notifies when a message is sent |
-| CONTACTS_SET               | /contacts-set              | Performs initial loading of all contacts.This event occurs only once |
-| CONTACTS_UPSERT            | /contacts-upsert           | Reloads all contacts with additional information.This event occurs only once |
-| CONTACTS_UPDATE            | /contacts-update           | Informs you when the chat is updated |
-| PRESENCE_UPDATE            | /presence-update           | Informs if the user is online, if he is performing some action like writing or recording and his last seen: 'unavailable', 'available', 'composing', 'recording', 'paused' |
-| CHATS_SET                  | /chats-set                 | Send a list of all loaded chats |
-| CHATS_UPDATE               | /chats-update              | Informs you when the chat is updated |
+| CONTACTS_SET               | /contacts-set              | Performs the initial loading of all contacts. This event occurs only once |
+| CONTACTS_UPSERT            | /contacts-upsert           | Reloads all contacts with additional information. This event occurs only once |
+| CONTACTS_UPDATE            | /contacts-update           | Informs when a contact is updated |
+| PRESENCE_UPDATE            | /presence-update           | Informs if the user is online, performing an action such as typing or recording, and their last seen status: 'unavailable', 'available', 'typing', 'recording', 'paused' |
+| CHATS_SET                  | /chats-set                 | Sends a list of all loaded chats |
+| CHATS_UPDATE               | /chats-update              | Informs when a chat is updated |
 | CHATS_UPSERT               | /chats-upsert              | Sends any new chat information |
-| CHATS_DELETE               | /chats-delete              | Notify you when a message is deleted |
+| CHATS_DELETE               | /chats-delete              | Notifies when a chat is deleted |
 | GROUPS_UPSERT              | /groups-upsert             | Notifies when a group is created |
 | GROUPS_UPDATE              | /groups-update             | Notifies when a group has its information updated |
 | GROUP_PARTICIPANTS_UPDATE  | /group-participants-update | Notifies when an action occurs involving a participant: 'add', 'remove', 'promote', 'demote' |
 | NEW_TOKEN                  | /new-jwt                   | Notifies when the token (jwt) is updated |
 
-## Webhook by events
+## Webhook by Events
 
-When enabling the WEBHOOK_BY_EVENTS options in the global and local webhooks, the following paths will be added at the end of the webhook.
+When enabling the WEBHOOK_BY_EVENTS options in both global and local webhooks, the following paths will be appended to the end of the webhook URL.
 
 <Note>
-Add on the end of the url the event name with a dash (-) between the words that compose the event for the event.
+Add the event name at the end of the URL with a hyphen (-) between the words that make up the event.
 </Note>
  
 ### Example
 
- Assuming your webhook url was `https://sub.domain.com/webhook/`. Evolution will add automatically in the end of the url the name of the event when `webhook_by_events` is set to true.
+Suppose your webhook URL is `https://sub.domain.com/webhook/`. Evolution will automatically add the event name to the end of the URL when `webhook_by_events` is set to true.
 
-|  **Event**                 | **New webhook by Events URL**                            |
-| -------------------------- | -------------------------------------------------------- |
+|  **Event**                 | **New Event-Specific Webhook URL**                     |
+| -------------------------- | ------------------------------------------------------ |
 | APPLICATION_STARTUP        | https://sub.domain.com/webhook/application-startup       |
 | QRCODE_UPDATED             | https://sub.domain.com/webhook/qrcode-updated            |
 | CONNECTION_UPDATE          | https://sub.domain.com/webhook/connection-update         |
@@ -132,18 +132,18 @@ Add on the end of the url the event name with a dash (-) between the words that 
 | GROUP_PARTICIPANTS_UPDATE  | https://sub.domain.com/webhook/group-participants-update |
 | NEW_TOKEN                  | https://sub.domain.com/webhook/new-jwt                   |
 
- ## Find Webhook
+## Locating Webhook
 
-If necessary, there is an option to find any active webhook on the specific instance.
+If necessary, there is an option to locate any active webhook on the specific instance.
 
 | Method | Endpoint                              |
 | ------ | ------------------------------------- |
 | GET    | [baseUrl]/webhook/find/[instance]     |
 
 
-### Data returned from the Request:
+### Data returned from the request:
 
-Calling the endpoint will return all the information about the webhook that is being used by the instance.
+Calling the endpoint will return all information about the webhook being used by the instance.
 
 ```json Result
 {

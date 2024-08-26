@@ -3,116 +3,393 @@ title: Docker
 icon: docker
 ---
 
-<Note>
-  These installation instructions assume you have already installed Docker on your machine. You can find
-  information on how to install Docker in the
+<Note>  
+  **Prerequisites:** Before proceeding with the installation of Evolution API v2 using Docker, make sure you have already configured the necessary services, such as PostgreSQL and Redis. Follow the links below for more details:
+  
+  - [Database Configuration](/v2/pt/requirements/database)
+  - [Redis Configuration](/v2/pt/requirements/redis)
+</Note>
+
+<Note>  
+  These installation instructions assume that you have already installed Docker on your machine. You can find information on how to install Docker in the  
   [Official Docker Documentation](https://docs.docker.com/engine/install/).
 </Note>
 
-EvolutionAPI is Docker-ready and can be easily deployed with Docker in both standalone and swarm modes. The official EvolutionAPI repository contains all the necessary compose files to install the API.
-
-## Docker Run
-### Quick Start
-
-<Warning>
-  CLI installation is recommended for quick deployment, mainly for testing or development. It should not be
-  used for production. Instead, we recommend that you [use docker-compose](#docker-compose) for
-  easier deployment and maintenance.
-</Warning>
-
-The fastest way to deploy EvolutionAPI with Docker is by using `docker run` on the command line interface.
-
-~~~ bash Terminal
-docker run -d \
-    --name evolution-api \
-    -p 8080:8080 \
-    -e AUTHENTICATION_API_KEY=change-me \
-    atendai/evolution-api
-~~~
-
-This will run a Docker container exposing the application on port 8080, and you can start testing and requesting the WhatsApp QR code using the authentication variable content with the `apikey` header set.
-
-### Quick Start with Volumes
-
-You can also deploy using Docker volumes to keep your EvolutionAPI's persistent data and all WhatsApp instances on your local machine, avoiding issues with container restarts by using `docker run` on the command line interface.
-
-Run the following command to deploy EvolutionAPI with the necessary volumes. This command maps the `evolution_store` and `evolution_instances` volumes to their respective directories inside the container.
-
-~~~ bash Terminal
-docker run -d \
-    --name evolution-api \
-    -p 8080:8080 \
-    -e AUTHENTICATION_API_KEY=change-me \
-    -v evolution_store:/evolution/store \
-    -v evolution_instances:/evolution/instances \
-    atendai/evolution-api
-~~~
+Evolution API v2 is Docker-ready and can be easily deployed with Docker in standalone or swarm mode. 
+The official Evolution API repository contains all the necessary composition files to install and run the API.
 
 ## Docker Compose
 
-Deploying EvolutionAPI using Docker Compose simplifies the setup and management of your Docker containers. It allows you to define your Docker environment in a `docker-compose.yaml` file and then use a single command to start everything.
+Deploying Evolution API v2 using Docker Compose simplifies the setup and management of your Docker containers. 
+It allows you to define your Docker environment in a `docker-compose.yaml` file and then use a single command to start everything.
 
-This is a Docker Compose example for standalone environments, i.e., a single running server. For synchronization of two servers in parallel, use Swarm. This is for more advanced Docker users.
+### Docker Compose File
 
-### Standalone
+The following example illustrates how to configure Docker Compose for standalone environments, i.e., a single running server. 
+For syncing two servers in parallel or for greater scalability, use Docker Swarm, recommended for more advanced users.
 
-<Warning>
-  **Warning:** the commands featured here as `docker compose` might not work on older versions, and must be replaced by `docker-compose`.
+#### Standalone Configuration
+
+<Warning>  
+  **Attention:** The commands described here as `docker compose` may not work in older versions of Docker. 
+  If you are using an older version, replace with `docker-compose`.
 </Warning>
 
-Docker standalone is suitable when your Evolution API will be running on just one machine, and you don't need scalability or other Docker Swarm features for now. It's the most convenient way to use Docker for most people.
+Docker standalone is suitable when Evolution API will run on just one machine, without the need for immediate scalability. 
+This is the most convenient method for most users.
 
-Create a `docker-compose.yml` file with this content:
+To get started, create a `docker-compose.yml` file with the following content:
 
-~~~ yaml docker-compose.yml
-version: '3'
+~~~ yaml
+version: '3.9'
 services:
   evolution-api:
     container_name: evolution_api
-    image: atendai/evolution-api
+    image: atendai/evolution-api:2.1.0
     restart: always
     ports:
       - "8080:8080"
     env_file:
       - .env
     volumes:
-      - evolution_store:/evolution/store
       - evolution_instances:/evolution/instances
 
 volumes:
-  evolution_store:
   evolution_instances:
 ~~~
 
-Create a `.env` file in the same directory with the following:
+Next, create a `.env` file in the same directory with the following minimal content:
 
-~~~ bash .env
+~~~ bash
 AUTHENTICATION_API_KEY=change-me
 ~~~
-<Note>
-  For more configurations, take the example file from the
-  [official repository](https://github.com/EvolutionAPI/evolution-api/blob/main/Docker/.env.example). And see the
-  guide [here](/en/install/env).
+
+<Note>  
+  For more configurations, you can get the example file from the
+  [official repository](https://github.com/EvolutionAPI/evolution-api/blob/main/.env.example). Also, check the environment variables guide [here](/v2/pt/env).
 </Note>
 
-Navigate to the directory containing your docker-compose.yml file and run:
-services defined in the file
+### Starting the API
+
+Navigate to the directory containing the `docker-compose.yml` file and run the following command to start the services defined in the file:
 
 ~~~ bash
 docker compose up -d
 ~~~
 
-This command will download the necessary Docker images, create the defined services, networks, and volumes, and start the EvolutionAPI service.
+This command will download the necessary Docker images, create the defined services, networks, and volumes, and start the Evolution API service.
 
-After running the docker-compose up command, you should see logs indicating that the services are running.
+### Checking the Logs
+
+After running the `docker compose up` command, you can check the logs to confirm that the services are running correctly:
 
 ~~~ bash
 docker logs evolution_api
 ~~~
 
-To stop the service, use:
+### Stopping the Service
+
+To stop the service, use the command:
+
 ~~~ bash
 docker compose down
 ~~~
 
-Open your browser and go to http://localhost:8080 to check if the EvolutionAPI is operational.
+### Accessing the API
+
+Open your browser and go to [http://localhost:8080](http://localhost:8080) to check if the Evolution API is operational.
+
+## Docker Swarm
+
+To set up and manage a Docker Swarm cluster for Evolution API v2, follow the instructions below. Docker Swarm is ideal for environments that require scalability and high availability.
+
+### Docker Swarm Installation
+
+
+#### Configuring the Manager Server
+
+If you are using a Hetzner server, run:
+
+~~~ bash
+sudo apt-get update && apt-get install -y apparmor-utils
+~~~
+
+**Step 1: Hostname Configuration**
+
+1. Change the machine's hostname to identify it in the cluster:
+
+~~~ bash
+hostnamectl set-hostname manager1
+~~~
+
+2. Edit the `/etc/hosts` file to add the new name:
+
+~~~ bash
+nano /etc/hosts
+~~~
+
+Add the line:
+
+~~~ bash
+127.0.0.1    manager1
+~~~
+
+3. Reboot the system to apply the changes:
+
+~~~ bash
+reboot
+~~~
+
+4. Check the hostname:
+
+~~~ bash
+hostnamectl
+~~~
+
+**Step 2: Docker Installation**
+
+Install Docker by running:
+
+~~~ bash
+curl -fsSL https://get.docker.com | bash
+~~~
+
+**Step 3: Starting the Swarm**
+
+Start Docker Swarm:
+
+~~~ bash
+docker swarm init --advertise-addr IP_SERVER
+~~~
+
+**Step 4: Docker Swarm Network Configuration**
+
+Create the overlay network for Docker Swarm:
+
+~~~ bash
+docker network create --driver=overlay network_public
+~~~
+
+Note the command generated to register the Workers:
+
+~~~ bash
+docker swarm join --token HASH IP_SERVER:2377
+~~~
+
+#### Configuring the Worker Server
+
+If you are using a Hetzner server, run:
+
+~~~ bash
+sudo apt-get update && apt-get install -y apparmor-utils
+~~~
+
+**Step 1: Hostname Configuration**
+
+1. Change the machine's hostname to identify it in the cluster:
+
+~~~ bash
+hostnamectl set-hostname worker1
+~~~
+
+2. Edit the `/etc/hosts` file to add the new name:
+
+~~~ bash
+nano /etc/hosts
+~~~
+
+Add the line:
+
+~~~ bash
+127.0.0.1    worker1
+~~~
+
+3. Reboot the system to apply the changes:
+
+~~~ bash
+reboot
+~~~
+
+**Step 2: Docker Installation**
+
+Install Docker by running:
+
+~~~ bash
+curl -fsSL https://get.docker.com | bash
+~~~
+
+**Step 3: Adding the Worker to the Cluster**
+
+Run the previously obtained command to add the Worker to the cluster:
+
+~~~ bash
+docker swarm join --token HASH IP_SERVER:2377
+~~~
+
+### Prerequisites for Evolution API via Swarm
+
+#### Installing Traefik
+
+To install Traefik on Docker Swarm, follow the instructions below:
+
+1. On the manager server, create a `traefik.yaml` file:
+
+~~~ bash
+nano traefik.yaml
+~~~
+
+2. Add the following content to the file:
+
+~~~ yaml
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik:2.11.2
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=network_public"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencryptresolver.acme.email=your@email.com"
+      - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
+      - "--log.level=DEBUG"
+      - "--log.format=common"
+      - "--log.filePath=/var/log/traefik/traefik.log"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/var/log/traefik/access-log"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
+        - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+        - "traefik.http.routers.http-catchall.entrypoints=web"
+        - "traefik.http.routers.http-catchall.middlewares=redirect-https@docker"
+        - "traefik.http.routers.http-catchall.priority=1"
+    volumes:
+      - "/var/run
+
+/docker.sock:/var/run/docker.sock:ro"
+      - "vol_certificates:/etc/traefik/letsencrypt"
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+      - target: 443
+        published: 443
+        mode: host
+    networks:
+      - network_public
+
+volumes:
+  vol_certificates:
+    external: true
+    name: volume_swarm_certificates
+
+networks:
+  network_public:
+    external: true
+    name: network_public
+~~~
+
+3. Run the following command to deploy the Traefik stack:
+
+~~~ bash
+docker stack deploy --prune --resolve-image always -c traefik.yaml traefik
+~~~
+
+### Deploying Evolution API v2
+
+Finally, to deploy Evolution API v2 on Docker Swarm, use the configuration file available [here](https://github.com/EvolutionAPI/evolution-api/blob/v2.0.0/Docker/swarm/evolution_api_v2.yaml) with the following content:
+
+~~~ yaml
+version: "3.7"
+
+services:
+  evolution_v2:
+
+
+    image: atendai/evolution-api:2.1.0
+    volumes:
+      - evolution_instances:/evolution/instances
+    networks:
+      - network_public
+    environment:
+      - SERVER_URL=https://evo2.site.com
+      - DEL_INSTANCE=false
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://postgres:PASSWORD@postgres:5432/evolution
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_MESSAGE_UPDATE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
+      - DATABASE_SAVE_DATA_LABELS=true
+      - DATABASE_SAVE_DATA_HISTORIC=true
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution_v2
+      - RABBITMQ_ENABLED=false
+      - RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/default
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://evo_redis:6379/1
+      - CACHE_REDIS_PREFIX_KEY=evolution_v2
+      - CACHE_REDIS_SAVE_INSTANCES=false
+      - CACHE_LOCAL_ENABLED=false
+      - S3_ENABLED=true
+      - S3_ACCESS_KEY=
+      - S3_SECRET_KEY=
+      - S3_BUCKET=evolution
+      - S3_PORT=443
+      - S3_ENDPOINT=files.site.com
+      - S3_USE_SSL=true
+      - AUTHENTICATION_API_KEY=429683C4C977415CAAFCCE10F7D57E11
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == evolution-manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.evolution_v2.rule=Host(`evo2.site.com`)
+        - traefik.http.routers.evolution_v2.entrypoints=websecure
+        - traefik.http.routers.evolution_v2.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evolution_v2.service=evolution_v2
+        - traefik.http.services.evolution_v2.loadbalancer.server.port=8080
+        - traefik.http.services.evolution_v2.loadbalancer.passHostHeader=true
+
+volumes:
+  evolution_instances:
+    external: true
+    name: evolution_v2_data
+
+networks:
+  network_public:
+    external: true
+    name: network_public
+~~~
+
+After configuring and saving the file, deploy the stack with the command:
+
+~~~ bash
+docker stack deploy --prune --resolve-image always -c evolution_api_v2.yaml evolution_v2
+~~~
+
+### Accessing the API
+
+Open your browser and go to [https://evo2.site.com](https://evo2.site.com) to check if the Evolution API is operational.

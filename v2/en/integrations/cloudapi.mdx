@@ -1,0 +1,113 @@
+---
+title: WhatsApp Cloud API
+icon: whatsapp
+---
+
+Evolution API v2 allows you to integrate your application with the official WhatsApp Cloud API to manage messages, contacts, and other functionalities directly through the API. Below are the prerequisites and the integration process.
+
+## Prerequisites
+
+Before starting the integration with the WhatsApp Cloud API, ensure that the following steps have been completed:
+
+### 1. Business Manager (BM) Creation and Approval
+
+To use the official WhatsApp Cloud API, you need an approved **Business Manager** (BM). This process involves:
+
+- Creating an account on [Facebook Business Manager](https://business.facebook.com/).
+- Following the steps to verify your business.
+- Waiting for your account approval.
+
+### 2. Creating the App on Facebook Developers
+
+After your BM is approved, you need to create an app on the [Facebook Developers](https://developers.facebook.com/) platform:
+
+- Access your Facebook Developers account and click on **My Apps**.
+- Click on **Create App** and follow the instructions to set up a new app.
+- Make sure to add the WhatsApp API to your app.
+
+### 3. Configuring the Number in the App
+
+After creating the app, you need to configure the WhatsApp number:
+
+- In your app's dashboard on Facebook Developers, go to the **WhatsApp** section.
+- Add and verify the phone number you want to use with the Cloud API.
+- Note the **Number ID** provided.
+
+### 4. Create a Permanent Token
+
+To avoid the access token from expiring, create a **permanent token** for the admin user of your BM:
+
+- Go to the **Access Tokens** section on Facebook Developers.
+- Generate a token with the necessary permissions for the WhatsApp API.
+- Ensure that this token is permanent, so it doesn't need to be renewed periodically.
+
+## Configuration in Evolution API v2
+
+Now that you have completed the prerequisites, follow the steps below to configure the integration with Evolution API v2.
+
+### 1. Creating the Instance
+
+To create an instance that uses the WhatsApp Cloud API, you need to access the `/instance/create` route of Evolution API v2 with the following request body:
+
+```json
+{
+    "instanceName": "INSTANCE NAME",
+    "token": "PERMANENT TOKEN OF BM ADMIN USER",
+    "number": "WHATSAPP NUMBER ID",
+    "businessId": "BUSINESS ID OF WHATSAPP ACCOUNT",
+    "qrcode": false,
+    "integration": "WHATSAPP-BUSINESS"
+}
+```
+
+### Request Body Parameters:
+
+- **`instanceName`**: The name of the instance you are creating.
+- **`token`**: Permanent token generated for the admin user of your BM.
+- **`number`**: WhatsApp Number ID that you configured in the Facebook Developers app.
+- **`businessId`**: ID of the business account associated with WhatsApp.
+- **`qrcode`**: Set to `false` because the integration is token-based, not QR Code-based.
+- **`integration`**: Use `"WHATSAPP-BUSINESS"` to specify that this integration is with the official WhatsApp Business API.
+
+### Example Request:
+
+```bash
+curl -X POST http://API_URL/instance/create \
+-H "Content-Type: application/json" \
+-d '{
+    "instanceName": "MyInstance",
+    "token": "EAAGm0PX4ZCpsBA...",
+    "number": "1234567890",
+    "businessId": "9876543210",
+    "qrcode": false,
+    "integration": "WHATSAPP-BUSINESS"
+}'
+```
+
+### 2. Webhook Configuration
+
+After creating the instance, you need to configure the webhook in the Meta app to receive events and messages from WhatsApp.
+
+#### Webhook URL
+
+In your app's dashboard on Facebook Developers, configure the webhook with the following URL:
+
+```plaintext
+API_URL/webhook/meta
+```
+
+#### Webhook Token
+
+The token to validate the webhook should be configured in the `WA_BUSINESS_TOKEN_WEBHOOK` variable in your `.env` file:
+
+```plaintext
+WA_BUSINESS_TOKEN_WEBHOOK=your_webhook_token
+```
+
+This token will be used by Meta to validate requests sent to your webhook.
+
+### Conclusion
+
+With the instance created and the webhook configured, your Evolution API v2 is ready to operate with the official WhatsApp Cloud API. All messages and events related to the configured number will be automatically managed by Evolution API.
+
+This documentation provides a clear and detailed overview of how to integrate the WhatsApp Cloud API with Evolution API v2, from the necessary preparation to the final configuration. By following all the steps, you will be prepared to utilize WhatsApp functionalities in your application through Evolution API v2.

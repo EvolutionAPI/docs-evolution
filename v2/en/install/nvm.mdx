@@ -1,29 +1,34 @@
 ---
-title: NVM
-icon: js
+title: NVM 
+icon: js  
 ---
 
-Evolution API can be easily installed using the Node Version Manager (NVM). Follow these steps to set up your environment and start the Evolution API on your server.
+## Prerequisites
 
-## Install NVM
+Before starting the installation of Evolution API v2, ensure that you have already configured the necessary services, such as PostgreSQL and Redis. Follow the links below for more details:
 
-First, download and install Node.js. You can do this by running the following commands:
+- [Database Configuration](/v2/pt/requirements/database)
+- [Redis Configuration](/v2/pt/requirements/redis)
+
+## NVM Installation
+
+Evolution API can be easily installed using Node Version Manager (NVM). Follow these steps to set up your environment and start the Evolution API on your server.
+
+### Install NVM
+
+First, download and install Node.js with the following commands:
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
-Now, just point to the NVM directories and install Node:
+Now, load the environment and install Node.js:
 
-```bash Terminal
-# Load bash source into the environment
+```bash
+# Load NVM into the current environment
 source ~/.bashrc
 
-# Directories
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# Install node:
+# Install and use the required Node.js version
 nvm install v20.10.0 && nvm use v20.10.0
 ```
 
@@ -33,242 +38,108 @@ Confirm that NVM was successfully installed:
 command -v nvm
 ```
 
-<Info>
-    If you haven't configured it yet, you can also set up your private server's timezone with the following command:
-
-    ```bash
-    dpkg-reconfigure tzdata
-    ```
-</Info>
-
-Clone the official GitHub repository to your private server.
+<Info>  
+If you haven't set it up yet, you can also configure your server's timezone with the command:
 
 ```bash
-git clone https://github.com/EvolutionAPI/evolution-api.git
+dpkg-reconfigure tzdata
+```
+</Info>
+
+## Cloning the Repository and Installing Dependencies
+
+Clone the official Evolution API v2 repository from the correct branch:
+
+```bash
+git clone -b v2.0.0 https://github.com/EvolutionAPI/evolution-api.git
 ```
 
-Next, navigate to the folder where the project is located.
+Navigate to the project directory and install the dependencies:
 
 ```bash
 cd evolution-api
 npm install
 ```
 
-Now, let's copy the `env.yml` file with the settings you need to edit.
+## Environment Variables Configuration
+
+Now let's configure the environment variables. First, copy the `.env.example` file to `.env`:
 
 ```bash
-cp src/dev-env.yml src/env.yml
-nano src/env.yml
+cp ./.env.example ./.env
 ```
 
-This command creates a copy of the default environment file.
-
-Next, open the env.yml file in a text editor to enter your configuration settings. You can use nano, a command-line text editor, for this purpose:
+Edit the `.env` file with your specific settings:
 
 ```bash
-nano src/env.yml
+nano ./.env
 ```
 
-In the nano editor, navigate through the file and replace the default values with your specific settings. This can include database connection strings, API keys, server ports, etc.
+Replace the default values with your configurations, such as database connection strings, API keys, server ports, etc.
 
-<Info>
-    Refer to the environment variables section for detailed instructions on how to set up your `env.yml` file.
+<Info>  
+Visit the [environment variables section](/v2/pt/env) for detailed instructions on how to configure your `.env` file.
 </Info>
 
-To start the Evolution API, use the following command:
+## Database Generation and Deployment
+
+After setting up the environment, you will need to generate the Prisma client files and deploy the migrations to the database. Use the following commands, depending on the database you are using (PostgreSQL or MySQL):
+
+1. Generate the Prisma client files:
+
+    ```bash
+    npm run db:generate
+    ```
+
+2. Deploy the migrations:
+
+    ```bash
+    npm run db:deploy
+    ```
+    
+## Starting the Evolution API
+
+After configuration, you can start the Evolution API with the following command:
 
 ```bash
 npm run build
 npm run start:prod
 ```
 
-## Install and Configure PM2
+## PM2 Installation and Configuration
 
-Use PM2 to install PM2 and start the manager for the API process:
+Use PM2 to manage the API process:
 
-```bash Terminal
+```bash
 npm install pm2 -g
 pm2 start 'npm run start:prod' --name ApiEvolution
 pm2 startup
 pm2 save --force
 ```
 
-<Info>
-    Optional:
-    You may need to allocate more memory for PM2, especially if your server has the capacity:
+<Info>  
+If your server has more memory, consider configuring PM2 to utilize more resources:
 
-    ```sh
-    pm2 start 'npm run start:prod' --name ApiEvolution -- start --node-args="--max-old-space-size=4096" --max-memory-restart 4G
-    ```
+```bash
+pm2 start 'npm run start:prod' --name ApiEvolution -- start --node-args="--max-old-space-size=4096" --max-memory-restart 4G
+```
 
-    In the example above, it is assumed that your VPS has at least 4GB of RAM available exclusively for the Evolution API.
-
-    Available memory may vary, we recommend at least 1GB to run Evolution.
+This is recommended for servers with at least 4GB of RAM exclusively available for the Evolution API.
 </Info>
 
-If you want to ensure the API is running, simply use your browser to access http://localhost:8080. This should be the response from your browser:
+To verify that the API is running, visit [http://localhost:8080](http://localhost:8080). You should see the following response:
 
-```json http://localhost:8080/
+```json
 {
-    "status": 200,
-    "message": "Welcome to Evolution API, it is working!",
-    "version": "1.x.x",
-    "documentation": "http://localhost:8080/docs"
+  "status": 200,
+  "message": "Welcome to the Evolution API, it is working!",
+  "version": "2.0.10",
+  "clientName": "evolution01",
+  "manager": "https://evo2.site.com/manager",
+  "documentation": "https://doc.evolution-api.com"
 }
 ```
 
-<Tip>
-    Make your life easier with the JSON Formatter extension in [Google Chrome](https://chromewebstore.google.com/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb?hl=pt-BR) or [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl).
+<Tip>  
+Make your life easier with the JSON Formatter extension on [Google Chrome](https://chromewebstore.google.com/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb?hl=en) or [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl).
 </Tip>
-
-EvolutionAPI has built-in Swagger endpoint documentation, which you can use to see all possible endpoints and test requests by accessing `http://localhost:8080/docs`.
-
-## Nginx Configuration
-
-First, let's install, start, enable, and test the Nginx service on your private server.
-
-```bash Terminal
-apt-get install -y nginx
-systemctl start nginx
-systemctl enable nginx
-systemctl status nginx
-```
-
-If the information "Active: active (running)" appears in green, it means that Nginx is running and you can proceed to the next step.
-
-### Remove Default Nginx Configuration
-
-First, remove the default site file that comes enabled with Nginx:
-
-```bash
-rm /etc/nginx/sites-enabled/default
-```
-
-### Create a new server block file in the directory
-
-```bash
-nano /etc/nginx/conf.d/default.conf
-```
-
-Next, paste the Nginx configuration into the `default.conf` file:
-
-```nginx /etc/nginx/conf.d/default.conf
-server {
-  listen 80;
-  listen [::]:80;
-  server_name _;
-  root /var/www/html/;
-  index index.php index.html index.htm index.nginx-debian.html;
-
-location / {
-    try_files $uri $uri/ /index.php;
-  }
-
-location ~ \.php$ {
-    fastcgi_pass unix:/run/php/php7.4-fpm.sock;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    include fastcgi_params;
-    include snippets/fastcgi-php.conf;
-  }
-
-# Long browser cache time can speed up repeat visits to your page
-location ~* \.(jpg|jpeg|gif|png|webp|svg|woff|woff2|ttf|css|js|ico|xml)$ {
-       access_log off;
-       log_not_found off;
-       expires 360d;
-  }
-
-# disable access to hidden files
-location ~ /\.ht {
-      access_log off;
-      log_not_found off;
-      deny all;
-  }
-}
-```
-
-After making changes to the Nginx settings, it is essential to reload the Nginx service. This ensures that any modifications you have made are applied and become effective.
-
-Run the following command in the terminal to reload Nginx:
-
-```bash
-systemctl reload nginx
-```
-
-Make the nginx user the owner of the web directory, by default, it is owned by the root user:
-
-```bash
-chown www-data:www-data /usr/share/nginx/html -R
-```
-
-Now, create a Virtual Host pointing to your subdomain by editing the `api` file:
-
-```bash
-cd ~
-nano /etc/nginx/sites-available/api
-```
-
-Next, paste the Nginx configuration into the `api` file:
-
-```nginx /etc/nginx/sites-available/api
-server {
-  server_name replace-this-with-your-cool-domain.com;
-
-location / {
-    proxy_pass http://127.0.0.1:8080;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_cache_bypass $http_upgrade;
-  }
-}
-```
-
-Create a symbolic link between the `api` and `sites-enabled` files:
-
-```bash
-ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
-```
-
-Next, validate the Nginx configuration for the subdomain:
-
-```bash
-nginx -t
-```
-
-<Note>
-    **This message should appear on your terminal if everything has been set up correctly:**
-    _nginx: the configuration file /etc/nginx/nginx.conf syntax is ok nginx: configuration file /etc/nginx/nginx.conf test is successful_
-</Note>
-
-Reload Nginx for the changes to take effect.
-
-```bash
-systemctl reload nginx
-```
-
-## Install Certbot for SSL Certificate
-
-To secure your Evolution API with an SSL certificate, you can use Certbot. Install Certbot using the following command:
-
-```bash
-snap install --classic certbot
-```
-
-### Certify the API subdomain
-
-```bash
-certbot --nginx -d replace-this-with-your-cool-domain.com
-```
-
-You will be asked if you want to enter an email to receive notifications when the generated certificate is close to its expiration date.
-
-<Note>
-    If the certification is successful, at the end of the process, a line with the following message will be displayed:
-
-    "Congratulations! You have successfully enabled HTTPS"
-</Note>

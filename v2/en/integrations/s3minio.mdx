@@ -1,0 +1,102 @@
+Aqui está a tradução para o inglês:
+
+---
+
+title: S3/Minio  
+icon: cloud
+
+---
+
+The Evolution API supports integration with Amazon S3 or Minio to store WhatsApp media files such as images, audio, and documents. This integration allows files to be stored securely and made accessible, with links automatically generated and included in the webhooks sent by the API.
+
+## Environment Variable Configuration
+
+To enable S3 or Minio storage, you need to set the appropriate environment variables in the Evolution API's `.env` file. Below are the required variables and their functions:
+
+### Configuration Variables for S3
+
+```plaintext
+S3_ENABLED=true
+S3_ACCESS_KEY=lJiKQSKlco6UfSUJSnZt
+S3_SECRET_KEY=gZXkzkXQwhME8XEmZVNF0ImSWxIpbXeJ5UoPy4s1
+S3_BUCKET=evolution
+S3_PORT=443
+S3_ENDPOINT=s3.eu-west-3.amazonaws.com
+S3_USE_SSL=true
+S3_REGION=eu-west-3
+```
+
+### Explanation of Variables
+
+- **`S3_ENABLED`**: Enables (`true`) or disables (`false`) the use of S3 or Minio for file storage.
+- **`S3_ACCESS_KEY`**: Access key provided by the service provider (AWS or Minio).
+- **`S3_SECRET_KEY`**: Secret key corresponding to the access key, used for authentication.
+- **`S3_BUCKET`**: Name of the bucket where files will be stored.
+- **`S3_PORT`**: Port used for the connection, usually `443` for SSL connections.
+- **`S3_ENDPOINT`**: Endpoint of the S3 or Minio service. For Amazon S3, it’s necessary to include the region in the format `region: s3.[region].amazonaws.com`, e.g., `s3.eu-west-3.amazonaws.com`.
+- **`S3_USE_SSL`**: Defines whether the connection should use SSL (`true` or `false`).
+- **`S3_REGION`**: The region of the S3 bucket (default is `us-east-1`).
+
+### Configuration Examples
+
+#### Amazon S3
+
+When using Amazon S3, it is essential to specify the endpoint correctly, including the region. Here is an example:
+
+```plaintext
+S3_ENABLED=true
+S3_ACCESS_KEY=your-aws-access-key
+S3_SECRET_KEY=your-aws-secret-key
+S3_BUCKET=my-s3-bucket
+S3_PORT=443
+S3_ENDPOINT=s3.eu-west-3.amazonaws.com
+S3_USE_SSL=true
+S3_REGION=eu-west-3
+```
+
+#### Minio
+
+For Minio, the endpoint can be the service's custom domain:
+
+```plaintext
+S3_ENABLED=true
+S3_ACCESS_KEY=your-minio-access-key
+S3_SECRET_KEY=your-minio-secret-key
+S3_BUCKET=my-minio-bucket
+S3_PORT=443
+S3_ENDPOINT=minio.mycompany.com
+S3_USE_SSL=true
+```
+
+## How Media Storage Works
+
+When S3 or Minio storage is correctly configured, all media files received from WhatsApp (such as images, videos, audio, etc.) are automatically uploaded to the configured bucket. The public URL of the stored file is then generated and included in the Evolution API webhook.
+
+### Webhook with `mediaUrl`
+
+When a media file is received and stored, the webhook sent by the Evolution API will include the `mediaUrl` in the message body. This allows your application to directly access the file stored in S3 or Minio.
+
+### Webhook Example
+
+Here is an example of how the webhook with `mediaUrl` might appear:
+
+~~~json
+{
+    "event": "messages.upsert",
+    "data": {
+        "message": {
+            ...
+            "mediaUrl": "https://files.evolution-api-pro.com/bucket/path/to/media/file.jpg",
+            ...
+        }
+    }
+}
+~~~
+
+## Final Considerations
+
+Integrating the Evolution API with Amazon S3 or Minio for media file storage provides a scalable and secure solution for managing WhatsApp media content. By correctly configuring the environment variables, you ensure that all media files are stored and accessible as needed, providing greater control over data and the ability to easily integrate it into your applications.
+
+<Info>  
+For more details on environment variables and other advanced configurations, consult the [environment variables section](/v2/pt/env#s3).
+</Info>

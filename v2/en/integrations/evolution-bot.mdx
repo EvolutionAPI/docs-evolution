@@ -1,0 +1,170 @@
+---
+title: Evolution Bot
+icon: robot
+---
+
+**Evolution Bot** is a universal chatbot integration that allows the use of any API URL or automation to create automated interactions. When using Evolution Bot, your API must return a response in the form of a JSON containing the `message` field, which will be sent back to the user. This system offers flexibility to build chatbots that seamlessly integrate with your custom APIs.
+
+## 1. Creating Bots in Evolution Bot
+
+You can configure bots in Evolution Bot using triggers to initiate interactions. Bot configuration can be done through the `/evolutionBot/create/{{instance}}` endpoint.
+
+### Endpoint for Bot Creation
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/evolutionBot/create/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of a JSON body to configure a bot in Evolution Bot:
+
+~~~json
+{
+    "enabled": true,
+    "apiUrl": "http://api.site.com/v1",
+    "apiKey": "app-123456", // optional
+    // options
+    "triggerType": "keyword", /* all or keyword */
+    "triggerOperator": "equals", /* contains, equals, startsWith, endsWith, regex, none */
+    "triggerValue": "test",
+    "expire": 0,
+    "keywordFinish": "#EXIT",
+    "delayMessage": 1000,
+    "unknownMessage": "Message not recognized",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": []
+}
+~~~
+
+### Parameters Explanation
+
+- **`enabled`**: Enables (`true`) or disables (`false`) the bot.
+- **`apiUrl`**: API URL that the bot will call (without a trailing `/`).
+- **`apiKey`**: API key provided by your application (optional).
+- **Options**:
+  - **`triggerType`**: Type of trigger to start the bot (`all` or `keyword`).
+  - **`triggerOperator`**: Operator used to evaluate the trigger (`contains`, `equals`, `startsWith`, `endsWith`, `regex`, `none`).
+  - **`triggerValue`**: Value used in the trigger (e.g., a keyword or regex).
+  - **`expire`**: Time in minutes after which the bot expires, restarting if the session has expired.
+  - **`keywordFinish`**: Keyword that ends the bot session.
+  - **`delayMessage`**: Delay (in milliseconds) to simulate typing before sending a message.
+  - **`unknownMessage`**: Message sent when the user's input is not recognized.
+  - **`listeningFromMe`**: Defines if the bot should listen to messages sent by the user (`true` or `false`).
+  - **`stopBotFromMe`**: Defines if the bot should stop when the user sends a message (`true` or `false`).
+  - **`keepOpen`**: Keeps the session open, preventing the bot from restarting for the same contact.
+  - **`debounceTime`**: Time (in seconds) to combine multiple messages into one.
+  - **`ignoreJids`**: List of JIDs of contacts that will not activate the bot.
+
+### Example of API Response
+
+Your API's response should be in JSON format and contain the message to be sent to the user in the `message` field:
+
+~~~json
+{
+    "message": "Your response here"
+}
+~~~
+
+## 2. Default Settings for Evolution Bot
+
+You can define default settings that will be applied if parameters are not passed during bot creation.
+
+### Endpoint for Default Settings
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/evolutionBot/settings/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of default settings:
+
+~~~json
+{
+    "expire": 20,
+    "keywordFinish": "#EXIT",
+    "delayMessage": 1000,
+    "unknownMessage": "Message not recognized",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": [],
+    "evolutionBotIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+}
+~~~
+
+### Parameters Explanation
+
+- **`expire`**: Time in minutes after which the bot expires.
+- **`keywordFinish`**: Keyword that ends the bot session.
+- **`delayMessage`**: Delay to simulate typing before sending a message.
+- **`unknownMessage`**: Message sent when the user's input is not recognized.
+- **`listeningFromMe`**: Defines if the bot should listen to messages sent by the user.
+- **`stopBotFromMe`**: Defines if the bot should stop when the user sends a message.
+- **`keepOpen`**: Keeps the session open, preventing the bot from restarting for the same contact.
+- **`debounceTime`**: Time to combine multiple messages into one.
+- **`ignoreJids`**: List of JIDs of contacts that will not activate the bot.
+- **`evolutionBotIdFallback`**: Fallback bot ID that will be used if no trigger is activated.
+
+## 3. Managing Evolution Bot Sessions
+
+You can manage the bot sessions by changing the status between open, paused, or closed for each specific contact.
+
+### Endpoint for Session Management
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/evolutionBot/changeStatus/{{instance}}
+~~~
+
+#### Request Body
+
+Here is an example of how to manage the session status:
+
+~~~json
+{
+    "remoteJid": "5511912345678@s.whatsapp.net",
+    "status": "closed"
+}
+~~~
+
+### Parameters Explanation
+
+- **`remoteJid`**: JID (identifier) of the contact on WhatsApp.
+- **`status`**: Session status (`opened`, `paused`, `closed`).
+
+## 4. Automatic and Special Variables in Evolution Bot
+
+When an Evolution Bot session is started, some predefined variables are automatically sent:
+
+~~~json
+inputs: {
+    remoteJid: "Contact JID",
+    pushName: "Contact name",
+    instanceName: "Instance name",
+    serverUrl: "API server URL",
+    apiKey: "Evolution API Key"
+};
+~~~
+
+### Explanation of Automatic Variables
+
+- **`remoteJid`**: JID of the contact the bot is interacting with.
+- **`pushName`**: Contact's name on WhatsApp.
+- **`instanceName`**: Name of the instance running the bot.
+- **`serverUrl`**: URL of the server where Evolution API is hosted.
+- **`apiKey`**: API key used to authenticate requests.
+
+### Final Considerations
+
+Evolution Bot offers a flexible platform for integrating chatbots with your custom APIs, enabling advanced automation and personalized interactions on WhatsApp. With support for triggers, session management, and automatic variable configuration, you can build a robust and effective chatbot experience for your users.
