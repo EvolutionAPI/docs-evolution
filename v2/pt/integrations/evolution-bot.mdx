@@ -1,32 +1,31 @@
 ---
-title: Dify
+title: Evolution Bot
 icon: robot
 ---
 
-A Evolution API permite a criação e gerenciamento de bots utilizando a tecnologia Dify, proporcionando automação e interatividade avançada através de diferentes tipos de bots, como chatBots, textGenerators, agents, e workflows. A seguir, você encontrará as instruções detalhadas sobre como configurar bots, gerenciar sessões e definir configurações padrão.
+O **Evolution Bot** é uma integração de chatbot universal que permite a utilização de qualquer URL de API ou automação para criar interações automatizadas. Ao utilizar o Evolution Bot, sua API deve retornar a resposta na forma de um JSON contendo o campo `message`, que será enviado de volta ao usuário. Este sistema oferece flexibilidade para construir chatbots que se integram perfeitamente com suas APIs personalizadas.
 
-## 1. Criação de Bots no Dify
+## 1. Criação de Bots no Evolution Bot
 
-Você pode configurar diversos bots no Dify utilizando triggers para iniciar as interações. A configuração do bot pode ser feita através do endpoint `/dify/create/{{instance}}`.
+Você pode configurar bots no Evolution Bot utilizando triggers para iniciar as interações. A configuração do bot pode ser feita através do endpoint `/evolutionBot/create/{{instance}}`.
 
 ### Endpoint para Criação de Bots
 
 #### Endpoint
 
 ~~~http
-POST {{baseUrl}}/dify/create/{{instance}}
+POST {{baseUrl}}/evolutionBot/create/{{instance}}
 ~~~
 
 #### Corpo da Requisição
 
-Aqui está um exemplo de corpo JSON para configurar um bot no Dify:
+Aqui está um exemplo de corpo JSON para configurar um bot no Evolution Bot:
 
 ~~~json
 {
     "enabled": true,
-    "botType": "chatBot", /* chatBot, textGenerator, agent, workflow */
-    "apiUrl": "http://dify.site.com/v1",
-    "apiKey": "app-123456",
+    "apiUrl": "http://api.site.com/v1",
+    "apiKey": "app-123456", // optional
     // opções
     "triggerType": "keyword", /* all ou keyword */
     "triggerOperator": "equals", /* contains, equals, startsWith, endsWith, regex, none */
@@ -46,9 +45,8 @@ Aqui está um exemplo de corpo JSON para configurar um bot no Dify:
 ### Explicação dos Parâmetros
 
 - **`enabled`**: Ativa (`true`) ou desativa (`false`) o bot.
-- **`botType`**: Tipo do bot Dify (`chatBot`, `textGenerator`, `agent`, `workflow`).
-- **`apiUrl`**: URL da API do Dify (sem a `/` no final).
-- **`apiKey`**: Chave da API fornecida pelo Dify.
+- **`apiUrl`**: URL da API que será chamada pelo bot (sem a `/` no final).
+- **`apiKey`**: Chave da API fornecida pela sua aplicação (opcional).
 - **Opções**:
   - **`triggerType`**: Tipo de trigger para iniciar o bot (`all` ou `keyword`).
   - **`triggerOperator`**: Operador utilizado para avaliar o trigger (`contains`, `equals`, `startsWith`, `endsWith`, `regex`, `none`).
@@ -63,7 +61,17 @@ Aqui está um exemplo de corpo JSON para configurar um bot no Dify:
   - **`debounceTime`**: Tempo (em segundos) para juntar várias mensagens em uma só.
   - **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
 
-## 2. Configurações Padrão do Dify
+### Exemplo de Retorno da API
+
+A resposta da sua API deve estar no formato JSON e conter a mensagem a ser enviada ao usuário no campo `message`:
+
+~~~json
+{
+    "message": "Sua resposta aqui"
+}
+~~~
+
+## 2. Configurações Padrão do Evolution Bot
 
 Você pode definir configurações padrão que serão aplicadas caso os parâmetros não sejam passados durante a criação do bot.
 
@@ -72,7 +80,7 @@ Você pode definir configurações padrão que serão aplicadas caso os parâmet
 #### Endpoint
 
 ~~~http
-POST {{baseUrl}}/dify/settings/{{instance}}
+POST {{baseUrl}}/evolutionBot/settings/{{instance}}
 ~~~
 
 #### Corpo da Requisição
@@ -90,7 +98,7 @@ Aqui está um exemplo de configuração padrão:
     "keepOpen": false,
     "debounceTime": 0,
     "ignoreJids": [],
-    "difyIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+    "evolutionBotIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
 }
 ~~~
 
@@ -105,9 +113,9 @@ Aqui está um exemplo de configuração padrão:
 - **`keepOpen`**: Mantém a sessão aberta, evitando que o bot seja reiniciado para o mesmo contato.
 - **`debounceTime`**: Tempo para juntar várias mensagens em uma só.
 - **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
-- **`difyIdFallback`**: ID do bot de fallback que será utilizado caso nenhum trigger seja ativado.
+- **`evolutionBotIdFallback`**: ID do bot de fallback que será utilizado caso nenhum trigger seja ativado.
 
-## 3. Gerenciamento de Sessões do Dify
+## 3. Gerenciamento de Sessões do Evolution Bot
 
 Você pode gerenciar as sessões do bot, alterando o status entre aberta, pausada ou fechada para cada contato específico.
 
@@ -116,7 +124,7 @@ Você pode gerenciar as sessões do bot, alterando o status entre aberta, pausad
 #### Endpoint
 
 ~~~http
-POST {{baseUrl}}/dify/changeStatus/{{instance}}
+POST {{baseUrl}}/evolutionBot/changeStatus/{{instance}}
 ~~~
 
 #### Corpo da Requisição
@@ -135,9 +143,9 @@ Aqui está um exemplo de como gerenciar o status da sessão:
 - **`remoteJid`**: JID (identificador) do contato no WhatsApp.
 - **`status`**: Status da sessão (`opened`, `paused`, `closed`).
 
-## 4. Variáveis Automáticas e Especiais no Dify
+## 4. Variáveis Automáticas e Especiais no Evolution Bot
 
-Quando uma sessão do Dify é iniciada, algumas variáveis predefinidas são automaticamente enviadas:
+Quando uma sessão do Evolution Bot é iniciada, algumas variáveis predefinidas são automaticamente enviadas:
 
 ~~~json
 inputs: {
@@ -157,23 +165,6 @@ inputs: {
 - **`serverUrl`**: URL do servidor onde a Evolution API está hospedada.
 - **`apiKey`**: Chave de API usada para autenticar as requisições.
 
-### Variáveis Especiais para Workflows
+### Considerações Finais
 
-No caso de bots do tipo **workflow**, a mensagem recebida é enviada na variável `query` dentro dos inputs. Isso permite que o workflow processe a mensagem diretamente com base no conteúdo da variável `query`.
-
-### Exemplo de Variáveis para Workflow
-
-~~~json
-inputs: {
-    remoteJid: "JID do contato",
-    pushName: "Nome do contato",
-    instanceName: "Nome da instância",
-    serverUrl: "URL do servidor da API",
-    apiKey: "Chave de API da Evolution",
-    query: "Conteúdo da mensagem recebida"
-}
-~~~
-
-## Considerações Finais
-
-A integração da Evolution API com o Dify oferece uma maneira robusta de automatizar interações no WhatsApp, utilizando diferentes tipos de bots para atender às necessidades específicas do seu negócio. Com a capacidade de configurar triggers, gerenciar sessões e utilizar variáveis automáticas, você pode otimizar o fluxo de trabalho e melhorar a experiência do usuário final.
+O Evolution Bot oferece uma plataforma flexível para integração de chatbots com suas APIs personalizadas, permitindo automação avançada e interações personalizadas no WhatsApp. Com o suporte para triggers, gerenciamento de sessões e configuração de variáveis automáticas, você pode construir uma experiência de chatbot robusta e eficaz para seus usuários.

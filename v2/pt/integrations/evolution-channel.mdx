@@ -1,0 +1,116 @@
+---
+title: Canal Evolution
+icon: messages
+---
+
+O **Evolution Channel** é um canal universal de integração que permite a entrada de mensagens através de webhooks, proporcionando flexibilidade para conectar diversos sistemas e aplicativos com a Evolution API. Este canal facilita a automação e o gerenciamento de mensagens, suportando diversas integrações e fluxos de trabalho.
+
+---
+
+## 1. Configuração da Instância Evolution
+
+Para configurar uma instância no Evolution Channel, você precisará acessar a rota `/instance/create` da Evolution API com o seguinte corpo de requisição:
+
+### Criação da Instância
+
+**Endpoint**
+```http
+POST {{baseUrl}}/instance/create
+```
+
+**Corpo da Requisição**
+
+Aqui está um exemplo de como criar uma instância no Evolution Channel:
+```json
+{
+    "instanceName": "NOME DA INSTANCIA",
+    "token": "TOKEN DA INSTANCIA (OPCIONAL)",
+    "number": "NUMBER ID DA INSTANCIA",
+    "qrcode": false,
+    "integration": "EVOLUTION"
+}
+```
+
+### Parâmetros do Corpo da Requisição
+
+- **`instanceName`**: Nome da instância que você está criando.
+- **`token`**: Token opcional para autenticar a instância.
+- **`number`**: Number ID da instância que será utilizado para receber e enviar mensagens.
+- **`qrcode`**: Defina como `false` pois a integração não requer QR Code.
+- **`integration`**: Use `"EVOLUTION"` para especificar que esta integração é com o canal universal Evolution.
+
+**Exemplo de Requisição**
+```bash
+curl -X POST http://API_URL/instance/create \
+-H "Content-Type: application/json" \
+-d '{
+    "instanceName": "MinhaInstancia",
+    "token": "123456",
+    "number": "9876543210",
+    "qrcode": false,
+    "integration": "EVOLUTION"
+}'
+```
+
+---
+
+## 2. Entrada de Mensagens no Evolution Channel
+
+Após a criação da instância, o Evolution Channel receberá as mensagens enviadas para a instância configurada. Essas mensagens são enviadas para a rota `{baseUrl}/webhook/evolution` como requisições POST. Este é o ponto de entrada para as mensagens que o Evolution Channel irá processar.
+
+**URL do Webhook para Entrada de Mensagens**
+```http
+POST {{baseUrl}}/webhook/evolution
+```
+
+### Exemplo de Payload de Entrada de Mensagem
+
+Aqui está um exemplo do formato de payload enviado para o Evolution Channel quando uma mensagem é recebida:
+
+```json
+{
+    "numberId": "1234567", 
+    "key": {
+        "remoteJid": "557499879409",
+        "fromMe": false,
+        "id": "ABC1234"
+    },
+    "pushName": "Davidson",
+    "message": {
+        "conversation": "Qual o seu nome?"
+    },
+    "messageType": "conversation"
+}
+```
+
+### Explicação dos Campos do Payload
+
+- **`numberId`**: ID do número cadastrado na criação da instância.
+- **`key.remoteJid`**: Número ou ID único do contato que enviou a mensagem.
+- **`key.fromMe`**: Indica se a mensagem foi enviada pelo contato (`false`) ou pelo próprio sistema (`true`).
+- **`key.id`**: ID único da mensagem.
+- **`pushName`**: Nome do contato que enviou a mensagem.
+- **`message.conversation`**: Conteúdo da mensagem recebida.
+- **`messageType`**: Tipo da mensagem (neste caso, `conversation`).
+
+---
+
+## 3. Feedback e Postbacks
+
+O Evolution Channel envia feedback e postbacks através dos canais de eventos configurados, como webhooks, RabbitMQ, ou SQS. Isso permite que você receba notificações em tempo real sobre o status das mensagens e interações, mantendo seu sistema atualizado.
+
+**Exemplos de Canais de Eventos**
+- **Webhook**: Notificações são enviadas para um endpoint HTTP especificado.
+- **RabbitMQ**: Mensagens são enviadas para uma fila RabbitMQ configurada.
+- **SQS**: Mensagens são enviadas para uma fila SQS da AWS.
+
+**Configuração de Canais de Eventos**
+Para configurar os canais de eventos, defina os parâmetros necessários no seu arquivo de configuração ou diretamente na instância, conforme as especificações da Evolution API.
+
+---
+
+## Conclusão
+
+Com a instância criada e a configuração do webhook de entrada de mensagens, a sua Evolution API está pronta para operar com o Evolution Channel. Todas as mensagens recebidas e os eventos associados serão gerenciados de forma centralizada, permitindo uma integração fluida e eficiente com seus sistemas de mensagens e automação.
+
+Esta documentação fornece uma visão clara e detalhada de como integrar o Evolution Channel com a Evolution API, desde a criação da instância até a configuração dos webhooks e canais de eventos. Seguindo estas etapas, você estará preparado para utilizar o canal universal Evolution em sua aplicação.

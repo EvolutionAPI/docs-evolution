@@ -1,32 +1,31 @@
 ---
-title: Dify
+title: Flowise
 icon: robot
 ---
 
-A Evolution API permite a criação e gerenciamento de bots utilizando a tecnologia Dify, proporcionando automação e interatividade avançada através de diferentes tipos de bots, como chatBots, textGenerators, agents, e workflows. A seguir, você encontrará as instruções detalhadas sobre como configurar bots, gerenciar sessões e definir configurações padrão.
+A Evolution API permite a criação e gerenciamento de bots utilizando a tecnologia Flowise, proporcionando automação e interatividade avançada através de diferentes tipos de interações. A seguir, você encontrará as instruções detalhadas sobre como configurar bots, gerenciar sessões e definir configurações padrão.
 
-## 1. Criação de Bots no Dify
+## 1. Criação de Bots no Flowise
 
-Você pode configurar diversos bots no Dify utilizando triggers para iniciar as interações. A configuração do bot pode ser feita através do endpoint `/dify/create/{{instance}}`.
+Você pode configurar diversos bots no Flowise utilizando triggers para iniciar as interações. A configuração do bot pode ser feita através do endpoint `/flowise/create/{{instance}}`.
 
 ### Endpoint para Criação de Bots
 
 #### Endpoint
 
 ~~~http
-POST {{baseUrl}}/dify/create/{{instance}}
+POST {{baseUrl}}/flowise/create/{{instance}}
 ~~~
 
 #### Corpo da Requisição
 
-Aqui está um exemplo de corpo JSON para configurar um bot no Dify:
+Aqui está um exemplo de corpo JSON para configurar um bot no Flowise:
 
 ~~~json
 {
     "enabled": true,
-    "botType": "chatBot", /* chatBot, textGenerator, agent, workflow */
-    "apiUrl": "http://dify.site.com/v1",
-    "apiKey": "app-123456",
+    "apiUrl": "http://flowise.site.com/v1",
+    "apiKey": "app-123456", // optional
     // opções
     "triggerType": "keyword", /* all ou keyword */
     "triggerOperator": "equals", /* contains, equals, startsWith, endsWith, regex, none */
@@ -46,9 +45,8 @@ Aqui está um exemplo de corpo JSON para configurar um bot no Dify:
 ### Explicação dos Parâmetros
 
 - **`enabled`**: Ativa (`true`) ou desativa (`false`) o bot.
-- **`botType`**: Tipo do bot Dify (`chatBot`, `textGenerator`, `agent`, `workflow`).
-- **`apiUrl`**: URL da API do Dify (sem a `/` no final).
-- **`apiKey`**: Chave da API fornecida pelo Dify.
+- **`apiUrl`**: URL da API do Flowise (sem a `/` no final).
+- **`apiKey`**: Chave da API fornecida pelo Flowise (opcional).
 - **Opções**:
   - **`triggerType`**: Tipo de trigger para iniciar o bot (`all` ou `keyword`).
   - **`triggerOperator`**: Operador utilizado para avaliar o trigger (`contains`, `equals`, `startsWith`, `endsWith`, `regex`, `none`).
@@ -63,7 +61,7 @@ Aqui está um exemplo de corpo JSON para configurar um bot no Dify:
   - **`debounceTime`**: Tempo (em segundos) para juntar várias mensagens em uma só.
   - **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
 
-## 2. Configurações Padrão do Dify
+## 2. Configurações Padrão do Flowise
 
 Você pode definir configurações padrão que serão aplicadas caso os parâmetros não sejam passados durante a criação do bot.
 
@@ -72,7 +70,7 @@ Você pode definir configurações padrão que serão aplicadas caso os parâmet
 #### Endpoint
 
 ~~~http
-POST {{baseUrl}}/dify/settings/{{instance}}
+POST {{baseUrl}}/flowise/settings/{{instance}}
 ~~~
 
 #### Corpo da Requisição
@@ -90,7 +88,7 @@ Aqui está um exemplo de configuração padrão:
     "keepOpen": false,
     "debounceTime": 0,
     "ignoreJids": [],
-    "difyIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+    "flowiseIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
 }
 ~~~
 
@@ -105,9 +103,9 @@ Aqui está um exemplo de configuração padrão:
 - **`keepOpen`**: Mantém a sessão aberta, evitando que o bot seja reiniciado para o mesmo contato.
 - **`debounceTime`**: Tempo para juntar várias mensagens em uma só.
 - **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
-- **`difyIdFallback`**: ID do bot de fallback que será utilizado caso nenhum trigger seja ativado.
+- **`flowiseIdFallback`**: ID do bot de fallback que será utilizado caso nenhum trigger seja ativado.
 
-## 3. Gerenciamento de Sessões do Dify
+## 3. Gerenciamento de Sessões do Flowise
 
 Você pode gerenciar as sessões do bot, alterando o status entre aberta, pausada ou fechada para cada contato específico.
 
@@ -116,7 +114,7 @@ Você pode gerenciar as sessões do bot, alterando o status entre aberta, pausad
 #### Endpoint
 
 ~~~http
-POST {{baseUrl}}/dify/changeStatus/{{instance}}
+POST {{baseUrl}}/flowise/changeStatus/{{instance}}
 ~~~
 
 #### Corpo da Requisição
@@ -135,9 +133,9 @@ Aqui está um exemplo de como gerenciar o status da sessão:
 - **`remoteJid`**: JID (identificador) do contato no WhatsApp.
 - **`status`**: Status da sessão (`opened`, `paused`, `closed`).
 
-## 4. Variáveis Automáticas e Especiais no Dify
+## 4. Variáveis Automáticas e Especiais no Flowise
 
-Quando uma sessão do Dify é iniciada, algumas variáveis predefinidas são automaticamente enviadas:
+Quando uma sessão do Flowise é iniciada, algumas variáveis predefinidas são automaticamente enviadas:
 
 ~~~json
 inputs: {
@@ -176,4 +174,4 @@ inputs: {
 
 ## Considerações Finais
 
-A integração da Evolution API com o Dify oferece uma maneira robusta de automatizar interações no WhatsApp, utilizando diferentes tipos de bots para atender às necessidades específicas do seu negócio. Com a capacidade de configurar triggers, gerenciar sessões e utilizar variáveis automáticas, você pode otimizar o fluxo de trabalho e melhorar a experiência do usuário final.
+A integração da Evolution API com o Flowise oferece uma maneira robusta de automatizar interações no WhatsApp, utilizando diferentes tipos de bots para atender às necessidades específicas do seu negócio. Com a capacidade de configurar triggers, gerenciar sessões e utilizar variáveis automáticas, você pode otimizar o fluxo de trabalho e melhorar a experiência do usuário final.

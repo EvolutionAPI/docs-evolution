@@ -71,21 +71,50 @@
         {
           "group": "Instalação",
           "icon": "wrench",
-          "pages": ["v2/pt/install/docker", "v2/pt/install/nvm", "v2/pt/install/nginx"]
+          "pages": [
+            "v2/pt/install/docker",
+            "v2/pt/install/nvm",
+            "v2/pt/install/nginx"
+          ]
         },
         {
           "group": "Integrações",
           "icon": "toolbox",
           "pages": [
-            "v2/pt/integrations/cloudapi",
-            "v2/pt/integrations/websocket",
-            "v2/pt/integrations/rabbitmq",
-            "v2/pt/integrations/sqs",
-            "v2/pt/integrations/chatwoot",
-            "v2/pt/integrations/typebot",
-            "v2/pt/integrations/openai",
-            "v2/pt/integrations/dify",
-            "v2/pt/integrations/s3minio"
+            {
+              "group": "Eventos",
+              "icon": "calendar",
+              "pages": [
+                "v2/pt/integrations/websocket",
+                "v2/pt/integrations/rabbitmq",
+                "v2/pt/integrations/sqs"
+              ]
+            },
+            {
+              "group": "Chatbot",
+              "icon": "robot",
+              "pages": [
+                "v2/pt/integrations/chatwoot",
+                "v2/pt/integrations/evolution-bot",
+                "v2/pt/integrations/typebot",
+                "v2/pt/integrations/openai",
+                "v2/pt/integrations/dify",
+                "v2/pt/integrations/flowise"
+              ]
+            },
+            {
+              "group": "Canal",
+              "icon": "message",
+              "pages": [
+                "v2/pt/integrations/cloudapi",
+                "v2/pt/integrations/evolution-channel"
+              ]
+            },
+            {
+              "group": "Armazenamento",
+              "icon": "database",
+              "pages": ["v2/pt/integrations/s3minio"]
+            }
           ]
         },
         "v2/pt/env",
@@ -159,7 +188,10 @@
     },
     {
       "group": "Settings",
-      "pages": ["v2/api-reference/settings/set", "v2/api-reference/settings/get"],
+      "pages": [
+        "v2/api-reference/settings/set",
+        "v2/api-reference/settings/get"
+      ],
       "version": "v2"
     },
     {
@@ -295,7 +327,10 @@
     },
     {
       "group": "Settings",
-      "pages": ["v2/api-reference/settings/set", "v2/api-reference/settings/get"],
+      "pages": [
+        "v2/api-reference/settings/set",
+        "v2/api-reference/settings/get"
+      ],
       "version": "v2"
     },
     {
@@ -500,7 +535,10 @@
     },
     {
       "group": "Settings",
-      "pages": ["v1/api-reference/settings/set", "v1/api-reference/settings/get"],
+      "pages": [
+        "v1/api-reference/settings/set",
+        "v1/api-reference/settings/get"
+      ],
       "version": "v1"
     },
     {
@@ -636,7 +674,10 @@
     },
     {
       "group": "Settings",
-      "pages": ["v1/api-reference/settings/set", "v1/api-reference/settings/get"],
+      "pages": [
+        "v1/api-reference/settings/set",
+        "v1/api-reference/settings/get"
+      ],
       "version": "v1"
     },
     {
