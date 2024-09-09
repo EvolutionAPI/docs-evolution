@@ -45,7 +45,7 @@ version: '3.9'
 services:
   evolution-api:
     container_name: evolution_api
-    image: atendai/evolution-api:2.1.0
+    image: atendai/evolution-api:v2.1.0
     restart: always
     ports:
       - "8080:8080"
@@ -324,7 +324,7 @@ services:
   evolution_v2:
 
 
-    image: atendai/evolution-api:2.1.0
+    image: atendai/evolution-api:v2.1.0
     volumes:
       - evolution_instances:/evolution/instances
     networks:
