@@ -1169,7 +1169,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -1183,18 +1183,25 @@
                 "type": "object",
                 "required": [
                   "url",
-                  "events"
+                  "events",
+                  "enabled",
+                  "webhookByEvents",
+                  "webhookBase64"
                 ],
                 "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "enable webhook to instance"
+                  },
                   "url": {
                     "type": "string",
                     "description": "Webhook URL"
                   },
-                  "webhook_by_events": {
+                  "webhookByEvents": {
                     "type": "boolean",
                     "description": "Enables Webhook by events"
                   },
-                  "webhook_base64": {
+                  "webhookBase64": {
                     "type": "boolean",
                     "description": "Sends files in base64 when available"
                   },
@@ -1309,7 +1316,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -1370,7 +1377,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -1383,39 +1390,40 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "reject_call",
-                  "groups_ignore",
-                  "always_online",
-                  "read_messages",
-                  "read_status",
-                  "sync_full_history"
+                  "rejectCall",
+                  "groupsIgnore",
+                  "alwaysOnline",
+                  "readMessages",
+                  "readStatus",
+                  "syncFullHistory",
+                  "msgCall"
                 ],
                 "properties": {
-                  "reject_call": {
+                  "rejectCall": {
                     "type": "boolean",
                     "description": "Reject calls automatically"
                   },
-                  "msg_call": {
+                  "msgCall": {
                     "type": "string",
                     "description": "Message to be sent when a call is rejected automatically"
                   },
-                  "groups_ignore": {
+                  "groupsIgnore": {
                     "type": "boolean",
                     "description": "Ignore group messages"
                   },
-                  "always_online": {
+                  "alwaysOnline": {
                     "type": "boolean",
                     "description": "Always show WhatsApp online"
                   },
-                  "read_messages": {
+                  "readMessages": {
                     "type": "boolean",
                     "description": "Send read receipts"
                   },
-                  "read_status": {
+                  "readStatus": {
                     "type": "boolean",
                     "description": "See message status"
                   },
-                  "sync_full_history": {
+                  "syncFullHistory": {
                     "type": "boolean",
                     "description": "Syncronize full WhatsApp history with EvolutionAPI"
                   }
@@ -1507,7 +1515,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance to get settings",
             "schema": {
               "type": "string"
             }
@@ -1578,7 +1586,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -1677,7 +1685,7 @@
     "/message/sendText/{instance}": {
       "post": {
         "operationId": "sendText",
-        "summary": "Send Text",
+        "summary": "Send Plain Text",
         "tags": ["Message Controller"],
         "deprecated": false,
         "security": [
@@ -1690,7 +1698,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -1704,12 +1712,24 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "textMessage"
+                  "text"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "Message to send"
+                  },
+                  "mentionsEveryOne": {
+                    "type": "boolean",
+                    "description": "Mention everyone"
+                  },
+                  "linkPreview": {
+                        "type": "boolean",
+                        "description": "Shows a preview of the target website if there's a link within the message"
                   },
                   "options": {
                     "type": "object",
@@ -1718,36 +1738,15 @@
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing", "recording"]
-                      },
-                      "linkPreview": {
-                        "type": "boolean",
-                        "description": "Shows a preview of the target website if there's a link within the message"
-                      },
                       "quoted": {
                         "type": "object",
                         "properties": {
                           "key": {
                             "type": "object",
                             "properties": {
-                              "remoteJid": {
-                                "type": "string",
-                                "description": "Receiver phone number with country code"
-                              },
-                              "fromMe": {
-                                "type": "boolean",
-                                "description": "If the message is from the owner number"
-                              },
                               "id": {
                                 "type": "string",
                                 "description": "Message ID"
-                              },
-                              "participant": {
-                                "type": "string",
-                                "description": "TODO"
                               }
                             }
                           },
@@ -1760,32 +1759,14 @@
                               }
                             }
                           }
-                        }
-                      },
-                      "mentions": {
-                        "type": "object",
-                        "properties": {
-                          "everyOne": {
-                            "type": "boolean",
-                            "description": "Mentions everyone"
-                          },
-                          "mentioned": {
+                        },
+                        "mentioned": {
                             "type": "array",
                             "items": {
                               "type": "string",
                               "description": "Receiver phone number with country code"
                             }
                           }
-                        }
-                      }
-                    }
-                  },
-                  "textMessage": {
-                    "type": "object",
-                    "properties": {
-                      "text": {
-                        "type": "string",
-                        "description": "Text message content"
                       }
                     }
                   }
