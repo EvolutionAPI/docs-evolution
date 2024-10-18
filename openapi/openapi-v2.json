@@ -1698,7 +1698,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -1712,12 +1712,16 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "textMessage"
+                  "text"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "Test message to send"
                   },
                   "options": {
                     "type": "object",
@@ -1726,14 +1730,21 @@
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing", "recording"]
-                      },
                       "linkPreview": {
                         "type": "boolean",
                         "description": "Shows a preview of the target website if there's a link within the message"
+                      },
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
+                      },
+                      "mentioned": {
+                        "type": "array",
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
                       },
                       "quoted": {
                         "type": "object",
@@ -1741,21 +1752,9 @@
                           "key": {
                             "type": "object",
                             "properties": {
-                              "remoteJid": {
-                                "type": "string",
-                                "description": "Receiver phone number with country code"
-                              },
-                              "fromMe": {
-                                "type": "boolean",
-                                "description": "If the message is from the owner number"
-                              },
                               "id": {
                                 "type": "string",
-                                "description": "Message ID"
-                              },
-                              "participant": {
-                                "type": "string",
-                                "description": "TODO"
+                                "description": "Quoted message ID"
                               }
                             }
                           },
@@ -1769,31 +1768,6 @@
                             }
                           }
                         }
-                      },
-                      "mentions": {
-                        "type": "object",
-                        "properties": {
-                          "everyOne": {
-                            "type": "boolean",
-                            "description": "Mentions everyone"
-                          },
-                          "mentioned": {
-                            "type": "array",
-                            "items": {
-                              "type": "string",
-                              "description": "Receiver phone number with country code"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "textMessage": {
-                    "type": "object",
-                    "properties": {
-                      "text": {
-                        "type": "string",
-                        "description": "Text message content"
                       }
                     }
                   }
