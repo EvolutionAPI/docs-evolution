@@ -2333,7 +2333,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -2345,46 +2345,39 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["statusMessage"],
+                "required": ["type","caption","content","backgroundColor","font","allContacts","statusJidList"],
                 "properties": {
-                  "statusMessage": {
-                    "type": "object",
-                    "required": [
-                      "type"
-                    ],
-                    "properties": {
-                      "type": {
-                        "type": "string",
-                        "description": "status type",
-                        "enum": ["text", "image", "audio"]
-                      },
-                      "content": {
-                        "type": "string",
-                        "description": "Text content for type `text` or file URL for type `image` and `audio`"
-                      },
-                      "caption": {
-                        "type": "string",
-                        "description": "Text caption for type `image` status"
-                      },
-                      "backgroundColor": {
-                        "type": "string",
-                        "description": "Background hex color"
-                      },
-                      "font": {
-                        "type": "integer",
-                        "description": "1 - Serif, 2 - Norican Regular, 3 - Bryndan Write, 4 - BebasNeue Regular, 5 - Oswald Heavy"
-                      },
-                      "allContacts": {
-                        "type": "boolean",
-                        "description": "true to send to all contacts or false to send to statusJidList"
-                      },
-                      "statusJidList": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "description": "Receivers numbers with country code"
-                        }
-                      }
+                  "type": {
+                    "type": "string",
+                    "description": "status type",
+                    "enum": ["text", "image", "audio"]
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "status type"
+                  },
+                  "caption": {
+                    "type": "string",
+                    "description": "Optional for image or video"
+                  },
+                  "backgroundColor": {
+                    "type": "string",
+                    "description": "Exemple #008000"
+                  },
+                  "font": {
+                    "type": "number",
+                    "description": "1 = SERIF 2 = NORICAN_REGULAR 3 = BRYNDAN_WRITE 4 = BEBASNEUE_REGULAR 5 = OSWALD_HEAVY "
+                  },
+                  "allContacts": {
+                    "type": "boolean",
+                    "description": "true to send to all contacts or false to send to statusJidList below "
+                  },
+                  "statusJidList": {
+                    "type": "array",
+                    "description": "Numbers to send status",
+                    "items":{
+                      "type": "string",
+                      "enum": ["{{remoteJID}}"]
                     }
                   }
                 }
