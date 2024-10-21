@@ -2778,7 +2778,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -2792,34 +2792,19 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "contactMessage"
+                  "contact"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
                   },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
-                        "type": "integer",
-                        "description": "Presence time in milliseconds before sending message"
-                      },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing"],
-                        "default": "composing"
-                      }
-                    }
-                  },
-                  "contactMessage": {
+                  "contact": {
                     "type": "array",
                     "minItems": 1,
                     "items": {
                       "type": "object",
-                      "required": ["fullname", "wuid", "phoneNumber"],
+                      "required": ["fullname", "wuid", "phoneNumber","organization","email","url"],
                       "properties": {
                         "fullName": {
                           "type": "string",
@@ -3279,269 +3264,6 @@
                     "messageTimestamp": "1717781848",
                     "status": "PENDING"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/message/sendList/{instance}": {
-      "post": {
-        "operationId": "sendList",
-        "summary": "Send List",
-        "tags": ["Message Controller"],
-        "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "ID of the instance to connect",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "description": "Send List",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "number": {
-                    "type": "string",
-                    "description": "Number to receive the message (with country code)"
-                  },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
-                        "type": "integer",
-                        "description": "Presence time in milliseconds before sending message"
-                      },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing", "recording"]
-                      }
-                    }
-                  },
-                  "listMessage": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string",
-                        "description": "List title"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "List description"
-                      },
-                      "buttonText": {
-                        "type": "string",
-                        "description": "Button text"
-                      },
-                      "footerText": {
-                        "type": "string",
-                        "description": "Footer text"
-                      },
-                      "sections": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "title": {
-                              "type": "string",
-                              "description": "Section title"
-                            },
-                            "rows": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "title": {
-                                    "type": "string",
-                                    "description": "Row title"
-                                  },
-                                  "description": {
-                                    "type": "string",
-                                    "description": "Row description"
-                                  },
-                                  "rowId": {
-                                    "type": "string",
-                                    "description": "Row ID"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "key": {
-                      "type": "object",
-                      "properties": {
-                        "remoteJid": {
-                          "type": "string",
-                          "description": "The remote Jid."
-                        },
-                        "fromMe": {
-                          "type": "boolean",
-                          "description": "Indicates whether the message was sent by the user."
-                        },
-                        "id": {
-                          "type": "string",
-                          "description": "The ID of the message."
-                        }
-                      },
-                      "description": "The key of the message, which identifies the message in the chat."
-                    },
-                    "message": {
-                      "type": "object",
-                      "properties": {
-                        "listMessage": {
-                          "type": "object",
-                          "properties": {
-                            "title": {
-                              "type": "string",
-                              "description": "The title of the list message."
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The description of the list message."
-                            },
-                            "buttonText": {
-                              "type": "string",
-                              "description": "The text of the button in the list message."
-                            },
-                            "listType": {
-                              "type": "string",
-                              "description": "The type of the list."
-                            },
-                            "sections": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "title": {
-                                    "type": "string",
-                                    "description": "The title of the section."
-                                  },
-                                  "rows": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "title": {
-                                          "type": "string",
-                                          "description": "The title of the row."
-                                        },
-                                        "description": {
-                                          "type": "string",
-                                          "description": "The description of the row."
-                                        },
-                                        "rowId": {
-                                          "type": "string",
-                                          "description": "The ID of the row."
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "description": "The sections in the list message."
-                            },
-                            "contextInfo": {
-                              "type": "object",
-                              "description": "Additional context information."
-                            }
-                          },
-                          "description": "Details of the list message."
-                        }
-                      },
-                      "description": "The message content, which may include various types of messages like text, images, list, etc."
-                    },
-                    "messageTimestamp": {
-                      "type": "string",
-                      "description": "The timestamp of the message, represented as a string."
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "The status of the message, such as sent, received, or pending."
-                    }
-                  },
-                  "example": {
-                    "key": {
-                      "remoteJid": "553198296801@s.whatsapp.net",
-                      "fromMe": true,
-                      "id": "BAE5096096C5E261"
-                    },
-                    "message": {
-                      "listMessage": {
-                        "title": "List Title",
-                        "description": "List description",
-                        "buttonText": "Click Me",
-                        "listType": "PRODUCT_LIST",
-                        "sections": [
-                          {
-                            "title": "Section title",
-                            "rows": [
-                              {
-                                "title": "Row 1",
-                                "description": "Row 1 description",
-                                "rowId": "1"
-                              },
-                              {
-                                "title": "Row 2",
-                                "description": "Row 2 description",
-                                "rowId": "2"
-                              }
-                            ]
-                          },
-                          {
-                            "title": "Section 2",
-                            "rows": [
-                              {
-                                "title": "Row 1",
-                                "description": "Row 1 description",
-                                "rowId": "1"
-                              },
-                              {
-                                "title": "Row 2",
-                                "description": "Row 2 description",
-                                "rowId": "2"
-                              }
-                            ]
-                          }
-                        ],
-                        "contextInfo": {}
-                      }
-                    },
-                    "messageTimestamp": "1717782429",
-                    "status": "PENDING"
-                  },
-                  "required": ["message"]
                 }
               }
             }
