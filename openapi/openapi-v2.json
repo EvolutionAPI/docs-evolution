@@ -2318,7 +2318,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -2332,34 +2332,62 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "stickerMessage"
+                  "sticker"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
                   },
-                  "options": {
+                  "sticker": {
+                    "type": "string",
+                    "description": "Url or base64 "
+                  },
+                 "options": {
                     "type": "object",
                     "properties": {
                       "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing"],
-                        "default": "composing"
-                      }
-                    }
-                  },
-                  "stickerMessage": {
-                    "type": "object",
-                    "properties": {
-                      "image": {
-                        "type": "string",
-                        "description": "Image URL or file in base64"
+                      "linkPreview": {
+                        "type": "boolean",
+                        "description": "Shows a preview of the target website if there's a link within the message"
+                      },
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
+                      },
+                      "mentioned": {
+                        "type": "array",
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
+                      },
+                      "quoted": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Quoted message ID"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "conversation": {
+                                "type": "string",
+                                "description": "Quoted message content"
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
