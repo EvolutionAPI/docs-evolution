@@ -1861,7 +1861,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name instance",
             "schema": {
               "type": "string"
             }
@@ -1875,47 +1875,82 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "mediaMessage"
+                  "mediatype",
+                  "mimetype",
+                  "caption",
+                  "media",
+                  "fileName"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
                   },
-                  "options": {
+                  "mediatype": {
+                    "type": "string",
+                    "description": "Image, video or document"
+                  },
+                  "mimetype": {
+                    "type": "string",
+                    "description": "image/png"
+                  },
+                  "caption": {
+                    "type": "string",
+                    "description": "Teste de caption"
+                  },
+                  "media": {
+                    "type": "string",
+                    "description": "Url or base64"
+                  },
+                  "fileName": {
+                    "type": "string",
+                    "description": "Image.png"
+                  },
+                 "options": {
                     "type": "object",
                     "properties": {
                       "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing", "recording"]
-                      }
-                    }
-                  },
-                  "mediaMessage": {
-                    "type": "object",
-                    "properties": {
-                      "mediaType": {
-                        "type": "string",
-                        "description": "Media type",
-                        "enum": ["image", "video", "document", "audio"]
+                      "linkPreview": {
+                        "type": "boolean",
+                        "description": "Shows a preview of the target website if there's a link within the message"
                       },
-                      "fileName": {
-                        "type": "string",
-                        "description": "Name of the file (for media type `document` only)",
-                        "example": "evolution-api.pdf"
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
                       },
-                      "caption": {
-                        "type": "string",
-                        "description": "Caption to send with media (except with media type `audio`)"
+                      "mentioned": {
+                        "type": "array",
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
                       },
-                      "media": {
-                        "type": "string",
-                        "description": "Media URL or file in base64"
+                      "quoted": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Quoted message ID"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "conversation": {
+                                "type": "string",
+                                "description": "Quoted message content"
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
