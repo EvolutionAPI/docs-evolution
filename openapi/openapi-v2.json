@@ -2121,12 +2121,16 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "audioMessage"
+                  "audio"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
+                  },
+                  "audio": {
+                    "type": "string",
+                    "description": "url or base64 "
                   },
                   "options": {
                     "type": "object",
@@ -2135,24 +2139,44 @@
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["recording"],
-                        "default": "recording"
-                      },
-                      "encoding": {
+                      "linkPreview": {
                         "type": "boolean",
-                        "description": "If the audio must be encoded or not"
-                      }
-                    }
-                  },
-                  "audioMessage": {
-                    "type": "object",
-                    "properties": {
-                      "audio": {
-                        "type": "string",
-                        "description": "Audio URL or file in base64"
+                        "description": "Shows a preview of the target website if there's a link within the message"
+                      },
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
+                      },
+                      "mentioned": {
+                        "type": "array",
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
+                      },
+                      "quoted": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Quoted message ID"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "conversation": {
+                                "type": "string",
+                                "description": "Quoted message content"
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
