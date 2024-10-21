@@ -3092,7 +3092,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -3106,12 +3106,30 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "pollMessage"
+                  "name",
+                  "selectableCount",
+                  "values"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
-                    "description": "Number to receive the message (with country code)"
+                    "description": "{{remoteJid}}"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Main text of the poll"
+                  },
+                  "selectableCount": {
+                    "type": "number",
+                    "description": "Ex: 1"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items":{
+                      "type": "string",
+                      "enum": ["Question 1","Question 2","Question 3"]
+                    },
+                    "description": "Values for question"
                   },
                   "options": {
                     "type": "object",
@@ -3120,35 +3138,43 @@
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing", "recording"]
-                      }
-                    }
-                  },
-                  "pollMessage": {
-                    "type": "object",
-                    "required": [
-                      "name",
-                      "selectableCount",
-                      "values"
-                    ],
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "Name of the poll"
+                      "linkPreview": {
+                        "type": "boolean",
+                        "description": "Shows a preview of the target website if there's a link within the message"
                       },
-                      "selectableCount": {
-                        "type": "integer",
-                        "minimum": 1,
-                        "description": "How many options each person can select"
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
                       },
-                      "values": {
+                      "mentioned": {
                         "type": "array",
-                        "minItems": 1,
-                        "items": {
-                          "type": "string"
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
+                      },
+                      "quoted": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Quoted message ID"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "conversation": {
+                                "type": "string",
+                                "description": "Quoted message content"
+                              }
+                            }
+                          }
                         }
                       }
                     }
