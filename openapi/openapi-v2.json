@@ -2575,7 +2575,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -2589,12 +2589,31 @@
                 "type": "object",
                 "required": [
                   "number",
-                  "locationMessage"
+                  "name",
+                  "address",
+                  "latitude",
+                  "longitude"
                 ],
                 "properties": {
                   "number": {
                     "type": "string",
                     "description": "Number to receive the message (with country code)"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name the city"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "Location address"
+                  },
+                  "latitude": {
+                    "type": "number",
+                    "description": "Latitude location"
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "description": "Longitude location"
                   },
                   "options": {
                     "type": "object",
@@ -2603,36 +2622,44 @@
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
-                      "presence": {
-                        "type": "string",
-                        "description": "Presence type to show ",
-                        "enum": ["composing"],
-                        "default": "composing"
-                      }
-                    }
-                  },
-                  "locationMessage": {
-                    "type": "object",
-                    "required": [
-                      "latitude",
-                      "longitude"
-                    ],
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "Location name"
+                      "linkPreview": {
+                        "type": "boolean",
+                        "description": "Shows a preview of the target website if there's a link within the message"
                       },
-                      "address": {
-                        "type": "string",
-                        "description": "Location address"
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
                       },
-                      "latitude": {
-                        "type": "number",
-                        "description": "Location latitude"
+                      "mentioned": {
+                        "type": "array",
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
                       },
-                      "longitude": {
-                        "type": "number",
-                        "description": "Location longitude"
+                      "quoted": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Quoted message ID"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "conversation": {
+                                "type": "string",
+                                "description": "Quoted message content"
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
