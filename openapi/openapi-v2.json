@@ -5540,10 +5540,10 @@
         }
       }
     },
-    "/typebot/set/{instance}": {
+    "/typebot/create/{instance}": {
       "post": {
         "operationId": "setTypebot",
-        "summary": "Set Typebot",
+        "summary": "Create Typebot",
         "tags": ["Typebot Controller"],
         "deprecated": false,
         "security": [
@@ -5556,7 +5556,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -5568,6 +5568,20 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required":[  "enabled",
+                "url",
+                "typebot",
+                "triggerType",
+                "triggerOperator",
+                "triggerValue",
+                "expire",
+                "keywordFinish",
+                "delayMessage",
+                "unknownMessage",
+                "listeningFromMe",
+                "stopBotFromMe",
+                "keepOpen",
+                "debounceTime"],
                 "properties": {
                   "enabled": {
                     "type": "boolean"
@@ -5580,24 +5594,48 @@
                     "type": "string",
                     "description": "Typebot name"
                   },
-                  "expire": {
-                    "type": "integer",
-                    "description": "Time to expire the sessions"
-                  },
-                  "keyword_finish": {
+                  "triggerType": {
                     "type": "string",
-                    "description": "Key word to finish typebot flow"
+                    "description": "All or keyword"
                   },
-                  "delay_message": {
-                    "type": "integer",
+                  "triggerOperator": {
+                    "type": "string",
+                    "description": "Operator logic, ex: contains, equals, startsWith, endsWith, regex"
+                  },
+                  "triggerValue": {
+                    "type": "string",
                     "description": "Default delay for text messages"
                   },
-                  "unknown_message": {
-                    "type": "string",
-                    "description": "'Unknown message' error message"
+                  "expire": {
+                    "type": "number",
+                    "description": "Time to expire session"
                   },
-                  "listening_from_me": {
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to finish session"
+                  },
+                  "delayMessage": {
+                    "type": "number",
+                    "description": "Delay when the bot send message"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Unrecognized message"
+                  },
+                  "listeningFromMe": {
                     "type": "boolean",
+                    "description": "Marked as viewed"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Stop bot when I send message"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Keep session open"
+                  },
+                  "debounceTime": {
+                    "type": "number",
                     "description": "Start typebot for your own messages"
                   }
                 }
