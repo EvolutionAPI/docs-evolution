@@ -5867,6 +5867,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "typebotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the typebot",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "description": "Start typebot",
