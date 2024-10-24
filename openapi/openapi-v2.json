@@ -5970,6 +5970,46 @@
         }
       }
     },
+    "/typebot/delete/:typebotId/{instance}": {
+      "delete": {
+        "operationId": "changeTypebotStatus",
+        "summary": "Delete Status",
+        "tags": ["Typebot Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "typebotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the typebot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Delete typebot",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
     "/chatwoot/set/{instance}": {
       "post": {
         "operationId": "setChatwoot",
