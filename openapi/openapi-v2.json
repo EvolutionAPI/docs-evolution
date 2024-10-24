@@ -5604,7 +5604,7 @@
                   },
                   "triggerValue": {
                     "type": "string",
-                    "description": "Default delay for text messages"
+                    "description": "All or keyword"
                   },
                   "expire": {
                     "type": "number",
@@ -5667,7 +5667,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -5756,6 +5756,46 @@
         }
       }
     },
+    "/typebot/fetch/:typebotId/{instance}": {
+      "get": {
+        "operationId": "findTypebot",
+        "summary": "Find Typebot",
+        "tags": ["Typebot Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "typebotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the typebot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Find typebot",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
     "/typebot/changeStatus/{instance}": {
       "post": {
         "operationId": "changeTypebotStatus",
@@ -5793,6 +5833,120 @@
                     "type": "string",
                     "description": "New typebot status",
                     "enum": ["opened", "closed", "paused"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/typebot/update/:typebotId/{instance}": {
+      "post": {
+        "operationId": "changeTypebotStatus",
+        "summary": "Change Typebot Status",
+        "tags": ["Typebot Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Start typebot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "url",
+                  "typebot",
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "triggerType",
+                  "triggerOperator",
+                  "triggerValue"
+                ],   
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Enable typebot"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Url of typebot"
+                  },
+                  "typebot": {
+                    "type": "string",
+                    "description": "Nmae typebot"
+                  },
+                  "expire": {
+                    "type": "number",
+                    "description": "Time to expire session"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to finished session"
+                  },
+                  "delayMessage": {
+                    "type": "number",
+                    "description": "Delay when the bot send message"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Unrecognized message"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Listening message for me"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Stop bot when I send message"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Keep session open"
+                  },
+                  "debounceTime": {
+                    "type": "number",
+                    "description": "The timestamp of the message."
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "description": "All or keyword"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "description": "Operator logic, ex: contains, equals, startsWith, endsWith, regex"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "Ex: evolution"
                   }
                 }
               }

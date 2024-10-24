@@ -316,6 +316,8 @@
         "v2/api-reference/integrations/typebot/set-typebot",
         "v2/api-reference/integrations/typebot/start-typebot",
         "v2/api-reference/integrations/typebot/find-typebot",
+        "v2/api-reference/integrations/typebot/fetch-typebot",
+        "v2/api-reference/integrations/typebot/update-typebot",
         "v2/api-reference/integrations/typebot/change-session-status"
       ],
       "version": "v2"
