@@ -1570,118 +1570,6 @@
         }
       }
     },
-    "/message/sendTemplate/{instance}": {
-      "post": {
-        "operationId": "sendTemplate",
-        "summary": "Send Template",
-        "tags": ["Message Controller"],
-        "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance ",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "description": "Send a template message with the Official WhatsApp API",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "number": {
-                    "type": "string",
-                    "description": "Message receiver number with country code"
-                  },
-                  "templateMessage": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "Template name"
-                      },
-                      "language": {
-                        "type": "string",
-                        "description": "Template language",
-                        "example": "pt_BR"
-                      },
-                      "components": {
-                        "type": "array",
-                        "description": "Template components",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "type": {
-                              "type": "string",
-                              "enum": ["header", "body", "button"]
-                            },
-                            "sub_type": {
-                              "type": "string",
-                              "enum": [
-                                "quick_reply",
-                                "url",
-                                "copy_code",
-                                "catalog"
-                              ]
-                            },
-                            "index": {
-                              "type": "string",
-                              "description": "Button index from 0-9"
-                            },
-                            "parameters": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Parameter type",
-                                    "enum": [
-                                      "payload",
-                                      "text",
-                                      "coupon_code",
-                                      "currency",
-                                      "date_time",
-                                      "image",
-                                      "document",
-                                      "video"
-                                    ]
-                                  },
-                                  "text": {
-                                    "type": "string",
-                                    "description": "Parameter text"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {}
-          }
-        }
-      }
-    },
     "/message/sendText/{instance}": {
       "post": {
         "operationId": "sendText",
@@ -1723,10 +1611,7 @@
                     "type": "string",
                     "description": "Test message to send"
                   },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
+                  "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
@@ -1769,8 +1654,6 @@
                           }
                         }
                       }
-                    }
-                  }
                 }
               }
             }
@@ -1906,10 +1789,7 @@
                     "type": "string",
                     "description": "Image.png"
                   },
-                 "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
+                 "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
@@ -1952,8 +1832,6 @@
                           }
                         }
                       }
-                    }
-                  }
                 }
               }
             }
@@ -2132,10 +2010,7 @@
                     "type": "string",
                     "description": "url or base64 "
                   },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
+                  "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
@@ -2178,8 +2053,6 @@
                           }
                         }
                       }
-                    }
-                  }
                 }
               }
             }
@@ -2343,10 +2216,7 @@
                     "type": "string",
                     "description": "Url or base64 "
                   },
-                 "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
+                 "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
@@ -2389,8 +2259,6 @@
                           }
                         }
                       }
-                    }
-                  }
                 }
               }
             }
@@ -2615,10 +2483,7 @@
                     "type": "number",
                     "description": "Longitude location"
                   },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
+                  "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
@@ -2661,8 +2526,6 @@
                           }
                         }
                       }
-                    }
-                  }
                 }
               }
             }
@@ -3131,10 +2994,7 @@
                     },
                     "description": "Values for question"
                   },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "delay": {
+                  "delay": {
                         "type": "integer",
                         "description": "Presence time in milliseconds before sending message"
                       },
@@ -3177,8 +3037,6 @@
                           }
                         }
                       }
-                    }
-                  }
                 }
               }
             }

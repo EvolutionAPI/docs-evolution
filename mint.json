@@ -244,7 +244,6 @@
     {
       "group": "Send Message",
       "pages": [
-        "v2/api-reference/message-controller/send-template",
         "v2/api-reference/message-controller/send-text",
         "v2/api-reference/message-controller/send-status",
         "v2/api-reference/message-controller/send-media",
