@@ -3150,6 +3150,251 @@
         }
       }
     },
+    "/message/sendList/{instance}": {
+      "post": {
+        "operationId": "sendList",
+        "summary": "Send List",
+        "tags": ["Message Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Send List",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "number",
+                  "title",
+                  "description",
+                  "buttonText",
+                  "footerText",
+                  "values"
+                ],
+                "properties": {
+                  "number": {
+                    "type": "string",
+                    "description": "{{remoteJid}}"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of list"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description for lists"
+                  },
+                  "buttonText": {
+                    "type": "string",
+                    "description": "Text Button"
+                  },
+                  "footerText": {
+                    "type": "string",
+                    "description": "footer list\nhttps://examplelink.com.br"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items":{
+                      "type": "object",
+                      "properties":{
+                        "title":{
+                          "type":"string",
+                          "description":"title item of list"
+                        },
+                        "rows":{
+                          "type": "array",
+                          "items":{
+                            "type":"object",
+                            "properties":{
+                              "title":{
+                                "type":"string",
+                                "description":"Title of row"
+                              },
+                              "description":{
+                                "type":"string",
+                                "description":"Description of row"
+                              },
+                              "rowId":{
+                                "type":"string",
+                                "description":"Id of row"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "delay": {
+                        "type": "integer",
+                        "description": "Presence time in milliseconds before sending message"
+                      },
+                      "linkPreview": {
+                        "type": "boolean",
+                        "description": "Shows a preview of the target website if there's a link within the message"
+                      },
+                      "mentionsEveryOne": {
+                        "type": "boolean",
+                        "description": "Mentioned everyone when the message send"
+                      },
+                      "mentioned": {
+                        "type": "array",
+                        "items":{
+                          "type": "string",
+                          "enum": ["{{remoteJID}}"]
+                        },
+                        "description": "Numbers to mention"
+                      },
+                      "quoted": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Quoted message ID"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "conversation": {
+                                "type": "string",
+                                "description": "Quoted message content"
+                              }
+                            }
+                          }
+                        }
+                      }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "object",
+                      "properties": {
+                        "remoteJid": {
+                          "type": "string",
+                          "description": "The remote Jid."
+                        },
+                        "fromMe": {
+                          "type": "boolean",
+                          "description": "Indicates whether the message was sent by the user."
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the message."
+                        }
+                      },
+                      "description": "The key of the message, which identifies the message in the chat."
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "messageContextInfo": {
+                          "type": "object",
+                          "properties": {
+                            "messageSecret": {
+                              "type": "string",
+                              "description": "The secret of the message context."
+                            }
+                          },
+                          "description": "Information about the context of the message."
+                        },
+                        "pollCreationMessage": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the poll."
+                            },
+                            "options": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "optionName": {
+                                    "type": "string",
+                                    "description": "The name of the poll option."
+                                  }
+                                }
+                              },
+                              "description": "The options available in the poll."
+                            },
+                            "selectableOptionsCount": {
+                              "type": "integer",
+                              "description": "The number of options that can be selected in the poll."
+                            }
+                          },
+                          "description": "Details of the poll creation message."
+                        }
+                      },
+                      "description": "The message content, which may include various types of messages like text, images, poll creation, etc."
+                    },
+                    "messageTimestamp": {
+                      "type": "string",
+                      "description": "The timestamp of the message, represented as a string."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the message, such as sent, received, or pending."
+                    }
+                  },
+                  "example": {
+                    "key": {
+                      "remoteJid": "553198296801@s.whatsapp.net",
+                      "fromMe": true,
+                      "id": "BAE53EC8D8E1FD8A"
+                    },
+                    "message": {
+                      "messageContextInfo": {
+                        "messageSecret": "lX/+cLHHNfnTTKZi+88mrhoyi6KNuUzWjgfaB0bTfOY="
+                      },
+                      "pollCreationMessage": {
+                        "name": "Poll Name",
+                        "options": [
+                          { "optionName": "Option 1" },
+                          { "optionName": "Option 2" },
+                          { "optionName": "Option 3" }
+                        ],
+                        "selectableOptionsCount": 1
+                      }
+                    },
+                    "messageTimestamp": "1717781848",
+                    "status": "PENDING"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/chat/whatsappNumbers/{instance}": {
       "post": {
         "operationId": "whatsappNumbers",
