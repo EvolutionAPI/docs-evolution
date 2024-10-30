@@ -320,7 +320,8 @@
         "v2/api-reference/integrations/typebot/fetch-typebot",
         "v2/api-reference/integrations/typebot/update-typebot",
         "v2/api-reference/integrations/typebot/delete-typebot",
-        "v2/api-reference/integrations/typebot/change-session-status"
+        "v2/api-reference/integrations/typebot/change-session-status",
+        "v2/api-reference/integrations/typebot/fetch-session"
       ],
       "version": "v2"
     },

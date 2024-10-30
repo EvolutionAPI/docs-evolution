@@ -6056,6 +6056,56 @@
         }
       }
     },
+    "/typebot/changeStatus/{instance}": {
+      "post": {
+        "operationId": "startTypebot",
+        "summary": "Change Session Status",
+        "tags": ["Typebot Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Change status session",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "{{remoteJid}}"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Typebot status, types: opened, paused, closed"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
     "/typebot/find/{instance}": {
       "get": {
         "operationId": "findTypebot",
@@ -6127,10 +6177,10 @@
         }
       }
     },
-    "/typebot/changeStatus/{instance}": {
-      "post": {
-        "operationId": "changeTypebotStatus",
-        "summary": "Change Typebot Status",
+    "/typebot/fetchSessions/:typebotId/{instance}": {
+      "get": {
+        "operationId": "findTypebot",
+        "summary": "Find session typebot",
         "tags": ["Typebot Controller"],
         "deprecated": false,
         "security": [
@@ -6143,33 +6193,22 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "typebotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the typebot",
             "schema": {
               "type": "string"
             }
           }
         ],
-        "description": "Start typebot",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "remoteJid": {
-                    "type": "string",
-                    "description": "Receiver remote JID"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "New typebot status",
-                    "enum": ["opened", "closed", "paused"]
-                  }
-                }
-              }
-            }
-          }
-        },
+        "description": "Find session typebot",
         "responses": {
           "200": {
             "description": "Ok",
