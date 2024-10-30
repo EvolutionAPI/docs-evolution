@@ -253,7 +253,8 @@
         "v2/api-reference/message-controller/send-contact",
         "v2/api-reference/message-controller/send-reaction",
         "v2/api-reference/message-controller/send-poll",
-        "v2/api-reference/message-controller/send-list"
+        "v2/api-reference/message-controller/send-list",
+        "v2/api-reference/message-controller/send-button"
       ],
       "version": "v2"
     },
