@@ -6106,6 +6106,130 @@
         }
       }
     },
+    "/typebot/settings/{instance}": {
+      "post": {
+        "operationId": "startTypebot",
+        "summary": "Change Session Status",
+        "tags": ["Typebot Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Set settings typebot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required":[ 
+                "expire",
+                "keywordFinish",
+                "delayMessage",
+                "unknownMessage",
+                "listeningFromMe",
+                "stopBotFromMe",
+                "keepOpen",
+                "debounceTime",
+                "ignoreJids",
+                "typebotIdFallback"],
+                "properties": {
+                  "expire": {
+                    "type": "string",
+                    "description": "Time to expire session bot"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to finished session"
+                  },
+                  "delayMessage": {
+                    "type": "string",
+                    "description": "Delay when the bot send message"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Unrecognized message"
+                  },
+                  "listeningFromMe": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "stopBotFromMe": {
+                    "type": "string",
+                    "description": "Stop bot when I send message"
+                  },
+                  "keepOpen": {
+                    "type": "string",
+                    "description": "Keep session open"
+                  },
+                  "debounceTime": {
+                    "type": "string",
+                    "description": "Time "
+                  },
+                  "ignoreJids": {
+                    "type": "string",
+                    "description": "Jids ignore from bot"
+                  },
+                  "typebotIdFallback": {
+                    "type": "string",
+                    "description": "Id fallback"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/typebot/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "findTypebot",
+        "summary": "Find Typebot",
+        "tags": ["Typebot Controller"],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Find typebot settings",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
     "/typebot/find/{instance}": {
       "get": {
         "operationId": "findTypebot",
@@ -6122,7 +6246,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
