@@ -6520,7 +6520,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance",
             "schema": {
               "type": "string"
             }
@@ -6532,11 +6532,30 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required":[ 
+                "enabled",
+                "accountId",
+                "token",
+                "url",
+                "signMsg",
+                "reopenConversation",
+                "conversationPending",
+                "nameInbox",
+                "mergeBrazilContacts",
+                "importContacts",
+                "importMessages",
+                "daysLimitImportMessages",
+                "signDelimiter",
+                "autoCreate",
+                "organization",
+                "logo",
+                "ignoreJids"],
                 "properties": {
                   "enabled": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Enable chatwoot"
                   },
-                  "account_id": {
+                  "accountId": {
                     "type": "string",
                     "description": "Chatwoot account ID"
                   },
@@ -6548,32 +6567,56 @@
                     "type": "string",
                     "description": "Chatwoot server URL"
                   },
-                  "sign_msg": {
+                  "signMsg": {
                     "type": "boolean",
                     "description": "Sign message with user name"
                   },
-                  "sign_delimiter": {
+                  "reopenConversation": {
+                    "type": "boolean",
+                    "description": ""
+                  },
+                  "conversationPending": {
+                    "type": "boolean"
+                  },
+                  "nameInbox": {
                     "type": "string",
-                    "description": "Delimiter for sign before the message. Use `\n` for line break"
+                    "description": "Name inbox chatwoot"
                   },
-                  "reopen_conversation": {
+                  "mergeBrazilContacts": {
                     "type": "boolean"
                   },
-                  "conversation_pending": {
+                  "importContacts": {
+                    "type": "boolean",
+                    "description": "Import Chatwoot contacts"
+                  },
+                  "importMessages": {
+                    "type": "boolean",
+                    "description": "Import chatwoot messages"
+                  },
+                  "daysLimitImportMessages": {
+                    "type": "integer"
+                  },
+                  "signDelimiter": {
+                    "type": "string",
+                    "description": "Break line"
+                  },
+                  "autoCreate": {
                     "type": "boolean"
                   },
-                  "import_contacts": {
-                    "type": "boolean"
+                  "organization": {
+                    "type": "string",
+                    "description": "Name organization"
                   },
-                  "import_messages": {
-                    "type": "boolean"
+                  "logo": {
+                    "type": "string",
+                    "description": "Url logo"
                   },
-                  "days_limit_import_messages": {
-                    "type": "integer",
-                    "description": "TODO"
-                  },
-                  "auto_create": {
-                    "type": "boolean"
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type":"string",
+                      "description":"Jids ignore"
+                    }
                   }
                 }
               }
