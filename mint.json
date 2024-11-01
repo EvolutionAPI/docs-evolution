@@ -336,6 +336,14 @@
       "version": "v2"
     },
     {
+      "group": "Websocket",
+      "pages": [
+        "v2/api-reference/integrations/websocket/set-websocket",
+        "v2/api-reference/integrations/websocket/find-websocket"
+      ],
+      "version": "v2"
+    },
+    {
       "group": "SQS",
       "pages": [
         "v2/api-reference/integrations/sqs/set-sqs",
