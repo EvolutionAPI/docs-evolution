@@ -263,14 +263,17 @@
       "pages": [
         "v2/api-reference/chat-controller/check-is-whatsapp",
         "v2/api-reference/chat-controller/mark-as-read",
+        "v2/api-reference/chat-controller/mark-as-unread",
         "v2/api-reference/chat-controller/archive-chat",
         "v2/api-reference/chat-controller/delete-message-for-everyone",
+        "v2/api-reference/chat-controller/update-message",
         "v2/api-reference/chat-controller/send-presence",
+        "v2/api-reference/chat-controller/updateBlockStatus",
         "v2/api-reference/chat-controller/fetch-profilepic-url",
+        "v2/api-reference/chat-controller/get-base64",
         "v2/api-reference/chat-controller/find-contacts",
         "v2/api-reference/chat-controller/find-messages",
         "v2/api-reference/chat-controller/find-status-message",
-        "v2/api-reference/chat-controller/update-message",
         "v2/api-reference/chat-controller/find-chats"
       ],
       "version": "v2"
