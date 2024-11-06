@@ -300,7 +300,6 @@
         "v2/api-reference/group-controller/update-group-subject",
         "v2/api-reference/group-controller/update-group-description",
         "v2/api-reference/group-controller/fetch-invite-code",
-        "v2/api-reference/group-controller/accept-invite-code",
         "v2/api-reference/group-controller/revoke-invite-code",
         "v2/api-reference/group-controller/send-invite-url",
         "v2/api-reference/group-controller/find-group-by-invite-code",

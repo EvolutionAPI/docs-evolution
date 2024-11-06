@@ -5270,7 +5270,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5282,6 +5282,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required":["subject","description","participants"],
                 "properties": {
                   "subject": {
                     "type": "object",
@@ -5312,11 +5313,10 @@
       }
     },
     "/group/updateGroupPicture/{instance}": {
-      "put": {
-        "operationId": "createGroup",
-        "summary": "Create Group",
+      "post": {
+        "summary": "Update group picture",
         "tags": [
-          "Group Controller"
+          "Update group picture"
         ],
         "deprecated": false,
         "security": [
@@ -5329,7 +5329,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5344,12 +5344,13 @@
             }
           }
         ],
-        "description": "Create group",
+        "description": "Update group picture",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required":["image"],
                 "properties": {
                   "image": {
                     "type": "object",
@@ -5369,7 +5370,7 @@
       }
     },
     "/group/updateGroupSubject/{instance}": {
-      "put": {
+      "post": {
         "operationId": "updateGroupSubject",
         "summary": "Update Group Subject",
         "tags": [
@@ -5386,7 +5387,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5407,9 +5408,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required":["subject"],
                 "properties": {
                   "subject": {
-                    "type": "object",
+                    "type": "string",
                     "description": "New group subject"
                   }
                 }
@@ -5426,7 +5428,7 @@
       }
     },
     "/group/updateGroupDescription/{instance}": {
-      "put": {
+      "post": {
         "operationId": "updateGroupDescription",
         "summary": "Update Group Description",
         "tags": [
@@ -5443,7 +5445,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5464,9 +5466,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required":["description"],
                 "properties": {
                   "description": {
-                    "type": "object",
+                    "type": "string",
                     "description": "New group description"
                   }
                 }
@@ -5500,7 +5503,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5587,7 +5590,7 @@
       }
     },
     "/group/revokeInviteCode/{instance}": {
-      "put": {
+      "post": {
         "operationId": "fetchInviteCode",
         "summary": "Fetch Group Invite Code",
         "tags": [
@@ -5604,7 +5607,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5619,7 +5622,7 @@
             }
           }
         ],
-        "description": "Fetch group invite code",
+        "description": "Revoke group invite",
         "responses": {
           "200": {
             "description": "Ok",
@@ -5646,7 +5649,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5660,6 +5663,7 @@
                 "type": "object",
                 "required": [
                   "groupJid",
+                  "description",
                   "numbers"
                 ],
                 "properties": {
@@ -5729,7 +5733,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5770,7 +5774,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -5905,7 +5909,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -6034,7 +6038,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -6095,7 +6099,7 @@
       }
     },
     "/group/updateParticipant/{instance}": {
-      "put": {
+      "post": {
         "operationId": "updateParticipant",
         "summary": "Update Group Members",
         "tags": [
@@ -6112,7 +6116,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -6123,7 +6127,7 @@
             "required": true,
             "description": "Group remote JID",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             }
           }
         ],
@@ -6164,7 +6168,7 @@
       }
     },
     "/group/updateSetting/{instance}": {
-      "put": {
+      "post": {
         "operationId": "updateSetting",
         "summary": "Update Group Settings",
         "tags": [
@@ -6181,7 +6185,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -6192,7 +6196,7 @@
             "required": true,
             "description": "Group remote JID",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             }
           }
         ],
@@ -6227,7 +6231,7 @@
       }
     },
     "/group/toggleEphemeral/{instance}": {
-      "put": {
+      "post": {
         "operationId": "toggleEphemeral",
         "summary": "Toggle Ephemeral Group Messages",
         "tags": [
@@ -6244,7 +6248,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -6255,7 +6259,7 @@
             "required": true,
             "description": "Group remote JID",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             }
           }
         ],
@@ -6304,7 +6308,7 @@
             "name": "instance",
             "in": "path",
             "required": true,
-            "description": "ID of the instance to connect",
+            "description": "Name of the instance ",
             "schema": {
               "type": "string"
             }
@@ -6315,7 +6319,7 @@
             "required": true,
             "description": "Group remote JID",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             }
           }
         ],
