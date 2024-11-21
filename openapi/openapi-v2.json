@@ -8425,6 +8425,147 @@
         }
       }
     },
+    "/dify/create/{instance}": {
+      "post": {
+        "operationId": "createDifyBot",
+        "summary": "Create a new Dify bot instance",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Creates a new Dify bot with the provided configuration",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration for the Dify bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "botType": {
+                    "type": "string",
+                    "enum": [
+                      "chatBot",
+                      "textGenerator",
+                      "agent",
+                      "workflow"
+                    ]
+                  },
+                  "apiUrl": {
+                    "type": "string"
+                  },
+                  "apiKey": {
+                    "type": "string"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ]
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "contains",
+                      "equals",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ]
+                  },
+                  "triggerValue": {
+                    "type": "string"
+                  },
+                  "expire": {
+                    "type": "integer"
+                  },
+                  "keywordFinish": {
+                    "type": "string"
+                  },
+                  "delayMessage": {
+                    "type": "integer"
+                  },
+                  "unknownMessage": {
+                    "type": "string"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean"
+                  },
+                  "keepOpen": {
+                    "type": "boolean"
+                  },
+                  "debounceTime": {
+                    "type": "integer"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "botType",
+                  "apiUrl",
+                  "apiKey"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bot instance created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bot instance created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid or missing parameters"
+          },
+          "404": {
+            "description": "Not Found - Instance could not be created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "operationId": "getEvoInfo",
