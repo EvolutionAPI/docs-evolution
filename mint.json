@@ -330,6 +330,24 @@
       "version": "v2"
     },
     {
+      "group": "OpenAI",
+      "pages": [
+        "v2/api-reference/integrations/openai/create-bot",
+        "v2/api-reference/integrations/openai/find-bot",
+        "v2/api-reference/integrations/openai/find-bots",
+        "v2/api-reference/integrations/openai/update-bot",
+        "v2/api-reference/integrations/openai/delete-bot",
+        "v2/api-reference/integrations/openai/find-creds-openai",
+        "v2/api-reference/integrations/openai/set-creds",
+        "v2/api-reference/integrations/openai/delete-creds",
+        "v2/api-reference/integrations/openai/settings-openai",
+        "v2/api-reference/integrations/openai/find-settings",
+        "v2/api-reference/integrations/openai/change-status",
+        "v2/api-reference/integrations/openai/find-session"
+      ],
+      "version": "v2"
+    },
+    {
       "group": "Chatwoot",
       "pages": [
         "v2/api-reference/integrations/chatwoot/set-chatwoot",

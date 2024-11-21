@@ -5282,7 +5282,11 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required":["subject","description","participants"],
+                "required": [
+                  "subject",
+                  "description",
+                  "participants"
+                ],
                 "properties": {
                   "subject": {
                     "type": "object",
@@ -5350,10 +5354,12 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required":["image"],
+                "required": [
+                  "image"
+                ],
                 "properties": {
                   "image": {
-                    "type": "object",
+                    "type": "string",
                     "description": "New profile picture image URL"
                   }
                 }
@@ -5408,7 +5414,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required":["subject"],
+                "required": [
+                  "subject"
+                ],
                 "properties": {
                   "subject": {
                     "type": "string",
@@ -5466,7 +5474,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required":["description"],
+                "required": [
+                  "description"
+                ],
                 "properties": {
                   "description": {
                     "type": "string",
@@ -7510,6 +7520,907 @@
           "200": {
             "description": "Ok",
             "content": {}
+          }
+        }
+      }
+    },
+    "/openai/create/{instance}": {
+      "post": {
+        "operationId": "createBotOpenAI",
+        "summary": "Create OpenAI",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Create an OpenAI bot with detailed configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "openaiCredsId",
+                  "botType",
+                  "assistantId",
+                  "functionUrl",
+                  "model",
+                  "systemMessages",
+                  "assistantMessages",
+                  "userMessages",
+                  "maxTokens",
+                  "triggerType",
+                  "triggerOperator",
+                  "triggerValue",
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "ignoreJids"
+                ],
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Indicates whether the bot is enabled"
+                  },
+                  "openaiCredsId": {
+                    "type": "string",
+                    "description": "ID of the OpenAI credentials"
+                  },
+                  "botType": {
+                    "type": "string",
+                    "description": "Type of the bot (e.g., 'assistant')"
+                  },
+                  "assistantId": {
+                    "type": "string",
+                    "description": "Unique identifier for the assistant"
+                  },
+                  "functionUrl": {
+                    "type": "string",
+                    "description": "URL for additional bot functionality"
+                  },
+                  "model": {
+                    "type": "string",
+                    "description": "Model to be used (e.g., 'gpt-4o')"
+                  },
+                  "systemMessages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Messages to define system behavior"
+                  },
+                  "assistantMessages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Predefined assistant messages"
+                  },
+                  "userMessages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Predefined user messages"
+                  },
+                  "maxTokens": {
+                    "type": "integer",
+                    "description": "Maximum number of tokens per interaction"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "description": "Type of trigger for the bot"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "description": "Operator for trigger evaluation"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "Value to trigger the bot"
+                  },
+                  "expire": {
+                    "type": "integer",
+                    "description": "Expiration time in seconds"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to terminate the bot interaction"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Delay before the bot responds, in milliseconds"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message to display for unrecognized input"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot listens to messages from the user"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot can be stopped by the user"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot session remains open"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Debounce time for message processing"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs to ignore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/find/{instance}": {
+      "get": {
+        "operationId": "findBotOpenAI",
+        "summary": "Find OpenAI Bots",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Get OpenAI bot with detailed configuration",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/find/:openaiBotId/{instance}": {
+      "get": {
+        "operationId": "findBotOpenAI",
+        "summary": "Find OpenAI Bot",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Get OpenAI bot with detailed configuration",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/delete/:openaiBotId/{instance}": {
+      "delete": {
+        "operationId": "deleteBotOpenAI",
+        "summary": "Delete OpenAI Bot",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Delete bot OpenAi",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/update/:openaiBotId/{instance}": {
+      "put": {
+        "operationId": "updateBotOpenAI",
+        "summary": "Update OpenAI Bot",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Update OpenAI bot with detailed configuration",
+        "requestBody": {
+          "description": "Configuration for the OpenAI bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot is enabled"
+                  },
+                  "openaiCredsId": {
+                    "type": "string",
+                    "description": "The OpenAI credentials ID"
+                  },
+                  "botType": {
+                    "type": "string",
+                    "enum": [
+                      "assistant",
+                      "chatCompletion"
+                    ],
+                    "description": "The type of bot (either 'assistant' or 'chatCompletion')"
+                  },
+                  "assistantId": {
+                    "type": "string",
+                    "description": "The ID of the assistant (only if 'botType' is 'assistant')"
+                  },
+                  "functionUrl": {
+                    "type": "string",
+                    "description": "The function URL that the bot will call"
+                  },
+                  "model": {
+                    "type": "string",
+                    "description": "The OpenAI model to use for chat completion (e.g., 'gpt-4o')"
+                  },
+                  "systemMessages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "The system messages to define the assistant behavior"
+                  },
+                  "assistantMessages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Messages to be sent by the assistant"
+                  },
+                  "userMessages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Messages sent by the user"
+                  },
+                  "maxTokens": {
+                    "type": "integer",
+                    "description": "Maximum number of tokens for the bot's responses"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ],
+                    "description": "The trigger type for the bot (e.g., 'keyword' or 'all')"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "contains",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ],
+                    "description": "The operator to match the trigger type"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "The value that triggers the bot (e.g., 'teste')"
+                  },
+                  "expire": {
+                    "type": "integer",
+                    "description": "The expiration time of the bot instance in minutes"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to end the bot interaction"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Time in milliseconds to delay the message"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message to send if the bot doesn't recognize the input"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot should listen for messages from the user"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot can be stopped by the user"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot session should remain open"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Time in milliseconds for the debounce delay"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs to ignore"
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "openaiCredsId",
+                  "botType",
+                  "model"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/creds/{instance}": {
+      "get": {
+        "operationId": "getBotOpenAICreds",
+        "summary": "Find OpenAI Creds",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Get OpenAI Creds",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/creds/{instance}": {
+      "post": {
+        "operationId": "credsBotOpenAI",
+        "summary": "Creds OpenAI Bot",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Creds openia bot configuration",
+        "requestBody": {
+          "description": "Configuration for the OpenAI bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apiKey": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "required": [
+                  "apiKey",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/creds/:openaiCredsId/{instance}": {
+      "delete": {
+        "operationId": "deleteCredsOpenAI",
+        "summary": "Delete OpenAI Creds",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "openaiCredsId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the creds",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Delete bot OpenAi",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/settings/{instance}": {
+      "post": {
+        "operationId": "setOpenAISettings",
+        "summary": "Set OpenAI Bot Settings",
+        "tags": [
+          "OpenAI Controller"
+        ],
+        "description": "Set settings for an OpenAI bot instance.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration for updating the OpenAI bot settings",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "openaiCredsId": {
+                    "type": "string",
+                    "description": "The OpenAI credentials ID"
+                  },
+                  "expire": {
+                    "type": "integer",
+                    "description": "Expiration time in seconds"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to finish the interaction"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Delay time for the message in milliseconds"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message when the input is not recognized"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot is listening for commands from the user"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot should stop upon user command"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Indicates if the bot session should remain open"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Time in milliseconds to wait before processing the next input"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs (Jabber IDs) to ignore"
+                  },
+                  "openaiIdFallback": {
+                    "type": "string",
+                    "description": "Fallback OpenAI credentials ID if the main one fails"
+                  }
+                },
+                "required": [
+                  "openaiCredsId",
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "ignoreJids",
+                  "openaiIdFallback"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated OpenAI bot settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates if the update was successful"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Details about the operation"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/openai/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "findSettingsOpenAI",
+        "summary": "Find OpenAI Settings",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Find settings OpenAi",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/openai/changeStatus/{instance}": {
+      "post": {
+        "operationId": "changeOpenAIStatus",
+        "summary": "Change OpenAI Bot Status",
+        "tags": [
+          "OpenAI Controller"
+        ],
+        "description": "Changes the status of the OpenAI bot instance.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Body for changing the status of the OpenAI bot",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "The JID (Jabber ID) of the remote contact"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "opened",
+                      "paused",
+                      "closed"
+                    ],
+                    "description": "Status of the bot instance. Possible values: 'opened', 'paused', 'closed'"
+                  }
+                },
+                "required": [
+                  "remoteJid",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully changed the bot status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates if the status change was successful"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Details about the status change operation"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/openai/fetchSessions/:openaiBotId/{instance}": {
+      "get": {
+        "operationId": "fetchSessions",
+        "summary": "Fetch sessions of the OpenAI bot instance",
+        "tags": [
+          "OpenAI Controller"
+        ],
+        "description": "Fetches the sessions of the specified OpenAI bot instance.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "openaiBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the OpenAI bot",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "404": {
+            "description": "Not Found - No sessions found for the given bot and instance"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
