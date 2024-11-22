@@ -350,7 +350,10 @@
     {
       "group": "Dify",
       "pages": [
-        "v2/api-reference/integrations/dify/create-dify"
+        "v2/api-reference/integrations/dify/create-dify",
+        "v2/api-reference/integrations/dify/find-dify",
+        "v2/api-reference/integrations/dify/find-bot-dify",
+        "v2/api-reference/integrations/dify/update-dify"
       ],
       "version": "v2"
     },
@@ -359,6 +362,7 @@
       "pages": [
         "v2/api-reference/integrations/chatwoot/set-chatwoot",
         "v2/api-reference/integrations/chatwoot/find-chatwoot"
+        
       ],
       "version": "v2"
     },
