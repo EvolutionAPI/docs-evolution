@@ -362,6 +362,14 @@
       "version": "v2"
     },
     {
+      "group": "Flowise",
+      "pages": [
+        "v2/api-reference/integrations/flowise/create-bot",
+        "v2/api-reference/integrations/flowise/find-flowise-bots"
+      ],
+      "version": "v2"
+    },
+    {
       "group": "Chatwoot",
       "pages": [
         "v2/api-reference/integrations/chatwoot/set-chatwoot",
