@@ -365,7 +365,10 @@
       "group": "Flowise",
       "pages": [
         "v2/api-reference/integrations/flowise/create-bot",
-        "v2/api-reference/integrations/flowise/find-flowise-bots"
+        "v2/api-reference/integrations/flowise/find-flowise-bots",
+        "v2/api-reference/integrations/flowise/find-flowise-bot",
+        "v2/api-reference/integrations/flowise/update-flowise-bot",
+        "v2/api-reference/integrations/flowise/delete-flowise-bot"
       ],
       "version": "v2"
     },

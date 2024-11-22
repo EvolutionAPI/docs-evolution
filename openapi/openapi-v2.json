@@ -9329,6 +9329,297 @@
         }
       }
     },
+    "/flowise/find/:flowiseId/{instance}": {
+      "get": {
+        "operationId": "fetchFlowiseBotSessions",
+        "summary": "Recupera as sessões ativas do bot Flowise",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Fetch bots flowise",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flowiseId",
+            "in": "path",
+            "required": true,
+            "description": "Id Bot Flowise",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessões recuperadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessions": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flowise/update/:flowiseId/{instance}": {
+      "post": {
+        "operationId": "updateFlowiseInstance",
+        "summary": "Atualiza uma instância do Flowise",
+        "tags": [
+          "Flowise Controller"
+        ],
+        "description": "Update flowise bot",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "flowiseId",
+            "in": "path",
+            "required": true,
+            "description": "ID da instância do Flowise",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuração para atualizar a instância do Flowise",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Indica se a instância está habilitada ou não.",
+                    "example": true
+                  },
+                  "apiUrl": {
+                    "type": "string",
+                    "description": "URL da API do Flowise.",
+                    "example": "http://dify.site.com/v1"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "description": "Chave de API (opcional).",
+                    "example": "app-123456"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ],
+                    "description": "Tipo de gatilho para o bot.",
+                    "example": "keyword"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "contains",
+                      "equals",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ],
+                    "description": "Operador para o gatilho.",
+                    "example": "equals"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "Valor do gatilho.",
+                    "example": "teste"
+                  },
+                  "expire": {
+                    "type": "integer",
+                    "description": "Tempo de expiração do bot em minutos.",
+                    "example": 0
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Palavra-chave para encerrar a interação.",
+                    "example": "#SAIR"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Tempo de atraso para a mensagem, em milissegundos.",
+                    "example": 1000
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Mensagem padrão quando a entrada não for reconhecida.",
+                    "example": "Mensagem não reconhecida"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Indica se o bot deve ouvir apenas mensagens enviadas por você.",
+                    "example": false
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Indica se o bot deve ser parado quando você enviar uma mensagem.",
+                    "example": false
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Indica se a instância do bot deve permanecer aberta.",
+                    "example": false
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Tempo de debounce para a entrada, em milissegundos.",
+                    "example": 0
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Lista de JIDs (identificadores de usuário) que o bot deve ignorar.",
+                    "example": [
+                      "1234567890@s.whatsapp.net"
+                    ]
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "apiUrl",
+                  "triggerType",
+                  "triggerOperator",
+                  "triggerValue"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instância do Flowise atualizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Instância do Flowise atualizada com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição, parâmetros inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Parâmetros inválidos fornecidos"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Instância não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Instância não encontrada"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flowise/delete/:flowiseId/{instance}": {
+      "delete": {
+        "operationId": "deleteBot",
+        "summary": "Delete Bot Flowise",
+        "tags": [
+          "Group Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flowiseId",
+            "in": "query",
+            "required": true,
+            "description": "Id Bot Flowise",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Delete Bot",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "operationId": "getEvoInfo",
