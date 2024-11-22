@@ -353,7 +353,11 @@
         "v2/api-reference/integrations/dify/create-dify",
         "v2/api-reference/integrations/dify/find-dify",
         "v2/api-reference/integrations/dify/find-bot-dify",
-        "v2/api-reference/integrations/dify/update-dify"
+        "v2/api-reference/integrations/dify/update-dify",
+        "v2/api-reference/integrations/dify/set-settings-dify",
+        "v2/api-reference/integrations/dify/find-settings",
+        "v2/api-reference/integrations/dify/change-status",
+        "v2/api-reference/integrations/dify/find-status"
       ],
       "version": "v2"
     },

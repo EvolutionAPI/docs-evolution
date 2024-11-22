@@ -8804,6 +8804,332 @@
         }
       }
     },
+    "/dify/settings/{instance}": {
+      "post": {
+        "operationId": "updateDifySettings",
+        "summary": "Atualiza as configurações do bot Dify",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Atualiza as configurações do bot Dify.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configurações do bot Dify",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expire": {
+                    "type": "integer",
+                    "description": "Tempo de expiração em minutos.",
+                    "example": 20
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Palavra-chave que finalizará o bot.",
+                    "example": "#SAIR"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Tempo de delay antes do envio de uma nova mensagem (em milissegundos).",
+                    "example": 1000
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Mensagem que será enviada quando o bot não reconhecer o comando.",
+                    "example": "Mensagem não reconhecida"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve ouvir mensagens enviadas pelo próprio usuário.",
+                    "example": false
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve parar ao receber mensagens enviadas pelo próprio usuário.",
+                    "example": false
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve manter a conversa aberta após uma resposta.",
+                    "example": false
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Tempo de debounce (em milissegundos).",
+                    "example": 0
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Lista de JIDs a serem ignorados.",
+                    "example": []
+                  },
+                  "difyIdFallback": {
+                    "type": "string",
+                    "description": "ID de fallback do bot Dify.",
+                    "example": "clyja4oys0a3uqpy7k3bd7swe"
+                  }
+                },
+                "required": [
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "difyIdFallback",
+                  "ignoreJids"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Configurações do bot Dify atualizadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações do bot Dify atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dify/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "findDifySettings",
+        "summary": "Find settings dify bot",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Find settigns dify bot",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurações do bot Dify atualizadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações do bot Dify atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dify/changeStatus/{instance}": {
+      "post": {
+        "operationId": "changeDifyBotStatus",
+        "summary": "Altera o status do bot Dify",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Altera o status de um bot Dify. O status pode ser `opened`, `paused`, ou `closed`. O status `closed` encerra a interação do bot.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados para alterar o status do bot Dify",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "Número de telefone remoto no formato E.164 (ex: 5511912345678@s.whatsapp.net)",
+                    "example": "5511912345678@s.whatsapp.net"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "opened",
+                      "paused",
+                      "closed"
+                    ],
+                    "description": "Status a ser atribuído ao bot Dify. Os valores válidos são `opened`, `paused` e `closed`.",
+                    "example": "closed"
+                  }
+                },
+                "required": [
+                  "remoteJid",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status do bot Dify alterado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Status do bot Dify alterado para closed com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dify/fetchSessions/:difyId/{instance}": {
+      "get": {
+        "operationId": "fetchDifyBotSessions",
+        "summary": "Recupera as sessões ativas do bot Dify",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Recupera as sessões ativas de um bot Dify específico, com base no ID do bot (`difyId`) e na instância do bot (`instance`).",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "difyId",
+            "in": "path",
+            "required": true,
+            "description": "ID único do bot Dify.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessões recuperadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "sessionId": {
+                            "type": "string",
+                            "description": "ID da sessão.",
+                            "example": "abc123"
+                          },
+                          "startTime": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Data e hora de início da sessão.",
+                            "example": "2024-11-01T12:30:00Z"
+                          },
+                          "endTime": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Data e hora de término da sessão.",
+                            "example": "2024-11-01T13:00:00Z"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "active",
+                              "inactive",
+                              "terminated"
+                            ],
+                            "description": "Status atual da sessão.",
+                            "example": "active"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "operationId": "getEvoInfo",
