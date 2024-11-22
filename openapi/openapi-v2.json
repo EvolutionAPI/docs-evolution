@@ -9620,6 +9620,331 @@
         }
       }
     },
+    "/flowise/settings/{instance}": {
+      "post": {
+        "operationId": "setlowiseSettings",
+        "summary": "Set as configurações do Flowise",
+        "tags": [
+          "Flowise Controller"
+        ],
+        "description": "Set Settings Flowise bot",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuração para atualizar as preferências da instância do Flowise",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expire": {
+                    "type": "integer",
+                    "description": "Tempo de expiração do bot, em minutos.",
+                    "example": 20
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Palavra-chave que encerra a interação com o bot.",
+                    "example": "#SAIR"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Tempo de atraso para a mensagem, em milissegundos.",
+                    "example": 1000
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Mensagem enviada quando o bot não reconhece a entrada.",
+                    "example": "Mensagem não reconhecida"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Indica se o bot deve ouvir apenas as mensagens enviadas pelo usuário.",
+                    "example": false
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Indica se o bot deve ser interrompido quando o usuário envia uma mensagem.",
+                    "example": false
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Indica se o bot deve permanecer aberto após a interação.",
+                    "example": false
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Tempo de debounce em milissegundos para a entrada do usuário.",
+                    "example": 0
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Lista de JIDs que devem ser ignorados pelo bot.",
+                    "example": []
+                  },
+                  "flowiseIdFallback": {
+                    "type": "string",
+                    "description": "ID do Flowise a ser utilizado como fallback caso a instância atual não esteja disponível.",
+                    "example": "clyja4oys0a3uqpy7k3bd7swe"
+                  }
+                },
+                "required": [
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "ignoreJids",
+                  "flowiseIdFallback"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Configurações da instância do Flowise atualizadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações da instância do Flowise atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flowise/fetchSessions/:flowiseId/{instance}": {
+      "get": {
+        "operationId": "fetchFlowiseSessions",
+        "summary": "Recupera as sessões ativas do bot Flowise",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Fetch session flowise",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flowiseId",
+            "in": "path",
+            "required": true,
+            "description": "Id Bot Flowise",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessões recuperadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessions": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flowise/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "fetchFlowiseSettings",
+        "summary": "Recupera os configurações do bot flowise",
+        "tags": [
+          "Dify Controller"
+        ],
+        "description": "Fetch settings flowise",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessões recuperadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessions": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flowise/changeStatus/{instance}": {
+      "post": {
+        "operationId": "changeFlowiseStatus",
+        "summary": "Atualiza o status de uma instância Flowise",
+        "tags": [
+          "Flowise Controller"
+        ],
+        "description": "Atualiza os settings do bot flowise",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Corpo da requisição contendo o identificador remoto e o status a ser atualizado",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "Identificador remoto do WhatsApp no formato JID",
+                    "example": "5511912345678@s.whatsapp.net"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Novo status para a instância",
+                    "enum": [
+                      "opened",
+                      "paused",
+                      "closed"
+                    ],
+                    "example": "closed"
+                  }
+                },
+                "required": [
+                  "remoteJid",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status da instância Flowise atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Status alterado com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição, parâmetros inválidos ou ausentes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Parâmetros inválidos fornecidos"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Instância do Flowise não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Instância não encontrada"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "operationId": "getEvoInfo",

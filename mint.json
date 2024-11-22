@@ -368,7 +368,11 @@
         "v2/api-reference/integrations/flowise/find-flowise-bots",
         "v2/api-reference/integrations/flowise/find-flowise-bot",
         "v2/api-reference/integrations/flowise/update-flowise-bot",
-        "v2/api-reference/integrations/flowise/delete-flowise-bot"
+        "v2/api-reference/integrations/flowise/delete-flowise-bot",
+        "v2/api-reference/integrations/flowise/set-settings",
+        "v2/api-reference/integrations/flowise/find-settings",
+        "v2/api-reference/integrations/flowise/change-session-status",
+        "v2/api-reference/integrations/flowise/find-sessions"
       ],
       "version": "v2"
     },
