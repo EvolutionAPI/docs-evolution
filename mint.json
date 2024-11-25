@@ -348,6 +348,19 @@
       "version": "v2"
     },
     {
+      "group": "Evolution Bot",
+      "pages": [
+        "v2/api-reference/integrations/evolution/create-bot",
+        "v2/api-reference/integrations/evolution/find-bot",
+        "v2/api-reference/integrations/evolution/fetch-bots",
+        "v2/api-reference/integrations/evolution/update",
+        "v2/api-reference/integrations/evolution/delete-bot",
+        "v2/api-reference/integrations/evolution/set-settings",
+        "v2/api-reference/integrations/evolution/find-settings"
+      ],
+      "version": "v2"
+    },
+    {
       "group": "Dify",
       "pages": [
         "v2/api-reference/integrations/dify/create-dify",

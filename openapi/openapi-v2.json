@@ -9945,6 +9945,718 @@
         }
       }
     },
+    "/evolutionBot/create/{instance}": {
+      "post": {
+        "operationId": "createEvolutionBot",
+        "summary": "Create Evolution Bot",
+        "tags": [
+          "Evolution Bot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Create a new Evolution Bot configuration.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "apiUrl",
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "triggerType",
+                  "triggerOperator",
+                  "triggerValue"
+                ],
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Enable Evolution Bot"
+                  },
+                  "apiUrl": {
+                    "type": "string",
+                    "description": "API URL for the bot"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "description": "API Key for authentication (optional)"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "description": "Trigger type, e.g., 'all' or 'keyword'"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "description": "Operator logic, e.g., 'contains', 'equals', 'startsWith', 'endsWith', 'regex'"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "Trigger value, e.g., 'test'"
+                  },
+                  "expire": {
+                    "type": "number",
+                    "description": "Expiration time for the session (in seconds)"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to terminate the session"
+                  },
+                  "delayMessage": {
+                    "type": "number",
+                    "description": "Delay time (in ms) for sending messages"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message displayed when an unknown input is received"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Listen to messages sent by the bot owner"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Stop bot when the owner sends a message"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Keep the session open after processing messages"
+                  },
+                  "debounceTime": {
+                    "type": "number",
+                    "description": "Time delay to debounce messages"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs to ignore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Evo bot criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Sucess"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/fetch/:evolutionBotId/{instance}": {
+      "get": {
+        "operationId": "findEvo",
+        "summary": "Find Bot Evo",
+        "tags": [
+          "OpenAI Controller"
+        ],
+        "description": "Update evo bot.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the evo bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/update/:evolutionBotId/{instance}": {
+      "put": {
+        "operationId": "updateEvolutionBot",
+        "summary": "Update Evolution Bot",
+        "tags": [
+          "Evolution Bot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the Evolution Bot to update",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Update an existing Evolution Bot configuration.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "apiUrl",
+                  "triggerType",
+                  "triggerOperator",
+                  "triggerValue",
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime"
+                ],
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Enable or disable the Evolution Bot"
+                  },
+                  "apiUrl": {
+                    "type": "string",
+                    "description": "API URL for the bot"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "description": "API Key for authentication (optional)"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "description": "Trigger type, e.g., 'all' or 'keyword'"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "description": "Operator logic, e.g., 'contains', 'equals', 'startsWith', 'endsWith', 'regex'"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "Trigger value, e.g., 'test'"
+                  },
+                  "expire": {
+                    "type": "number",
+                    "description": "Expiration time for the session (in seconds)"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to terminate the session"
+                  },
+                  "delayMessage": {
+                    "type": "number",
+                    "description": "Delay time (in ms) for sending messages"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message displayed when an unknown input is received"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Listen to messages sent by the bot owner"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Stop bot when the owner sends a message"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Keep the session open after processing messages"
+                  },
+                  "debounceTime": {
+                    "type": "number",
+                    "description": "Time delay to debounce messages"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs to ignore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Evo bot atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Sucess"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/find/{instance}": {
+      "get": {
+        "operationId": "findEvo",
+        "summary": "Find Bots Evo",
+        "tags": [
+          "OpenAI Controller"
+        ],
+        "description": "Update evo bots.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/delete/:evolutionBotId/{instance}": {
+      "delete": {
+        "operationId": "deleteBot",
+        "summary": "Delete Bot Evolution",
+        "tags": [
+          "Group Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "evolutionBotId",
+            "in": "query",
+            "required": true,
+            "description": "Id Bot Evolution",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Delete Bot",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/evolutionBot/update/{evolutionBotId}/{instance}": {
+      "put": {
+        "operationId": "updateEvolutionBot",
+        "summary": "Update Evolution Bot",
+        "tags": [
+          "Evolution Bot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the Evolution Bot to update",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Update an existing Evolution Bot configuration.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "apiUrl",
+                  "triggerType",
+                  "triggerOperator",
+                  "triggerValue",
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime"
+                ],
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Enable or disable the Evolution Bot"
+                  },
+                  "apiUrl": {
+                    "type": "string",
+                    "description": "API URL for the bot"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "description": "API Key for authentication (optional)"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "description": "Trigger type, e.g., 'all' or 'keyword'"
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "description": "Operator logic, e.g., 'contains', 'equals', 'startsWith', 'endsWith', 'regex'"
+                  },
+                  "triggerValue": {
+                    "type": "string",
+                    "description": "Trigger value, e.g., 'test'"
+                  },
+                  "expire": {
+                    "type": "number",
+                    "description": "Expiration time for the session (in seconds)"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to terminate the session"
+                  },
+                  "delayMessage": {
+                    "type": "number",
+                    "description": "Delay time (in ms) for sending messages"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message displayed when an unknown input is received"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Listen to messages sent by the bot owner"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Stop bot when the owner sends a message"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Keep the session open after processing messages"
+                  },
+                  "debounceTime": {
+                    "type": "number",
+                    "description": "Time delay to debounce messages"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs to ignore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Evolution Bot updated successfully",
+                  "id": "evolutionBotId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Invalid parameters"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Evolution Bot not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Evolution Bot not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/settings/{instance}": {
+      "post": {
+        "operationId": "createEvolutionBotSettings",
+        "summary": "Create Evolution Bot Settings",
+        "tags": [
+          "Evolution Bot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Configure settings for an Evolution Bot.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "botIdFallback"
+                ],
+                "properties": {
+                  "expire": {
+                    "type": "number",
+                    "description": "Expiration time for the session (in seconds)"
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Keyword to terminate the session"
+                  },
+                  "delayMessage": {
+                    "type": "number",
+                    "description": "Delay time (in ms) for sending messages"
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Message displayed when an unknown input is received"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Listen to messages sent by the bot owner"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Stop bot when the owner sends a message"
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Keep the session open after processing messages"
+                  },
+                  "debounceTime": {
+                    "type": "number",
+                    "description": "Time delay to debounce messages"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of JIDs to ignore"
+                  },
+                  "botIdFallback": {
+                    "type": "string",
+                    "description": "Fallback bot ID to use"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Update successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Evolution Bot updated successfully",
+                  "id": "evolutionBotId"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evolutionBot/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "findEvolutionBot",
+        "summary": "Find EvoBot",
+        "tags": [
+          "Evolution Bot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Find evolution bot settings",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "operationId": "getEvoInfo",
