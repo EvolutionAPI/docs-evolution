@@ -227,7 +227,10 @@
     },
     {
       "group": "Webhook",
-      "pages": ["v2/api-reference/webhook/set", "v2/api-reference/webhook/get"],
+      "pages": [
+        "v2/api-reference/webhook/set", 
+        "v2/api-reference/webhook/get"
+      ],
       "version": "v2"
     },
     {
@@ -241,7 +244,6 @@
     {
       "group": "Send Message",
       "pages": [
-        "v2/api-reference/message-controller/send-template",
         "v2/api-reference/message-controller/send-text",
         "v2/api-reference/message-controller/send-status",
         "v2/api-reference/message-controller/send-media",
@@ -251,7 +253,8 @@
         "v2/api-reference/message-controller/send-contact",
         "v2/api-reference/message-controller/send-reaction",
         "v2/api-reference/message-controller/send-poll",
-        "v2/api-reference/message-controller/send-list"
+        "v2/api-reference/message-controller/send-list",
+        "v2/api-reference/message-controller/send-button"
       ],
       "version": "v2"
     },
@@ -260,14 +263,17 @@
       "pages": [
         "v2/api-reference/chat-controller/check-is-whatsapp",
         "v2/api-reference/chat-controller/mark-as-read",
+        "v2/api-reference/chat-controller/mark-as-unread",
         "v2/api-reference/chat-controller/archive-chat",
         "v2/api-reference/chat-controller/delete-message-for-everyone",
+        "v2/api-reference/chat-controller/update-message",
         "v2/api-reference/chat-controller/send-presence",
+        "v2/api-reference/chat-controller/updateBlockStatus",
         "v2/api-reference/chat-controller/fetch-profilepic-url",
+        "v2/api-reference/chat-controller/get-base64",
         "v2/api-reference/chat-controller/find-contacts",
         "v2/api-reference/chat-controller/find-messages",
         "v2/api-reference/chat-controller/find-status-message",
-        "v2/api-reference/chat-controller/update-message",
         "v2/api-reference/chat-controller/find-chats"
       ],
       "version": "v2"
@@ -287,14 +293,13 @@
       "version": "v2"
     },
     {
-      "group": "Profile Settings",
+      "group": "Group Controller",
       "pages": [
         "v2/api-reference/group-controller/group-create",
         "v2/api-reference/group-controller/update-group-picture",
         "v2/api-reference/group-controller/update-group-subject",
         "v2/api-reference/group-controller/update-group-description",
         "v2/api-reference/group-controller/fetch-invite-code",
-        "v2/api-reference/group-controller/accept-invite-code",
         "v2/api-reference/group-controller/revoke-invite-code",
         "v2/api-reference/group-controller/send-invite-url",
         "v2/api-reference/group-controller/find-group-by-invite-code",
@@ -314,7 +319,75 @@
         "v2/api-reference/integrations/typebot/set-typebot",
         "v2/api-reference/integrations/typebot/start-typebot",
         "v2/api-reference/integrations/typebot/find-typebot",
-        "v2/api-reference/integrations/typebot/change-session-status"
+        "v2/api-reference/integrations/typebot/fetch-typebot",
+        "v2/api-reference/integrations/typebot/update-typebot",
+        "v2/api-reference/integrations/typebot/delete-typebot",
+        "v2/api-reference/integrations/typebot/change-session-status",
+        "v2/api-reference/integrations/typebot/fetch-session",
+        "v2/api-reference/integrations/typebot/settings-typebot",
+        "v2/api-reference/integrations/typebot/find-settings-typebot"
+      ],
+      "version": "v2"
+    },
+    {
+      "group": "OpenAI",
+      "pages": [
+        "v2/api-reference/integrations/openai/create-bot",
+        "v2/api-reference/integrations/openai/find-bot",
+        "v2/api-reference/integrations/openai/find-bots",
+        "v2/api-reference/integrations/openai/update-bot",
+        "v2/api-reference/integrations/openai/delete-bot",
+        "v2/api-reference/integrations/openai/find-creds-openai",
+        "v2/api-reference/integrations/openai/set-creds",
+        "v2/api-reference/integrations/openai/delete-creds",
+        "v2/api-reference/integrations/openai/settings-openai",
+        "v2/api-reference/integrations/openai/find-settings",
+        "v2/api-reference/integrations/openai/change-status",
+        "v2/api-reference/integrations/openai/find-session"
+      ],
+      "version": "v2"
+    },
+    {
+      "group": "Evolution Bot",
+      "pages": [
+        "v2/api-reference/integrations/evolution/create-bot",
+        "v2/api-reference/integrations/evolution/find-bot",
+        "v2/api-reference/integrations/evolution/fetch-bots",
+        "v2/api-reference/integrations/evolution/update",
+        "v2/api-reference/integrations/evolution/delete-bot",
+        "v2/api-reference/integrations/evolution/set-settings",
+        "v2/api-reference/integrations/evolution/find-settings",
+        "v2/api-reference/integrations/evolution/change-status-session",
+        "v2/api-reference/integrations/evolution/fetch-session"
+      ],
+      "version": "v2"
+    },
+    {
+      "group": "Dify",
+      "pages": [
+        "v2/api-reference/integrations/dify/create-dify",
+        "v2/api-reference/integrations/dify/find-dify",
+        "v2/api-reference/integrations/dify/find-bot-dify",
+        "v2/api-reference/integrations/dify/update-dify",
+        "v2/api-reference/integrations/dify/set-settings-dify",
+        "v2/api-reference/integrations/dify/find-settings",
+        "v2/api-reference/integrations/dify/change-status",
+        "v2/api-reference/integrations/dify/find-status"
+      ],
+      "version": "v2"
+    },
+    {
+      "group": "Flowise",
+      "pages": [
+        "v2/api-reference/integrations/flowise/create-bot",
+        "v2/api-reference/integrations/flowise/find-flowise-bots",
+        "v2/api-reference/integrations/flowise/find-flowise-bot",
+        "v2/api-reference/integrations/flowise/update-flowise-bot",
+        "v2/api-reference/integrations/flowise/delete-flowise-bot",
+        "v2/api-reference/integrations/flowise/set-settings",
+        "v2/api-reference/integrations/flowise/find-settings",
+        "v2/api-reference/integrations/flowise/change-session-status",
+        "v2/api-reference/integrations/flowise/find-sessions"
       ],
       "version": "v2"
     },
@@ -323,6 +396,15 @@
       "pages": [
         "v2/api-reference/integrations/chatwoot/set-chatwoot",
         "v2/api-reference/integrations/chatwoot/find-chatwoot"
+        
+      ],
+      "version": "v2"
+    },
+    {
+      "group": "Websocket",
+      "pages": [
+        "v2/api-reference/integrations/websocket/set-websocket",
+        "v2/api-reference/integrations/websocket/find-websocket"
       ],
       "version": "v2"
     },
@@ -339,153 +421,6 @@
       "pages": [
         "v2/api-reference/integrations/rabbitmq/set-rabbitmq",
         "v2/api-reference/integrations/rabbitmq/find-rabbitmq"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "WebSocket",
-      "pages": [
-        "v2/api-reference/integrations/websocket/set-websocket",
-        "v2/api-reference/integrations/websocket/find-websocket"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Instances",
-      "pages": [
-        "v2/api-reference/instance-controller/create-instance-basic",
-        "v2/api-reference/instance-controller/fetch-instances",
-        "v2/api-reference/instance-controller/instance-connect",
-        "v2/api-reference/instance-controller/restart-instance",
-        "v2/api-reference/instance-controller/connection-state",
-        "v2/api-reference/instance-controller/logout-instance",
-        "v2/api-reference/instance-controller/delete-instance",
-        "v2/api-reference/instance-controller/set-presence"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Webhook",
-      "pages": ["v2/api-reference/webhook/set", "v2/api-reference/webhook/get"],
-      "version": "v2"
-    },
-    {
-      "group": "Settings",
-      "pages": [
-        "v2/api-reference/settings/set",
-        "v2/api-reference/settings/get"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Send Message",
-      "pages": [
-        "v2/api-reference/message-controller/send-template",
-        "v2/api-reference/message-controller/send-text",
-        "v2/api-reference/message-controller/send-status",
-        "v2/api-reference/message-controller/send-media",
-        "v2/api-reference/message-controller/send-audio",
-        "v2/api-reference/message-controller/send-sticker",
-        "v2/api-reference/message-controller/send-location",
-        "v2/api-reference/message-controller/send-contact",
-        "v2/api-reference/message-controller/send-reaction",
-        "v2/api-reference/message-controller/send-poll",
-        "v2/api-reference/message-controller/send-list"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Chat Controller",
-      "pages": [
-        "v2/api-reference/chat-controller/check-is-whatsapp",
-        "v2/api-reference/chat-controller/mark-as-read",
-        "v2/api-reference/chat-controller/archive-chat",
-        "v2/api-reference/chat-controller/delete-message-for-everyone",
-        "v2/api-reference/chat-controller/send-presence",
-        "v2/api-reference/chat-controller/fetch-profilepic-url",
-        "v2/api-reference/chat-controller/find-contacts",
-        "v2/api-reference/chat-controller/find-messages",
-        "v2/api-reference/chat-controller/find-status-message",
-        "v2/api-reference/chat-controller/update-message",
-        "v2/api-reference/chat-controller/find-chats"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Profile Settings",
-      "pages": [
-        "v2/api-reference/profile-settings/fetch-business-profile",
-        "v2/api-reference/profile-settings/fetch-profile",
-        "v2/api-reference/profile-settings/update-profile-name",
-        "v2/api-reference/profile-settings/update-profile-status",
-        "v2/api-reference/profile-settings/update-profile-picture",
-        "v2/api-reference/profile-settings/remove-profile-picture",
-        "v2/api-reference/profile-settings/fetch-privacy-settings",
-        "v2/api-reference/profile-settings/update-privacy-settings"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Profile Settings",
-      "pages": [
-        "v2/api-reference/group-controller/group-create",
-        "v2/api-reference/group-controller/update-group-picture",
-        "v2/api-reference/group-controller/update-group-subject",
-        "v2/api-reference/group-controller/update-group-description",
-        "v2/api-reference/group-controller/fetch-invite-code",
-        "v2/api-reference/group-controller/accept-invite-code",
-        "v2/api-reference/group-controller/revoke-invite-code",
-        "v2/api-reference/group-controller/send-invite-url",
-        "v2/api-reference/group-controller/find-group-by-invite-code",
-        "v2/api-reference/group-controller/find-group-by-jid",
-        "v2/api-reference/group-controller/fetch-all-groups",
-        "v2/api-reference/group-controller/find-participants",
-        "v2/api-reference/group-controller/update-participant",
-        "v2/api-reference/group-controller/update-setting",
-        "v2/api-reference/group-controller/toggle-ephemeral",
-        "v2/api-reference/group-controller/leave-group"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Typebot",
-      "pages": [
-        "v2/api-reference/integrations/typebot/set-typebot",
-        "v2/api-reference/integrations/typebot/start-typebot",
-        "v2/api-reference/integrations/typebot/find-typebot",
-        "v2/api-reference/integrations/typebot/change-session-status"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "Chatwoot",
-      "pages": [
-        "v2/api-reference/integrations/chatwoot/set-chatwoot",
-        "v2/api-reference/integrations/chatwoot/find-chatwoot"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "SQS",
-      "pages": [
-        "v2/api-reference/integrations/sqs/set-sqs",
-        "v2/api-reference/integrations/sqs/find-sqs"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "RabbitMQ",
-      "pages": [
-        "v2/api-reference/integrations/rabbitmq/set-rabbitmq",
-        "v2/api-reference/integrations/rabbitmq/find-rabbitmq"
-      ],
-      "version": "v2"
-    },
-    {
-      "group": "WebSocket",
-      "pages": [
-        "v2/api-reference/integrations/websocket/set-websocket",
-        "v2/api-reference/integrations/websocket/find-websocket"
       ],
       "version": "v2"
     },
@@ -634,146 +569,7 @@
       "version": "v1"
     },
     {
-      "group": "Profile Settings",
-      "pages": [
-        "v1/api-reference/group-controller/group-create",
-        "v1/api-reference/group-controller/update-group-picture",
-        "v1/api-reference/group-controller/update-group-subject",
-        "v1/api-reference/group-controller/update-group-description",
-        "v1/api-reference/group-controller/fetch-invite-code",
-        "v1/api-reference/group-controller/accept-invite-code",
-        "v1/api-reference/group-controller/revoke-invite-code",
-        "v1/api-reference/group-controller/send-invite-url",
-        "v1/api-reference/group-controller/find-group-by-invite-code",
-        "v1/api-reference/group-controller/find-group-by-jid",
-        "v1/api-reference/group-controller/fetch-all-groups",
-        "v1/api-reference/group-controller/find-participants",
-        "v1/api-reference/group-controller/update-participant",
-        "v1/api-reference/group-controller/update-setting",
-        "v1/api-reference/group-controller/toggle-ephemeral",
-        "v1/api-reference/group-controller/leave-group"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Typebot",
-      "pages": [
-        "v1/api-reference/integrations/typebot/set-typebot",
-        "v1/api-reference/integrations/typebot/start-typebot",
-        "v1/api-reference/integrations/typebot/find-typebot",
-        "v1/api-reference/integrations/typebot/change-session-status"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Chatwoot",
-      "pages": [
-        "v1/api-reference/integrations/chatwoot/set-chatwoot",
-        "v1/api-reference/integrations/chatwoot/find-chatwoot"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "SQS",
-      "pages": [
-        "v1/api-reference/integrations/sqs/set-sqs",
-        "v1/api-reference/integrations/sqs/find-sqs"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "RabbitMQ",
-      "pages": [
-        "v1/api-reference/integrations/rabbitmq/set-rabbitmq",
-        "v1/api-reference/integrations/rabbitmq/find-rabbitmq"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "WebSocket",
-      "pages": [
-        "v1/api-reference/integrations/websocket/set-websocket",
-        "v1/api-reference/integrations/websocket/find-websocket"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Instances",
-      "pages": [
-        "v1/api-reference/instance-controller/create-instance-basic",
-        "v1/api-reference/instance-controller/fetch-instances",
-        "v1/api-reference/instance-controller/instance-connect",
-        "v1/api-reference/instance-controller/restart-instance",
-        "v1/api-reference/instance-controller/connection-state",
-        "v1/api-reference/instance-controller/logout-instance",
-        "v1/api-reference/instance-controller/delete-instance",
-        "v1/api-reference/instance-controller/set-presence"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Webhook",
-      "pages": ["v1/api-reference/webhook/set", "v1/api-reference/webhook/get"],
-      "version": "v1"
-    },
-    {
-      "group": "Settings",
-      "pages": [
-        "v1/api-reference/settings/set",
-        "v1/api-reference/settings/get"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Send Message",
-      "pages": [
-        "v1/api-reference/message-controller/send-template",
-        "v1/api-reference/message-controller/send-text",
-        "v1/api-reference/message-controller/send-status",
-        "v1/api-reference/message-controller/send-media",
-        "v1/api-reference/message-controller/send-audio",
-        "v1/api-reference/message-controller/send-sticker",
-        "v1/api-reference/message-controller/send-location",
-        "v1/api-reference/message-controller/send-contact",
-        "v1/api-reference/message-controller/send-reaction",
-        "v1/api-reference/message-controller/send-poll",
-        "v1/api-reference/message-controller/send-list"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Chat Controller",
-      "pages": [
-        "v1/api-reference/chat-controller/check-is-whatsapp",
-        "v1/api-reference/chat-controller/mark-as-read",
-        "v1/api-reference/chat-controller/archive-chat",
-        "v1/api-reference/chat-controller/delete-message-for-everyone",
-        "v1/api-reference/chat-controller/send-presence",
-        "v1/api-reference/chat-controller/fetch-profilepic-url",
-        "v1/api-reference/chat-controller/find-contacts",
-        "v1/api-reference/chat-controller/find-messages",
-        "v1/api-reference/chat-controller/find-status-message",
-        "v1/api-reference/chat-controller/update-message",
-        "v1/api-reference/chat-controller/find-chats"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Profile Settings",
-      "pages": [
-        "v1/api-reference/profile-settings/fetch-business-profile",
-        "v1/api-reference/profile-settings/fetch-profile",
-        "v1/api-reference/profile-settings/update-profile-name",
-        "v1/api-reference/profile-settings/update-profile-status",
-        "v1/api-reference/profile-settings/update-profile-picture",
-        "v1/api-reference/profile-settings/remove-profile-picture",
-        "v1/api-reference/profile-settings/fetch-privacy-settings",
-        "v1/api-reference/profile-settings/update-privacy-settings"
-      ],
-      "version": "v1"
-    },
-    {
-      "group": "Profile Settings",
+      "group": "Group Controller",
       "pages": [
         "v1/api-reference/group-controller/group-create",
         "v1/api-reference/group-controller/update-group-picture",
