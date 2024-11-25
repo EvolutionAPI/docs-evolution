@@ -356,7 +356,9 @@
         "v2/api-reference/integrations/evolution/update",
         "v2/api-reference/integrations/evolution/delete-bot",
         "v2/api-reference/integrations/evolution/set-settings",
-        "v2/api-reference/integrations/evolution/find-settings"
+        "v2/api-reference/integrations/evolution/find-settings",
+        "v2/api-reference/integrations/evolution/change-status-session",
+        "v2/api-reference/integrations/evolution/fetch-session"
       ],
       "version": "v2"
     },

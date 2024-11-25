@@ -10361,7 +10361,7 @@
         }
       }
     },
-    "/evolutionBot/update/{evolutionBotId}/{instance}": {
+    "/evolutionBot/update/:evolutionBotId/{instance}": {
       "put": {
         "operationId": "updateEvolutionBot",
         "summary": "Update Evolution Bot",
@@ -10649,6 +10649,100 @@
           }
         ],
         "description": "Find evolution bot settings",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/evolutionBot/fetchSessions/:evolutionBotId/{instance}": {
+      "get": {
+        "operationId": "findEvolutionBot",
+        "summary": "Find EvoBot session",
+        "tags": [
+          "Evolution Bot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "evolutionBotId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the evo bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Find evolution bot settings",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/evolutionBot/changeStatus/{instance}": {
+      "post": {
+        "operationId": "changeEvobotStatus",
+        "summary": "Change Session Status",
+        "tags": [
+          "Typebot Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Change status session",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "{{remoteJid}}"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Typebot status, types: opened, paused, closed"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Ok",
