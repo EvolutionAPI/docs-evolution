@@ -7987,39 +7987,6 @@
       }
     },
     "/openai/creds/{instance}": {
-      "get": {
-        "operationId": "getBotOpenAICreds",
-        "summary": "Find OpenAI Creds",
-        "tags": [
-          "OpenIA Controller"
-        ],
-        "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "description": "Get OpenAI Creds",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/openai/creds/{instance}": {
       "post": {
         "operationId": "credsBotOpenAI",
         "summary": "Creds OpenAI Bot",
@@ -8069,6 +8036,37 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "operationId": "getBotOpenAICreds",
+        "summary": "Find OpenAI Creds",
+        "tags": [
+          "OpenIA Controller"
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Get OpenAI Creds",
         "responses": {
           "200": {
             "description": "Ok",
@@ -10486,35 +10484,8 @@
         },
         "responses": {
           "200": {
-            "description": "Update successful",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Evolution Bot updated successfully",
-                  "id": "evolutionBotId"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - Invalid parameters",
-            "content": {
-              "application/json": {
-                "example": {
-                  "error": "Invalid parameters"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - Evolution Bot not found",
-            "content": {
-              "application/json": {
-                "example": {
-                  "error": "Evolution Bot not found"
-                }
-              }
-            }
+            "description": "Ok",
+            "content": {}
           }
         }
       }
@@ -10610,16 +10581,9 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Update successful",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Evolution Bot updated successfully",
-                  "id": "evolutionBotId"
-                }
-              }
-            }
+          "200": {
+            "description": "Ok",
+            "content": {}
           }
         }
       }
