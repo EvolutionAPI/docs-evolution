@@ -4,18 +4,16 @@
     "title": "Evolution API",
     "version": "2.1.1"
   },
-  "servers": [
-    {
-      "url": "https://{server-url}",
-      "variables": {
-        "server-url": {
-          "default": "evolution-example",
-          "description": "The URL of your EvolutionAPI server"
-        }
-      },
-      "description": "Your instance domain"
-    }
-  ],
+  "servers": [{
+    "url": "https://{server-url}",
+    "variables": {
+      "server-url": {
+        "default": "evolution-example",
+        "description": "The URL of your EvolutionAPI server"
+      }
+    },
+    "description": "Your instance domain"
+  }],
   "paths": {
     "/instance/create": {
       "post": {
@@ -25,11 +23,9 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
+        "security": [{
+          "ApiKeyAuth": []
+        }],
         "requestBody": {
           "required": true,
           "content": {
@@ -471,13 +467,10 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instanceName",
             "description": "Name of the instance to be fetched",
             "in": "query",
@@ -524,8 +517,7 @@
                       }
                     }
                   },
-                  "example": [
-                    {
+                  "example": [{
                       "instance": {
                         "instanceName": "example-name",
                         "instanceId": "421a4121-a3d9-40cc-a8db-c3a1df353126",
@@ -574,13 +566,10 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -681,22 +670,18 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance to restart",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance to restart",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Restarts the instance",
         "responses": {
           "200": {
@@ -782,22 +767,18 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance to get status connect",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance to get status connect",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Gets the state of the connection",
         "responses": {
           "200": {
@@ -883,22 +864,18 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance to logout",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance to logout",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Makes logout on instance",
         "responses": {
           "200": {
@@ -989,22 +966,18 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance to delete",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance to delete",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Delete instance",
         "responses": {
           "200": {
@@ -1095,22 +1068,18 @@
           "Instance Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance to connect",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance to connect",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Deletes instance",
         "requestBody": {
           "content": {
@@ -1190,22 +1159,18 @@
           "Webhook Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set Webhook for instance",
         "requestBody": {
           "content": {
@@ -1339,22 +1304,18 @@
           "Webhook Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Fetch Webhook configuration",
         "responses": {
           "200": {
@@ -1402,22 +1363,18 @@
           "Settings Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set settings",
         "requestBody": {
           "content": {
@@ -1542,22 +1499,18 @@
           "Webhook Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance to get settings",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance to get settings",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Fetch Webhook configuration",
         "responses": {
           "200": {
@@ -1615,22 +1568,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send plain text message",
         "requestBody": {
           "content": {
@@ -1777,22 +1726,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send media message",
         "requestBody": {
           "content": {
@@ -2022,22 +1967,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "ID of the instance to connect",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "ID of the instance to connect",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send WhatsApp Audio",
         "requestBody": {
           "content": {
@@ -2232,22 +2173,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Sticker",
         "requestBody": {
           "content": {
@@ -2333,22 +2270,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance ",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance ",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Post WhatsApp status (stories)",
         "requestBody": {
           "content": {
@@ -2504,22 +2437,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Location",
         "requestBody": {
           "content": {
@@ -2706,22 +2635,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Contact",
         "requestBody": {
           "content": {
@@ -2873,22 +2798,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Reaction",
         "requestBody": {
           "content": {
@@ -3031,22 +2952,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Poll",
         "requestBody": {
           "content": {
@@ -3224,8 +3141,7 @@
                       },
                       "pollCreationMessage": {
                         "name": "Poll Name",
-                        "options": [
-                          {
+                        "options": [{
                             "optionName": "Option 1"
                           },
                           {
@@ -3256,22 +3172,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send List",
         "requestBody": {
           "content": {
@@ -3479,8 +3391,7 @@
                       },
                       "pollCreationMessage": {
                         "name": "Poll Name",
-                        "options": [
-                          {
+                        "options": [{
                             "optionName": "Option 1"
                           },
                           {
@@ -3511,22 +3422,18 @@
           "Message Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Buttons",
         "requestBody": {
           "content": {
@@ -3717,8 +3624,7 @@
                       },
                       "pollCreationMessage": {
                         "name": "Poll Name",
-                        "options": [
-                          {
+                        "options": [{
                             "optionName": "Option 1"
                           },
                           {
@@ -3749,22 +3655,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Check if numbers are on WhatsApp",
         "requestBody": {
           "content": {
@@ -3809,13 +3711,11 @@
                     }
                   },
                   "description": "Array of objects representing WhatsApp account existence information.",
-                  "example": [
-                    {
-                      "exists": true,
-                      "jid": "553198296801@s.whatsapp.net",
-                      "number": "553198296801"
-                    }
-                  ]
+                  "example": [{
+                    "exists": true,
+                    "jid": "553198296801@s.whatsapp.net",
+                    "number": "553198296801"
+                  }]
                 }
               }
             }
@@ -3831,22 +3731,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Mark message as read",
         "requestBody": {
           "content": {
@@ -3919,22 +3815,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Mark message as read",
         "requestBody": {
           "content": {
@@ -4012,22 +3904,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Archive Chat",
         "requestBody": {
           "content": {
@@ -4120,22 +4008,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Delete Message For Everyone",
         "requestBody": {
           "content": {
@@ -4274,22 +4158,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send Presence (typing...)",
         "requestBody": {
           "content": {
@@ -4352,22 +4232,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Block status to contacts",
         "requestBody": {
           "content": {
@@ -4408,22 +4284,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Fetch Profile Picture URL",
         "requestBody": {
           "content": {
@@ -4479,22 +4351,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Here it is possible to list all contacts or just one,using the 'where' option.",
         "requestBody": {
           "content": {
@@ -4535,22 +4403,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Get base64 from media message",
         "requestBody": {
           "content": {
@@ -4601,22 +4465,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find all messages",
         "requestBody": {
           "content": {
@@ -4659,22 +4519,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find status message",
         "requestBody": {
           "content": {
@@ -4731,22 +4587,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Update message",
         "requestBody": {
           "content": {
@@ -4805,22 +4657,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find all chats",
         "responses": {
           "200": {
@@ -4838,22 +4686,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Fetch business profile from phone number",
         "requestBody": {
           "content": {
@@ -4889,22 +4733,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Fetch profile from phone number",
         "requestBody": {
           "content": {
@@ -4940,22 +4780,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Update profile name",
         "requestBody": {
           "content": {
@@ -4991,22 +4827,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Update profile status",
         "requestBody": {
           "content": {
@@ -5042,22 +4874,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Update profile picture",
         "requestBody": {
           "content": {
@@ -5093,22 +4921,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Update profile picture",
         "responses": {
           "200": {
@@ -5126,22 +4950,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance ",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance ",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Fetch privacy settings",
         "responses": {
           "200": {
@@ -5159,22 +4979,18 @@
           "Chat Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance ",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance ",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Update privacy settings",
         "requestBody": {
           "content": {
@@ -5260,22 +5076,18 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance ",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance ",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Create group",
         "requestBody": {
           "content": {
@@ -5323,13 +5135,10 @@
           "Update group picture"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5383,13 +5192,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5443,13 +5249,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5503,13 +5306,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5565,13 +5365,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5607,13 +5404,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5649,22 +5443,18 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance ",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance ",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Send group invite",
         "requestBody": {
           "content": {
@@ -5733,13 +5523,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5774,13 +5561,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -5887,12 +5671,10 @@
                     "descId": "BAE57E16498982ED",
                     "restrict": false,
                     "announce": false,
-                    "participants": [
-                      {
-                        "id": "553198296801@s.whatsapp.net",
-                        "admin": "superadmin"
-                      }
-                    ]
+                    "participants": [{
+                      "id": "553198296801@s.whatsapp.net",
+                      "admin": "superadmin"
+                    }]
                   }
                 }
               }
@@ -5909,13 +5691,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6007,22 +5786,20 @@
                     ]
                   },
                   "description": "Array of objects representing WhatsApp group details.",
-                  "example": [
-                    {
-                      "id": "120363295648424210@g.us",
-                      "subject": "Example Group",
-                      "subjectOwner": "553198296801@s.whatsapp.net",
-                      "subjectTime": 1714769954,
-                      "pictureUrl": null,
-                      "size": 1,
-                      "creation": 1714769954,
-                      "owner": "553198296801@s.whatsapp.net",
-                      "desc": "optional",
-                      "descId": "BAE57E16498982ED",
-                      "restrict": false,
-                      "announce": false
-                    }
-                  ]
+                  "example": [{
+                    "id": "120363295648424210@g.us",
+                    "subject": "Example Group",
+                    "subjectOwner": "553198296801@s.whatsapp.net",
+                    "subjectTime": 1714769954,
+                    "pictureUrl": null,
+                    "size": 1,
+                    "creation": 1714769954,
+                    "owner": "553198296801@s.whatsapp.net",
+                    "desc": "optional",
+                    "descId": "BAE57E16498982ED",
+                    "restrict": false,
+                    "announce": false
+                  }]
                 }
               }
             }
@@ -6038,13 +5815,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6094,12 +5868,10 @@
                     }
                   },
                   "example": {
-                    "participants": [
-                      {
-                        "id": "553198296801@s.whatsapp.net",
-                        "admin": "superadmin"
-                      }
-                    ]
+                    "participants": [{
+                      "id": "553198296801@s.whatsapp.net",
+                      "admin": "superadmin"
+                    }]
                   }
                 }
               }
@@ -6116,13 +5888,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6185,13 +5954,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6248,13 +6014,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6308,13 +6071,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6350,22 +6110,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set typebot",
         "requestBody": {
           "content": {
@@ -6465,22 +6221,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Start typebot",
         "requestBody": {
           "content": {
@@ -6541,22 +6293,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Change status session",
         "requestBody": {
           "content": {
@@ -6593,22 +6341,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set settings typebot",
         "requestBody": {
           "content": {
@@ -6689,22 +6433,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find typebot settings",
         "responses": {
           "200": {
@@ -6722,22 +6462,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find typebot",
         "responses": {
           "200": {
@@ -6755,13 +6491,10 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6797,13 +6530,10 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6839,13 +6569,10 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -6964,13 +6691,10 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -7006,22 +6730,18 @@
           "Chatwoot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set Chatwoot",
         "requestBody": {
           "content": {
@@ -7136,22 +6856,18 @@
           "Chatwoot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find Chatwoot",
         "responses": {
           "200": {
@@ -7169,22 +6885,18 @@
           "SQS Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set SQS",
         "requestBody": {
           "content": {
@@ -7257,22 +6969,18 @@
           "SQS Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find SQS",
         "responses": {
           "200": {
@@ -7290,22 +6998,18 @@
           "RabbitMQ Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set RabbitMQ",
         "requestBody": {
           "content": {
@@ -7378,22 +7082,18 @@
           "RabbitMQ Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find RabbitMQ",
         "responses": {
           "200": {
@@ -7411,22 +7111,18 @@
           "Websocket Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Set Websocket",
         "requestBody": {
           "content": {
@@ -7499,22 +7195,18 @@
           "Websocket Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find Websocket",
         "responses": {
           "200": {
@@ -7532,22 +7224,18 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Create an OpenAI bot with detailed configuration",
         "requestBody": {
           "content": {
@@ -7700,22 +7388,18 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Get OpenAI bot with detailed configuration",
         "responses": {
           "200": {
@@ -7733,13 +7417,10 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -7775,13 +7456,10 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -7817,13 +7495,10 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -7994,22 +7669,18 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Creds openia bot configuration",
         "requestBody": {
           "description": "Configuration for the OpenAI bot instance",
@@ -8050,22 +7721,18 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Get OpenAI Creds",
         "responses": {
           "200": {
@@ -8083,13 +7750,10 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -8125,22 +7789,18 @@
           "OpenAI Controller"
         ],
         "description": "Set settings for an OpenAI bot instance.",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Configuration for updating the OpenAI bot settings",
           "required": true,
@@ -8252,22 +7912,18 @@
           "OpenIA Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find settings OpenAi",
         "responses": {
           "200": {
@@ -8285,22 +7941,18 @@
           "OpenAI Controller"
         ],
         "description": "Changes the status of the OpenAI bot instance.",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Body for changing the status of the OpenAI bot",
           "required": true,
@@ -8369,13 +8021,10 @@
           "OpenAI Controller"
         ],
         "description": "Fetches the sessions of the specified OpenAI bot instance.",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "openaiBotId",
             "in": "path",
             "required": true,
@@ -8431,22 +8080,18 @@
           "Dify Controller"
         ],
         "description": "Creates a new Dify bot with the provided configuration",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Configuration for the Dify bot instance",
           "required": true,
@@ -8572,22 +8217,18 @@
           "OpenAI Controller"
         ],
         "description": "Fetches dify bots.",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Successfully fetched sessions",
@@ -8616,13 +8257,10 @@
           "OpenAI Controller"
         ],
         "description": "Update dify bot.",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -8669,13 +8307,10 @@
           "Dify Controller"
         ],
         "description": "Update bot Dify",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -8810,22 +8445,18 @@
           "Dify Controller"
         ],
         "description": "Atualiza as configurações do bot Dify.",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Configurações do bot Dify",
           "required": true,
@@ -8932,22 +8563,18 @@
           "Dify Controller"
         ],
         "description": "Find settigns dify bot",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Configurações do bot Dify atualizadas com sucesso.",
@@ -8976,22 +8603,18 @@
           "Dify Controller"
         ],
         "description": "Altera o status de um bot Dify. O status pode ser `opened`, `paused`, ou `closed`. O status `closed` encerra a interação do bot.",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Dados para alterar o status do bot Dify",
           "required": true,
@@ -9052,13 +8675,10 @@
           "Dify Controller"
         ],
         "description": "Recupera as sessões ativas de um bot Dify específico, com base no ID do bot (`difyId`) e na instância do bot (`instance`).",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "difyId",
             "in": "path",
             "required": true,
@@ -9104,22 +8724,18 @@
           "Flowise Controller"
         ],
         "description": "Create Bot Flowise",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Configuração para a instância do Flowise",
           "required": true,
@@ -9292,22 +8908,18 @@
           "Dify Controller"
         ],
         "description": "Fetch bots flowise",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância.",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Sessões recuperadas com sucesso.",
@@ -9335,13 +8947,10 @@
           "Dify Controller"
         ],
         "description": "Fetch bots flowise",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -9387,13 +8996,10 @@
           "Flowise Controller"
         ],
         "description": "Update flowise bot",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "flowiseId",
             "in": "path",
             "required": true,
@@ -9584,13 +9190,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -9626,22 +9229,18 @@
           "Flowise Controller"
         ],
         "description": "Set Settings Flowise bot",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Configuração para atualizar as preferências da instância do Flowise",
           "required": true,
@@ -9748,13 +9347,10 @@
           "Dify Controller"
         ],
         "description": "Fetch session flowise",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -9800,22 +9396,18 @@
           "Dify Controller"
         ],
         "description": "Fetch settings flowise",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância.",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Sessões recuperadas com sucesso.",
@@ -9843,22 +9435,18 @@
           "Flowise Controller"
         ],
         "description": "Atualiza os settings do bot flowise",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Nome da instância",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Nome da instância",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "requestBody": {
           "description": "Corpo da requisição contendo o identificador remoto e o status a ser atualizado",
           "required": true,
@@ -9951,22 +9539,18 @@
           "Evolution Bot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Create a new Evolution Bot configuration.",
         "requestBody": {
           "content": {
@@ -10085,13 +9669,10 @@
           "OpenAI Controller"
         ],
         "description": "Update evo bot.",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -10138,13 +9719,10 @@
           "Evolution Bot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "evolutionBotId",
             "in": "path",
             "required": true,
@@ -10281,22 +9859,18 @@
           "OpenAI Controller"
         ],
         "description": "Update evo bots.",
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Successfully fetched sessions",
@@ -10325,13 +9899,10 @@
           "Group Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -10359,137 +9930,6 @@
         }
       }
     },
-    "/evolutionBot/update/:evolutionBotId/{instance}": {
-      "put": {
-        "operationId": "updateEvolutionBot",
-        "summary": "Update Evolution Bot",
-        "tags": [
-          "Evolution Bot Controller"
-        ],
-        "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "evolutionBotId",
-            "in": "path",
-            "required": true,
-            "description": "ID of the Evolution Bot to update",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "description": "Update an existing Evolution Bot configuration.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "enabled",
-                  "apiUrl",
-                  "triggerType",
-                  "triggerOperator",
-                  "triggerValue",
-                  "expire",
-                  "keywordFinish",
-                  "delayMessage",
-                  "unknownMessage",
-                  "listeningFromMe",
-                  "stopBotFromMe",
-                  "keepOpen",
-                  "debounceTime"
-                ],
-                "properties": {
-                  "enabled": {
-                    "type": "boolean",
-                    "description": "Enable or disable the Evolution Bot"
-                  },
-                  "apiUrl": {
-                    "type": "string",
-                    "description": "API URL for the bot"
-                  },
-                  "apiKey": {
-                    "type": "string",
-                    "description": "API Key for authentication (optional)"
-                  },
-                  "triggerType": {
-                    "type": "string",
-                    "description": "Trigger type, e.g., 'all' or 'keyword'"
-                  },
-                  "triggerOperator": {
-                    "type": "string",
-                    "description": "Operator logic, e.g., 'contains', 'equals', 'startsWith', 'endsWith', 'regex'"
-                  },
-                  "triggerValue": {
-                    "type": "string",
-                    "description": "Trigger value, e.g., 'test'"
-                  },
-                  "expire": {
-                    "type": "number",
-                    "description": "Expiration time for the session (in seconds)"
-                  },
-                  "keywordFinish": {
-                    "type": "string",
-                    "description": "Keyword to terminate the session"
-                  },
-                  "delayMessage": {
-                    "type": "number",
-                    "description": "Delay time (in ms) for sending messages"
-                  },
-                  "unknownMessage": {
-                    "type": "string",
-                    "description": "Message displayed when an unknown input is received"
-                  },
-                  "listeningFromMe": {
-                    "type": "boolean",
-                    "description": "Listen to messages sent by the bot owner"
-                  },
-                  "stopBotFromMe": {
-                    "type": "boolean",
-                    "description": "Stop bot when the owner sends a message"
-                  },
-                  "keepOpen": {
-                    "type": "boolean",
-                    "description": "Keep the session open after processing messages"
-                  },
-                  "debounceTime": {
-                    "type": "number",
-                    "description": "Time delay to debounce messages"
-                  },
-                  "ignoreJids": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "List of JIDs to ignore"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {}
-          }
-        }
-      }
-    },
     "/evolutionBot/settings/{instance}": {
       "post": {
         "operationId": "createEvolutionBotSettings",
@@ -10498,22 +9938,18 @@
           "Evolution Bot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Configure settings for an Evolution Bot.",
         "requestBody": {
           "content": {
@@ -10596,22 +10032,18 @@
           "Evolution Bot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Find evolution bot settings",
         "responses": {
           "200": {
@@ -10629,13 +10061,10 @@
           "Evolution Bot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
             "name": "instance",
             "in": "path",
             "required": true,
@@ -10671,22 +10100,18 @@
           "Typebot Controller"
         ],
         "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
+        "security": [{
+          "ApiKeyAuth": []
+        }],
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "Name of the instance",
+          "schema": {
+            "type": "string"
           }
-        ],
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        }],
         "description": "Change status session",
         "requestBody": {
           "content": {
@@ -10720,17 +10145,15 @@
         "operationId": "getEvoInfo",
         "summary": "Get information about your EvolutionAPI",
         "deprecated": false,
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "ID of the instance to connect",
-            "schema": {
-              "type": "string"
-            }
+        "parameters": [{
+          "name": "instance",
+          "in": "path",
+          "required": true,
+          "description": "ID of the instance to connect",
+          "schema": {
+            "type": "string"
           }
-        ],
+        }],
         "description": "Get information about your EvolutionAPI",
         "responses": {
           "200": {
