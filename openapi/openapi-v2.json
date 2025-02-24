@@ -132,7 +132,7 @@
                         "type": "object",
                         "description": "Headers for send the API from webhook",
                         "properties": {
-                          "autorization": {
+                          "authorization": {
                             "type": "string",
                             "description": "Your authorization key header"
                           },
