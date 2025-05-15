@@ -9096,6 +9096,1314 @@
         }
       }
     },
+    "/n8n/create/{instance}": {
+      "post": {
+        "operationId": "createN8nBot",
+        "summary": "Create a new n8n bot instance",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Creates a new n8n bot with the provided configuration",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration for the n8n bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "webhookUrl": {
+                    "type": "string"
+                  },
+                  "basicAuthUser": {
+                    "type": "string"
+                  },
+                  "basicAuthPassword": {
+                    "type": "string"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ]
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "contains",
+                      "equals",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ]
+                  },
+                  "triggerValue": {
+                    "type": "string"
+                  },
+                  "expire": {
+                    "type": "integer"
+                  },
+                  "keywordFinish": {
+                    "type": "string"
+                  },
+                  "delayMessage": {
+                    "type": "integer"
+                  },
+                  "unknownMessage": {
+                    "type": "string"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean"
+                  },
+                  "keepOpen": {
+                    "type": "boolean"
+                  },
+                  "debounceTime": {
+                    "type": "integer"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "webhookUrl"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "n8n bot instance created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "n8n bot instance created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid or missing parameters"
+          },
+          "404": {
+            "description": "Not Found - Instance could not be created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/n8n/find/{instance}": {
+      "get": {
+        "operationId": "fetchN8n",
+        "summary": "Fetch n8n Bot",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Fetches n8n bots.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/n8n/find/:n8nId/{instance}": {
+      "get": {
+        "operationId": "findN8n",
+        "summary": "Find n8n Bot",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Update n8n bot.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "n8nId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the n8n bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/n8n/update/:n8nId/{instance}": {
+      "put": {
+        "operationId": "updateN8nBot",
+        "summary": "Create a new n8n bot instance",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Update bot n8n",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "n8nId",
+            "in": "path",
+            "required": true,
+            "description": "Id bot n8n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration for the n8n bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "webhookUrl": {
+                    "type": "string"
+                  },
+                  "basicAuthUser": {
+                    "type": "string"
+                  },
+                  "basicAuthPassword": {
+                    "type": "string"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ]
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "contains",
+                      "equals",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ]
+                  },
+                  "triggerValue": {
+                    "type": "string"
+                  },
+                  "expire": {
+                    "type": "integer"
+                  },
+                  "keywordFinish": {
+                    "type": "string"
+                  },
+                  "delayMessage": {
+                    "type": "integer"
+                  },
+                  "unknownMessage": {
+                    "type": "string"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean"
+                  },
+                  "keepOpen": {
+                    "type": "boolean"
+                  },
+                  "debounceTime": {
+                    "type": "integer"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "webhookUrl"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "n8n bot instance created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "n8n bot instance created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/n8n/settings/{instance}": {
+      "post": {
+        "operationId": "updateN8nSettings",
+        "summary": "Atualiza as configurações do bot n8n",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Atualiza as configurações do bot n8n.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configurações do bot n8n",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expire": {
+                    "type": "integer",
+                    "description": "Tempo de expiração em minutos.",
+                    "example": 20
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Palavra-chave que finalizará o bot.",
+                    "example": "#SAIR"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Tempo de delay antes do envio de uma nova mensagem (em milissegundos).",
+                    "example": 1000
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Mensagem que será enviada quando o bot não reconhecer o comando.",
+                    "example": "Mensagem não reconhecida"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve ouvir mensagens enviadas pelo próprio usuário.",
+                    "example": false
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve parar ao receber mensagens enviadas pelo próprio usuário.",
+                    "example": false
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve manter a conversa aberta após uma resposta.",
+                    "example": false
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Tempo de debounce (em milissegundos).",
+                    "example": 0
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Lista de JIDs a serem ignorados.",
+                    "example": []
+                  },
+                  "n8nIdFallback": {
+                    "type": "string",
+                    "description": "ID de fallback do bot n8n.",
+                    "example": "clyja4oys0a3uqpy7k3bd7swe"
+                  }
+                },
+                "required": [
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "n8nIdFallback",
+                  "ignoreJids"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Configurações do bot n8n atualizadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações do bot n8n atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/n8n/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "findN8nSettings",
+        "summary": "Find settings n8n bot",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Find settigns n8n bot",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurações do bot n8n atualizadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações do bot n8n atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/n8n/changeStatus/{instance}": {
+      "post": {
+        "operationId": "changeN8nBotStatus",
+        "summary": "Altera o status do bot n8n",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Altera o status de um bot n8n. O status pode ser `opened`, `paused`, ou `closed`. O status `closed` encerra a interação do bot.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados para alterar o status do bot n8n",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "Número de telefone remoto no formato E.164 (ex: 5511912345678@s.whatsapp.net)",
+                    "example": "5511912345678@s.whatsapp.net"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "opened",
+                      "paused",
+                      "closed"
+                    ],
+                    "description": "Status a ser atribuído ao bot n8n. Os valores válidos são `opened`, `paused` e `closed`.",
+                    "example": "closed"
+                  }
+                },
+                "required": [
+                  "remoteJid",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status do bot n8n alterado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Status do bot n8n alterado para closed com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/n8n/fetchSessions/:n8nId/{instance}": {
+      "get": {
+        "operationId": "fetchN8nBotSessions",
+        "summary": "Recupera as sessões ativas do bot n8n",
+        "tags": [
+          "n8n Controller"
+        ],
+        "description": "Recupera as sessões ativas de um bot n8n específico, com base no ID do bot (`n8nId`) e na instância do bot (`instance`).",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "n8nId",
+            "in": "path",
+            "required": true,
+            "description": "ID único do bot n8n.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessões recuperadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessions": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/create/{instance}": {
+      "post": {
+        "operationId": "createEvoAIBot",
+        "summary": "Create a new evoai bot instance",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Creates a new EvoAI bot with the provided configuration",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration for the EvoAI bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "agentUrl": {
+                    "type": "string"
+                  },
+                  "apiKey": {
+                    "type": "string"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ]
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "contains",
+                      "equals",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ]
+                  },
+                  "triggerValue": {
+                    "type": "string"
+                  },
+                  "expire": {
+                    "type": "integer"
+                  },
+                  "keywordFinish": {
+                    "type": "string"
+                  },
+                  "delayMessage": {
+                    "type": "integer"
+                  },
+                  "unknownMessage": {
+                    "type": "string"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean"
+                  },
+                  "keepOpen": {
+                    "type": "boolean"
+                  },
+                  "debounceTime": {
+                    "type": "integer"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "agentUrl"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "EvoAI bot instance created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "EvoAI bot instance created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid or missing parameters"
+          },
+          "404": {
+            "description": "Not Found - Instance could not be created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/evoai/find/{instance}": {
+      "get": {
+        "operationId": "fetchEvoAIBot",
+        "summary": "Fetch EvoAI Bot",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Fetches EvoAI bots.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/find/:evoaiId/{instance}": {
+      "get": {
+        "operationId": "findEvoAIBot",
+        "summary": "Find EvoAI Bot",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Update EvoAI bot.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "evoaiId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the EvoAI bot",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/update/:evoaiId/{instance}": {
+      "put": {
+        "operationId": "updateEvoAIBot",
+        "summary": "Create a new EvoAI bot instance",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Update bot EvoAI",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Name of the instance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "evoaiId",
+            "in": "path",
+            "required": true,
+            "description": "Id bot EvoAI",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration for the EvoAI bot instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "agentUrl": {
+                    "type": "string"
+                  },
+                  "apiKey": {
+                    "type": "string"
+                  },
+                  "triggerType": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "keyword"
+                    ]
+                  },
+                  "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                      "contains",
+                      "equals",
+                      "startsWith",
+                      "endsWith",
+                      "regex",
+                      "none"
+                    ]
+                  },
+                  "triggerValue": {
+                    "type": "string"
+                  },
+                  "expire": {
+                    "type": "integer"
+                  },
+                  "keywordFinish": {
+                    "type": "string"
+                  },
+                  "delayMessage": {
+                    "type": "integer"
+                  },
+                  "unknownMessage": {
+                    "type": "string"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean"
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean"
+                  },
+                  "keepOpen": {
+                    "type": "boolean"
+                  },
+                  "debounceTime": {
+                    "type": "integer"
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "agentUrl"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "EvoAI bot instance created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "EvoAI bot instance created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/settings/{instance}": {
+      "post": {
+        "operationId": "updateEvoAISettings",
+        "summary": "Atualiza as configurações do bot EvoAI",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Atualiza as configurações do bot EvoAI.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Configurações do bot EvoAI",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expire": {
+                    "type": "integer",
+                    "description": "Tempo de expiração em minutos.",
+                    "example": 20
+                  },
+                  "keywordFinish": {
+                    "type": "string",
+                    "description": "Palavra-chave que finalizará o bot.",
+                    "example": "#SAIR"
+                  },
+                  "delayMessage": {
+                    "type": "integer",
+                    "description": "Tempo de delay antes do envio de uma nova mensagem (em milissegundos).",
+                    "example": 1000
+                  },
+                  "unknownMessage": {
+                    "type": "string",
+                    "description": "Mensagem que será enviada quando o bot não reconhecer o comando.",
+                    "example": "Mensagem não reconhecida"
+                  },
+                  "listeningFromMe": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve ouvir mensagens enviadas pelo próprio usuário.",
+                    "example": false
+                  },
+                  "stopBotFromMe": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve parar ao receber mensagens enviadas pelo próprio usuário.",
+                    "example": false
+                  },
+                  "keepOpen": {
+                    "type": "boolean",
+                    "description": "Define se o bot deve manter a conversa aberta após uma resposta.",
+                    "example": false
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Tempo de debounce (em milissegundos).",
+                    "example": 0
+                  },
+                  "ignoreJids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Lista de JIDs a serem ignorados.",
+                    "example": []
+                  },
+                  "evoaiIdFallback": {
+                    "type": "string",
+                    "description": "ID de fallback do bot EvoAI.",
+                    "example": "clyja4oys0a3uqpy7k3bd7swe"
+                  }
+                },
+                "required": [
+                  "expire",
+                  "keywordFinish",
+                  "delayMessage",
+                  "unknownMessage",
+                  "listeningFromMe",
+                  "stopBotFromMe",
+                  "keepOpen",
+                  "debounceTime",
+                  "evoaiIdFallback",
+                  "ignoreJids"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Configurações do bot EvoAI atualizadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações do bot EvoAI atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/fetchSettings/{instance}": {
+      "get": {
+        "operationId": "findEvoAISettings",
+        "summary": "Find settings EvoAI bot",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Find settigns EvoAI bot",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurações do bot EvoAI atualizadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Configurações do bot EvoAI atualizadas com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/changeStatus/{instance}": {
+      "post": {
+        "operationId": "changeEvoAIBotStatus",
+        "summary": "Altera o status do bot EvoAI",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Altera o status de um bot EvoAI. O status pode ser `opened`, `paused`, ou `closed`. O status `closed` encerra a interação do bot.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados para alterar o status do bot EvoAI",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remoteJid": {
+                    "type": "string",
+                    "description": "Número de telefone remoto no formato E.164 (ex: 5511912345678@s.whatsapp.net)",
+                    "example": "5511912345678@s.whatsapp.net"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "opened",
+                      "paused",
+                      "closed"
+                    ],
+                    "description": "Status a ser atribuído ao bot EvoAI. Os valores válidos são `opened`, `paused` e `closed`.",
+                    "example": "closed"
+                  }
+                },
+                "required": [
+                  "remoteJid",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status do bot EvoAI alterado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Status do bot EvoAI alterado para closed com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evoai/fetchSessions/:evoaiId/{instance}": {
+      "get": {
+        "operationId": "fetchEvoAIBotSessions",
+        "summary": "Recupera as sessões ativas do bot EvoAI",
+        "tags": [
+          "EvoAI Controller"
+        ],
+        "description": "Recupera as sessões ativas de um bot EvoAI específico, com base no ID do bot (`evoaiId`) e na instância do bot (`instance`).",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "evoaiId",
+            "in": "path",
+            "required": true,
+            "description": "ID único do bot EvoAI.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "required": true,
+            "description": "Nome da instância.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessões recuperadas com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessions": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/flowise/create/{instance}": {
       "post": {
         "operationId": "createFlowiseInstance",
@@ -10351,137 +11659,6 @@
           }
         ],
         "description": "Delete Bot",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/evolutionBot/update/:evolutionBotId/{instance}": {
-      "put": {
-        "operationId": "updateEvolutionBot",
-        "summary": "Update Evolution Bot",
-        "tags": [
-          "Evolution Bot Controller"
-        ],
-        "deprecated": false,
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "evolutionBotId",
-            "in": "path",
-            "required": true,
-            "description": "ID of the Evolution Bot to update",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "Name of the instance",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "description": "Update an existing Evolution Bot configuration.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "enabled",
-                  "apiUrl",
-                  "triggerType",
-                  "triggerOperator",
-                  "triggerValue",
-                  "expire",
-                  "keywordFinish",
-                  "delayMessage",
-                  "unknownMessage",
-                  "listeningFromMe",
-                  "stopBotFromMe",
-                  "keepOpen",
-                  "debounceTime"
-                ],
-                "properties": {
-                  "enabled": {
-                    "type": "boolean",
-                    "description": "Enable or disable the Evolution Bot"
-                  },
-                  "apiUrl": {
-                    "type": "string",
-                    "description": "API URL for the bot"
-                  },
-                  "apiKey": {
-                    "type": "string",
-                    "description": "API Key for authentication (optional)"
-                  },
-                  "triggerType": {
-                    "type": "string",
-                    "description": "Trigger type, e.g., 'all' or 'keyword'"
-                  },
-                  "triggerOperator": {
-                    "type": "string",
-                    "description": "Operator logic, e.g., 'contains', 'equals', 'startsWith', 'endsWith', 'regex'"
-                  },
-                  "triggerValue": {
-                    "type": "string",
-                    "description": "Trigger value, e.g., 'test'"
-                  },
-                  "expire": {
-                    "type": "number",
-                    "description": "Expiration time for the session (in seconds)"
-                  },
-                  "keywordFinish": {
-                    "type": "string",
-                    "description": "Keyword to terminate the session"
-                  },
-                  "delayMessage": {
-                    "type": "number",
-                    "description": "Delay time (in ms) for sending messages"
-                  },
-                  "unknownMessage": {
-                    "type": "string",
-                    "description": "Message displayed when an unknown input is received"
-                  },
-                  "listeningFromMe": {
-                    "type": "boolean",
-                    "description": "Listen to messages sent by the bot owner"
-                  },
-                  "stopBotFromMe": {
-                    "type": "boolean",
-                    "description": "Stop bot when the owner sends a message"
-                  },
-                  "keepOpen": {
-                    "type": "boolean",
-                    "description": "Keep the session open after processing messages"
-                  },
-                  "debounceTime": {
-                    "type": "number",
-                    "description": "Time delay to debounce messages"
-                  },
-                  "ignoreJids": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "List of JIDs to ignore"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Ok",

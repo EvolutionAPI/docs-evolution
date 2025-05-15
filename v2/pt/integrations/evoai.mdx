@@ -1,0 +1,161 @@
+---
+title: EvoAI
+icon: robot
+description: https://github.com/EvolutionAPI/evo-ai/
+---
+
+A Evolution API permite a criação e gerenciamento de bots usando a tecnologia EvoAI, fornecendo automação avançada e interatividade através de diferentes tipos de bots. A EvoAI é nossa própria tecnologia desenvolvida pela equipe da Evolution. Você pode saber mais em [evo-ai.co](https://evo-ai.co). Abaixo, você encontrará instruções detalhadas sobre como configurar bots, gerenciar sessões e definir configurações padrão.
+
+## 1. Criando Bots no EvoAI
+
+Você pode configurar vários bots no EvoAI usando gatilhos para iniciar interações. A configuração do bot pode ser feita através do endpoint `/evoai/create/{{instance}}`.
+
+### Endpoint para Criação de Bot
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/evoai/create/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de um corpo JSON para configurar um bot no EvoAI:
+
+~~~json
+{
+    "enabled": true,
+    "agentUrl": "http://evoai.site.com/v1",
+    "apiKey": "app-123456",
+    // opções
+    "triggerType": "keyword", /* all ou keyword */
+    "triggerOperator": "equals", /* contains, equals, startsWith, endsWith, regex, none */
+    "triggerValue": "test",
+    "expire": 0,
+    "keywordFinish": "#SAIR",
+    "delayMessage": 1000,
+    "unknownMessage": "Mensagem não reconhecida",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": []
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`enabled`**: Ativa (`true`) ou desativa (`false`) o bot.
+- **`agentUrl`**: URL da API EvoAI (sem uma barra `/` no final).
+- **`apiKey`**: Chave de API fornecida pelo EvoAI.
+- **Opções**:
+  - **`triggerType`**: Tipo de gatilho para iniciar o bot (`all` ou `keyword`).
+  - **`triggerOperator`**: Operador usado para avaliar o gatilho (`contains`, `equals`, `startsWith`, `endsWith`, `regex`, `none`).
+  - **`triggerValue`**: Valor usado no gatilho (por exemplo, uma palavra-chave ou regex).
+  - **`expire`**: Tempo em minutos após o qual o bot expira, reiniciando se a sessão expirou.
+  - **`keywordFinish`**: Palavra-chave que encerra a sessão do bot.
+  - **`delayMessage`**: Atraso (em milissegundos) para simular digitação antes de enviar uma mensagem.
+  - **`unknownMessage`**: Mensagem enviada quando a entrada do usuário não é reconhecida.
+  - **`listeningFromMe`**: Define se o bot deve ouvir mensagens enviadas pelo usuário (`true` ou `false`).
+  - **`stopBotFromMe`**: Define se o bot deve parar quando o usuário enviar uma mensagem (`true` ou `false`).
+  - **`keepOpen`**: Mantém a sessão aberta, impedindo que o bot reinicie para o mesmo contato.
+  - **`debounceTime`**: Tempo (em segundos) para combinar várias mensagens em uma.
+  - **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
+
+## 2. Configurações Padrão do EvoAI
+
+Você pode definir configurações padrão que serão aplicadas se os parâmetros não forem passados durante a criação do bot.
+
+### Endpoint para Configurações Padrão
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/evoai/settings/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de configurações padrão:
+
+~~~json
+{
+    "expire": 20,
+    "keywordFinish": "#SAIR",
+    "delayMessage": 1000,
+    "unknownMessage": "Mensagem não reconhecida",
+    "listeningFromMe": false,
+    "stopBotFromMe": false,
+    "keepOpen": false,
+    "debounceTime": 0,
+    "ignoreJids": [],
+    "evoaiIdFallback": "clyja4oys0a3uqpy7k3bd7swe"
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`expire`**: Tempo em minutos após o qual o bot expira.
+- **`keywordFinish`**: Palavra-chave que encerra a sessão do bot.
+- **`delayMessage`**: Atraso para simular digitação antes de enviar uma mensagem.
+- **`unknownMessage`**: Mensagem enviada quando a entrada do usuário não é reconhecida.
+- **`listeningFromMe`**: Define se o bot deve ouvir mensagens enviadas pelo usuário.
+- **`stopBotFromMe`**: Define se o bot deve parar quando o usuário enviar uma mensagem.
+- **`keepOpen`**: Mantém a sessão aberta, impedindo que o bot reinicie para o mesmo contato.
+- **`debounceTime`**: Tempo para combinar várias mensagens em uma.
+- **`ignoreJids`**: Lista de JIDs de contatos que não ativarão o bot.
+- **`evoaiIdFallback`**: ID do bot de fallback que será usado se nenhum gatilho for ativado.
+
+## 3. Gerenciando Sessões do EvoAI
+
+Você pode gerenciar as sessões do bot alterando o status entre aberto, pausado ou fechado para cada contato específico.
+
+### Endpoint para Gerenciamento de Sessão
+
+#### Endpoint
+
+~~~http
+POST {{baseUrl}}/evoai/changeStatus/{{instance}}
+~~~
+
+#### Corpo da Requisição
+
+Aqui está um exemplo de como gerenciar o status da sessão:
+
+~~~json
+{
+    "remoteJid": "5511912345678@s.whatsapp.net",
+    "status": "closed"
+}
+~~~
+
+### Explicação dos Parâmetros
+
+- **`remoteJid`**: JID (identificador) do contato no WhatsApp.
+- **`status`**: Status da sessão (`opened`, `paused`, `closed`).
+
+## 4. Variáveis Automáticas no EvoAI
+
+Quando uma sessão do EvoAI é iniciada, algumas variáveis predefinidas são enviadas automaticamente:
+
+~~~json
+inputs: {
+    remoteJid: "JID do contato",
+    pushName: "Nome do contato",
+    instanceName: "Nome da instância",
+    serverUrl: "URL do servidor API",
+    apiKey: "Chave da API Evolution"
+};
+~~~
+
+### Explicação das Variáveis Automáticas
+
+- **`remoteJid`**: JID do contato com o qual o bot está interagindo.
+- **`pushName`**: Nome do contato no WhatsApp.
+- **`instanceName`**: Nome da instância que está executando o bot.
+- **`serverUrl`**: URL do servidor onde a Evolution API está hospedada.
+- **`apiKey`**: Chave de API usada para autenticar solicitações.
+
+## Considerações Finais
+
+A integração da Evolution API com o EvoAI oferece uma maneira robusta de automatizar interações no WhatsApp. Com a capacidade de configurar gatilhos, gerenciar sessões e usar variáveis automáticas, você pode otimizar o fluxo de trabalho e melhorar a experiência do usuário final.
