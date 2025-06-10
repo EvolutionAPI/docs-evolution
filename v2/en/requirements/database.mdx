@@ -19,7 +19,7 @@ The easiest and fastest way to set up a database for Evolution API v2 is through
 
 To set up PostgreSQL via Docker, follow these steps:
 
-1. Download the `docker-compose.yaml` file for PostgreSQL available [here](https://github.com/EvolutionAPI/evolution-api/blob/v2.0.0/Docker/postgres/docker-compose.yaml).
+1. Download the `docker-compose.yaml` file for PostgreSQL available [here](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/postgres/docker-compose.yaml).
 2. Navigate to the directory where the file was downloaded and run the command:
 
 ```bash
@@ -32,7 +32,7 @@ docker-compose up -d
 
 To set up MySQL via Docker, follow these steps:
 
-1. Download the `docker-compose.yaml` file for MySQL available [here](https://github.com/EvolutionAPI/evolution-api/blob/v2.0.0/Docker/mysql/docker-compose.yaml).
+1. Download the `docker-compose.yaml` file for MySQL available [here](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/mysql/docker-compose.yaml).
 2. Navigate to the directory where the file was downloaded and run the command:
 
 ```bash
@@ -40,6 +40,79 @@ docker-compose up -d
 ```
 
 3. The MySQL instance will be available at `localhost` on port `3306`.
+
+### Using Docker (Single file)
+
+If you don't want to have separate containers, you can create a single file with the database and the Evolution API. Follow the steps below:
+
+#### PostgreSQL
+
+1. Download the `docker-compose.yaml` file for PostgreSQL available [here](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/postgres/docker-compose.yaml).
+2. Open the file and add your Evolution API configuration specifying the `networks`. For example:
+```yaml
+services:
+  # Your Evolution API configuration:
+  evolution-api:
+    ...
+    networks:
+      - evolution-net
+    ...
+
+  # PostgreSQL configuration you downloaded:
+  postgres:
+    ...
+
+  pgadmin:
+    ...
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  evolution_instances:
+
+networks:
+  evolution-net:
+    name: evolution-net
+    driver: bridge
+```
+
+3. Save the file and run the command:
+```bash
+docker-compose up -d
+```
+
+#### MySQL
+
+1. Download the `docker-compose.yaml` file for MySQL available [here](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/mysql/docker-compose.yaml). 
+2. Open the file and add your Evolution API configuration specifying `networks`. For example:
+
+```yaml
+services:
+  # Sua configuração do Evolution API:
+  evolution-api:
+    ...
+    networks:
+      - evolution-net
+    ...
+
+  # Configuração do MySQL que você baixou:
+  mysql:
+    ...
+
+volumes:
+  mysql_data:
+  evolution_instances:
+
+networks:
+  evolution-net:
+    name: evolution-net
+    driver: bridge
+```
+
+3. Save the file and run the command:
+```bash
+docker-compose up -d
+```
 
 ### Environment Variables Configuration
 
@@ -66,6 +139,20 @@ DATABASE_SAVE_DATA_CONTACTS=true
 DATABASE_SAVE_DATA_CHATS=true
 DATABASE_SAVE_DATA_LABELS=true
 DATABASE_SAVE_DATA_HISTORIC=true
+```
+
+If you use a single [docker-compose.yaml](#using-docker-single-file), you should replace `localhost` with the name of your database service. For example:
+
+#### PostgreSQL
+```env
+# Database connection URI
+DATABASE_CONNECTION_URI='postgresql://user:password@postgres:5432/evolution?schema=public'
+```
+
+#### MySQL
+```env
+# Database connection URI
+DATABASE_CONNECTION_URI='postgresql://user:password@mysql:5432/evolution?schema=public'
 ```
 
 ### Local Installation

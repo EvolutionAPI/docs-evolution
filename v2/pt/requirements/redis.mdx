@@ -15,7 +15,7 @@ A maneira mais fácil e rápida de configurar o Redis para a Evolution API v2 é
 
 Para configurar o Redis via Docker, siga os passos abaixo:
 
-1. Baixe o arquivo `docker-compose.yaml` para o Redis disponível [aqui](https://github.com/EvolutionAPI/evolution-api/blob/v2.0.0/Docker/redis/docker-compose.yaml).
+1. Baixe o arquivo `docker-compose.yaml` para o Redis disponível [aqui](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/redis/docker-compose.yaml).
 2. Navegue até o diretório onde o arquivo foi baixado e execute o comando:
 
 ```bash
@@ -23,6 +23,41 @@ docker-compose up -d
 ```
 
 3. A instância do Redis estará disponível no endereço `localhost` na porta `6379`.
+
+
+### Utilizando Docker (Único arquivo)
+
+Caso não queira ter containers separados, você pode criar um único arquivo com o Redis e o Evolution API. Siga os passos abaixo:
+
+1. Baixe o arquivo `docker-compose.yaml` para o Redis disponível [aqui](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/redis/docker-compose.yaml).
+2. Abra o arquivo e acrescente sua configuração do Evolution API especificando o `networks`. Por exemplo:
+
+```yaml
+services:
+  # Sua configuração do Evolution API:
+  evolution-api:
+    ...
+    networks:
+      - evolution-net
+    ...
+
+  # Configuração do Redis que você baixou:
+  redis:
+    ...
+
+volumes:
+  evolution_redis:
+  evolution_instances:
+
+networks:
+  evolution-net:
+    name: evolution-net
+    driver: bridge
+```
+3. Salve o arquivo e execute o comando:
+```bash
+docker-compose up -d
+```
 
 ### Configuração das Variáveis de Ambiente
 
@@ -43,6 +78,12 @@ CACHE_REDIS_SAVE_INSTANCES=false
 
 # Habilitar o cache local
 CACHE_LOCAL_ENABLED=false
+```
+
+Caso use um único [docker-compose.yaml](#utilizando-docker-único-arquivo), você deve substituir o `localhost` por `redis`. Por exemplo:
+```env
+# URI de conexão com o Redis
+CACHE_REDIS_URI=redis://redis:6379/6
 ```
 
 ### Instalação Local

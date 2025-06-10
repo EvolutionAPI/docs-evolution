@@ -15,7 +15,7 @@ The easiest and fastest way to set up Redis for Evolution API v2 is through Dock
 
 To set up Redis via Docker, follow these steps:
 
-1. Download the `docker-compose.yaml` file for Redis available [here](https://github.com/EvolutionAPI/evolution-api/blob/v2.0.0/Docker/redis/docker-compose.yaml).
+1. Download the `docker-compose.yaml` file for Redis available [here](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/redis/docker-compose.yaml).
 2. Navigate to the directory where the file was downloaded and run the command:
 
 ```bash
@@ -23,6 +23,41 @@ docker-compose up -d
 ```
 
 3. The Redis instance will be available at `localhost` on port `6379`.
+
+### Using Docker (Single File)
+
+If you don't want to have separate containers, you can create a single file with Redis and Evolution API. Follow the steps below:
+
+1. Download the `docker-compose.yaml` file for Redis available [here](https://github.com/EvolutionAPI/evolution-api/blob/2.2.3/Docker/redis/docker-compose.yaml).
+2. Open the file and add your Evolution API configuration specifying the `networks`. For example:
+
+```yaml
+services:
+  # Your Evolution API configuration:
+  evolution-api:
+    ...
+    networks:
+      - evolution-net
+    ...
+
+  # Redis configuration you downloaded:
+  redis:
+    ...
+
+volumes:
+  evolution_redis:
+  evolution_instances:
+
+networks:
+  evolution-net:
+    name: evolution-net
+    driver: bridge
+```
+
+3. Save the file and run the command:
+```bash
+docker-compose up -d
+```
 
 ### Environment Variables Configuration
 
@@ -43,6 +78,12 @@ CACHE_REDIS_SAVE_INSTANCES=false
 
 # Enable local cache
 CACHE_LOCAL_ENABLED=false
+```
+
+If you use a single [docker-compose.yaml](#using-docker-single-file), you should replace `localhost` with `redis`. For example:
+```env
+# Redis connection URI
+CACHE_REDIS_URI=redis://redis:6379/6
 ```
 
 ### Local Installation
