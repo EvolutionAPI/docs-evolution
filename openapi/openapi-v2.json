@@ -6587,8 +6587,8 @@
     },
     "/typebot/settings/{instance}": {
       "post": {
-        "operationId": "startTypebot",
-        "summary": "Change Session Status",
+        "operationId": "settingsTypebot",
+        "summary": "Set settings typebot",
         "tags": [
           "Typebot Controller"
         ],
