@@ -6749,8 +6749,8 @@
     },
     "/typebot/fetch/:typebotId/{instance}": {
       "get": {
-        "operationId": "findTypebot",
-        "summary": "Find Typebot",
+        "operationId": "fetchTypebot",
+        "summary": "Fetch Typebot",
         "tags": [
           "Typebot Controller"
         ],
@@ -6780,7 +6780,7 @@
             }
           }
         ],
-        "description": "Find typebot",
+        "description": "Fetch typebot",
         "responses": {
           "200": {
             "description": "Ok",
