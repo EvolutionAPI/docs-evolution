@@ -11392,7 +11392,7 @@
         "tags": [
           "OpenAI Controller"
         ],
-        "description": "Update evo bot.",
+        "description": "Find evo bot.",
         "security": [
           {
             "ApiKeyAuth": []
