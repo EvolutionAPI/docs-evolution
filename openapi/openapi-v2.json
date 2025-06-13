@@ -7694,7 +7694,7 @@
     },
     "/openai/find/{instance}": {
       "get": {
-        "operationId": "findBotOpenAI",
+        "operationId": "findBotsOpenAI",
         "summary": "Find OpenAI Bots",
         "tags": [
           "OpenIA Controller"
