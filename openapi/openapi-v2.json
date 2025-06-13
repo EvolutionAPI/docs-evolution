@@ -5559,8 +5559,8 @@
     },
     "/group/acceptInviteCode/{instance}": {
       "get": {
-        "operationId": "fetchInviteCode",
-        "summary": "Fetch Group Invite Code",
+        "operationId": "acceptInviteCode",
+        "summary": "Accept Group Invite Code",
         "tags": [
           "Group Controller"
         ],
