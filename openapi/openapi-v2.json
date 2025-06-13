@@ -1536,10 +1536,10 @@
     },
     "/settings/find/{instance}": {
       "get": {
-        "operationId": "findWebhook",
-        "summary": "Find Webhook",
+        "operationId": "findSettings",
+        "summary": "Find Settings",
         "tags": [
-          "Webhook Controller"
+          "Settings Controller"
         ],
         "deprecated": false,
         "security": [
@@ -1558,7 +1558,7 @@
             }
           }
         ],
-        "description": "Fetch Webhook configuration",
+        "description": "Fetch Settings configuration",
         "responses": {
           "200": {
             "description": "Ok",
@@ -3505,7 +3505,7 @@
     },
     "/message/sendButtons/{instance}": {
       "post": {
-        "operationId": "sendList",
+        "operationId": "sendButtons",
         "summary": "Send Buttons",
         "tags": [
           "Message Controller"
@@ -3913,7 +3913,7 @@
     },
     "/chat/markChatUnread/{instance}": {
       "post": {
-        "operationId": "markMessageAsRead",
+        "operationId": "markMessageAsUnread",
         "summary": "Mark Message As Unread",
         "tags": [
           "Chat Controller"
@@ -4883,8 +4883,8 @@
     },
     "/chat/fetchProfile/{instance}": {
       "post": {
-        "operationId": "fetchBusinessProfile",
-        "summary": "Fetch Business Profile",
+        "operationId": "fetchProfile",
+        "summary": "Fetch Profile",
         "tags": [
           "Chat Controller"
         ],
@@ -5559,8 +5559,8 @@
     },
     "/group/acceptInviteCode/{instance}": {
       "get": {
-        "operationId": "fetchInviteCode",
-        "summary": "Fetch Group Invite Code",
+        "operationId": "acceptInviteCode",
+        "summary": "Accept Group Invite Code",
         "tags": [
           "Group Controller"
         ],
@@ -5601,8 +5601,8 @@
     },
     "/group/revokeInviteCode/{instance}": {
       "post": {
-        "operationId": "fetchInviteCode",
-        "summary": "Fetch Group Invite Code",
+        "operationId": "revokeInviteCode",
+        "summary": "Revoke Group Invite Code",
         "tags": [
           "Group Controller"
         ],
@@ -6535,7 +6535,7 @@
     },
     "/typebot/changeStatus/{instance}": {
       "post": {
-        "operationId": "startTypebot",
+        "operationId": "changeStatusTypebot",
         "summary": "Change Session Status",
         "tags": [
           "Typebot Controller"
@@ -6587,8 +6587,8 @@
     },
     "/typebot/settings/{instance}": {
       "post": {
-        "operationId": "startTypebot",
-        "summary": "Change Session Status",
+        "operationId": "settingsTypebot",
+        "summary": "Set settings typebot",
         "tags": [
           "Typebot Controller"
         ],
@@ -6683,8 +6683,8 @@
     },
     "/typebot/fetchSettings/{instance}": {
       "get": {
-        "operationId": "findTypebot",
-        "summary": "Find Typebot",
+        "operationId": "findSettingsTypebot",
+        "summary": "Find Typebot settings",
         "tags": [
           "Typebot Controller"
         ],
@@ -6747,10 +6747,10 @@
         }
       }
     },
-    "/typebot/fetch/:typebotId/{instance}": {
+    "/typebot/fetch/{typebotId}/{instance}": {
       "get": {
-        "operationId": "findTypebot",
-        "summary": "Find Typebot",
+        "operationId": "fetchTypebot",
+        "summary": "Fetch Typebot",
         "tags": [
           "Typebot Controller"
         ],
@@ -6780,7 +6780,7 @@
             }
           }
         ],
-        "description": "Find typebot",
+        "description": "Fetch typebot",
         "responses": {
           "200": {
             "description": "Ok",
@@ -6789,10 +6789,10 @@
         }
       }
     },
-    "/typebot/fetchSessions/:typebotId/{instance}": {
+    "/typebot/fetchSessions/{typebotId}/{instance}": {
       "get": {
-        "operationId": "findTypebot",
-        "summary": "Find session typebot",
+        "operationId": "fetchTypebotSession",
+        "summary": "Fetch session typebot",
         "tags": [
           "Typebot Controller"
         ],
@@ -6822,7 +6822,7 @@
             }
           }
         ],
-        "description": "Find session typebot",
+        "description": "Fetch session typebot",
         "responses": {
           "200": {
             "description": "Ok",
@@ -6831,7 +6831,7 @@
         }
       }
     },
-    "/typebot/update/:typebotId/{instance}": {
+    "/typebot/update/{typebotId}/{instance}": {
       "post": {
         "operationId": "changeTypebotStatus",
         "summary": "Change Typebot Status",
@@ -6956,10 +6956,10 @@
         }
       }
     },
-    "/typebot/delete/:typebotId/{instance}": {
+    "/typebot/delete/{typebotId}/{instance}": {
       "delete": {
-        "operationId": "changeTypebotStatus",
-        "summary": "Delete Status",
+        "operationId": "deleteTypebotStatus",
+        "summary": "Delete typebot status",
         "tags": [
           "Typebot Controller"
         ],
@@ -6989,7 +6989,7 @@
             }
           }
         ],
-        "description": "Delete typebot",
+        "description": "Delete typebot status",
         "responses": {
           "200": {
             "description": "Ok",
@@ -7694,7 +7694,7 @@
     },
     "/openai/find/{instance}": {
       "get": {
-        "operationId": "findBotOpenAI",
+        "operationId": "findBotsOpenAI",
         "summary": "Find OpenAI Bots",
         "tags": [
           "OpenIA Controller"
@@ -7725,7 +7725,7 @@
         }
       }
     },
-    "/openai/find/:openaiBotId/{instance}": {
+    "/openai/find/{openaiBotId}/{instance}": {
       "get": {
         "operationId": "findBotOpenAI",
         "summary": "Find OpenAI Bot",
@@ -7767,7 +7767,7 @@
         }
       }
     },
-    "/openai/delete/:openaiBotId/{instance}": {
+    "/openai/delete/{openaiBotId}/{instance}": {
       "delete": {
         "operationId": "deleteBotOpenAI",
         "summary": "Delete OpenAI Bot",
@@ -7809,7 +7809,7 @@
         }
       }
     },
-    "/openai/update/:openaiBotId/{instance}": {
+    "/openai/update/{openaiBotId}/{instance}": {
       "put": {
         "operationId": "updateBotOpenAI",
         "summary": "Update OpenAI Bot",
@@ -8075,7 +8075,7 @@
         }
       }
     },
-    "/openai/creds/:openaiCredsId/{instance}": {
+    "/openai/creds/{openaiCredsId}/{instance}": {
       "delete": {
         "operationId": "deleteCredsOpenAI",
         "summary": "Delete OpenAI Creds",
@@ -8361,7 +8361,7 @@
         }
       }
     },
-    "/openai/fetchSessions/:openaiBotId/{instance}": {
+    "/openai/fetchSessions/{openaiBotId}/{instance}": {
       "get": {
         "operationId": "fetchSessions",
         "summary": "Fetch sessions of the OpenAI bot instance",
@@ -8608,7 +8608,7 @@
         }
       }
     },
-    "/dify/find/:difyId/{instance}": {
+    "/dify/find/{difyId}/{instance}": {
       "get": {
         "operationId": "findDify",
         "summary": "Find Bot Dify",
@@ -8661,7 +8661,7 @@
         }
       }
     },
-    "/dify/update/:difyId/{instance}": {
+    "/dify/update/{difyId}/{instance}": {
       "put": {
         "operationId": "updateDifyBot",
         "summary": "Create a new Dify bot instance",
@@ -9044,7 +9044,7 @@
         }
       }
     },
-    "/dify/fetchSessions/:difyId/{instance}": {
+    "/dify/fetchSessions/{difyId}/{instance}": {
       "get": {
         "operationId": "fetchDifyBotSessions",
         "summary": "Recupera as sessões ativas do bot Dify",
@@ -9273,7 +9273,7 @@
         }
       }
     },
-    "/n8n/find/:n8nId/{instance}": {
+    "/n8n/find/{n8nId}/{instance}": {
       "get": {
         "operationId": "findN8n",
         "summary": "Find n8n Bot",
@@ -9326,7 +9326,7 @@
         }
       }
     },
-    "/n8n/update/:n8nId/{instance}": {
+    "/n8n/update/{n8nId}/{instance}": {
       "put": {
         "operationId": "updateN8nBot",
         "summary": "Create a new n8n bot instance",
@@ -9701,7 +9701,7 @@
         }
       }
     },
-    "/n8n/fetchSessions/:n8nId/{instance}": {
+    "/n8n/fetchSessions/{n8nId}/{instance}": {
       "get": {
         "operationId": "fetchN8nBotSessions",
         "summary": "Recupera as sessões ativas do bot n8n",
@@ -9927,7 +9927,7 @@
         }
       }
     },
-    "/evoai/find/:evoaiId/{instance}": {
+    "/evoai/find/{evoaiId}/{instance}": {
       "get": {
         "operationId": "findEvoAIBot",
         "summary": "Find EvoAI Bot",
@@ -9980,7 +9980,7 @@
         }
       }
     },
-    "/evoai/update/:evoaiId/{instance}": {
+    "/evoai/update/{evoaiId}/{instance}": {
       "put": {
         "operationId": "updateEvoAIBot",
         "summary": "Create a new EvoAI bot instance",
@@ -10352,7 +10352,7 @@
         }
       }
     },
-    "/evoai/fetchSessions/:evoaiId/{instance}": {
+    "/evoai/fetchSessions/{evoaiId}/{instance}": {
       "get": {
         "operationId": "fetchEvoAIBotSessions",
         "summary": "Recupera as sessões ativas do bot EvoAI",
@@ -10594,7 +10594,7 @@
     },
     "/flowise/find/{instance}": {
       "get": {
-        "operationId": "fetchFlowiseBotSessions",
+        "operationId": "fetchFlowiseBotsSessions",
         "summary": "Recupera as sessões ativas do bot Flowise",
         "tags": [
           "Dify Controller"
@@ -10635,7 +10635,7 @@
         }
       }
     },
-    "/flowise/find/:flowiseId/{instance}": {
+    "/flowise/find/{flowiseId}/{instance}": {
       "get": {
         "operationId": "fetchFlowiseBotSessions",
         "summary": "Recupera as sessões ativas do bot Flowise",
@@ -10687,7 +10687,7 @@
         }
       }
     },
-    "/flowise/update/:flowiseId/{instance}": {
+    "/flowise/update/{flowiseId}/{instance}": {
       "post": {
         "operationId": "updateFlowiseInstance",
         "summary": "Atualiza uma instância do Flowise",
@@ -10884,9 +10884,9 @@
         }
       }
     },
-    "/flowise/delete/:flowiseId/{instance}": {
+    "/flowise/delete/{flowiseId}/{instance}": {
       "delete": {
-        "operationId": "deleteBot",
+        "operationId": "deleteFlowiseBot",
         "summary": "Delete Bot Flowise",
         "tags": [
           "Group Controller"
@@ -10909,7 +10909,7 @@
           },
           {
             "name": "flowiseId",
-            "in": "query",
+            "in": "path",
             "required": true,
             "description": "Id Bot Flowise",
             "schema": {
@@ -11048,7 +11048,7 @@
         }
       }
     },
-    "/flowise/fetchSessions/:flowiseId/{instance}": {
+    "/flowise/fetchSessions/{flowiseId}/{instance}": {
       "get": {
         "operationId": "fetchFlowiseSessions",
         "summary": "Recupera as sessões ativas do bot Flowise",
@@ -11385,14 +11385,14 @@
         }
       }
     },
-    "/evolutionBot/fetch/:evolutionBotId/{instance}": {
+    "/evolutionBot/fetch/{evolutionBotId}/{instance}": {
       "get": {
         "operationId": "findEvo",
         "summary": "Find Bot Evo",
         "tags": [
           "OpenAI Controller"
         ],
-        "description": "Update evo bot.",
+        "description": "Find evo bot.",
         "security": [
           {
             "ApiKeyAuth": []
@@ -11438,7 +11438,7 @@
         }
       }
     },
-    "/evolutionBot/update/:evolutionBotId/{instance}": {
+    "/evolutionBot/update/{evolutionBotId}/{instance}": {
       "put": {
         "operationId": "updateEvolutionBot",
         "summary": "Update Evolution Bot",
@@ -11583,12 +11583,12 @@
     },
     "/evolutionBot/find/{instance}": {
       "get": {
-        "operationId": "findEvo",
+        "operationId": "findEvoBots",
         "summary": "Find Bots Evo",
         "tags": [
           "OpenAI Controller"
         ],
-        "description": "Update evo bots.",
+        "description": "Find evo bots.",
         "security": [
           {
             "ApiKeyAuth": []
@@ -11625,9 +11625,9 @@
         }
       }
     },
-    "/evolutionBot/delete/:evolutionBotId/{instance}": {
+    "/evolutionBot/delete/{evolutionBotId}/{instance}": {
       "delete": {
-        "operationId": "deleteBot",
+        "operationId": "deleteEvoBot",
         "summary": "Delete Bot Evolution",
         "tags": [
           "Group Controller"
@@ -11650,7 +11650,7 @@
           },
           {
             "name": "evolutionBotId",
-            "in": "query",
+            "in": "path",
             "required": true,
             "description": "Id Bot Evolution",
             "schema": {
@@ -11789,7 +11789,7 @@
             }
           }
         ],
-        "description": "Find evolution bot settings",
+        "description": "Find evolution bot session",
         "responses": {
           "200": {
             "description": "Ok",
@@ -11798,9 +11798,9 @@
         }
       }
     },
-    "/evolutionBot/fetchSessions/:evolutionBotId/{instance}": {
+    "/evolutionBot/fetchSessions/{evolutionBotId}/{instance}": {
       "get": {
-        "operationId": "findEvolutionBot",
+        "operationId": "findEvolutionBotSession",
         "summary": "Find EvoBot session",
         "tags": [
           "Evolution Bot Controller"
@@ -11831,7 +11831,7 @@
             }
           }
         ],
-        "description": "Find evolution bot settings",
+        "description": "Find evolution bot session",
         "responses": {
           "200": {
             "description": "Ok",
@@ -11897,17 +11897,6 @@
         "operationId": "getEvoInfo",
         "summary": "Get information about your EvolutionAPI",
         "deprecated": false,
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "ID of the instance to connect",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "description": "Get information about your EvolutionAPI",
         "responses": {
           "200": {
@@ -11945,8 +11934,7 @@
                   "example": {
                     "status": 200,
                     "message": "Welcome to the Evolution API, it is working!",
-                    "version": "1.7.4",
-                    "swagger": "http://example.evolution-api.com/docs",
+                    "version": "2.2.3",
                     "manager": "http://example.evolution-api.com/manager",
                     "documentation": "https://doc.evolution-api.com"
                   }
