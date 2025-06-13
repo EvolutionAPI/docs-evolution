@@ -11800,7 +11800,7 @@
     },
     "/evolutionBot/fetchSessions/:evolutionBotId/{instance}": {
       "get": {
-        "operationId": "findEvolutionBot",
+        "operationId": "findEvolutionBotSession",
         "summary": "Find EvoBot session",
         "tags": [
           "Evolution Bot Controller"
@@ -11831,7 +11831,7 @@
             }
           }
         ],
-        "description": "Find evolution bot settings",
+        "description": "Find evolution bot session",
         "responses": {
           "200": {
             "description": "Ok",
