@@ -11789,7 +11789,7 @@
             }
           }
         ],
-        "description": "Find evolution bot settings",
+        "description": "Find evolution bot session",
         "responses": {
           "200": {
             "description": "Ok",
