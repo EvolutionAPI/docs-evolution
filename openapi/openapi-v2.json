@@ -10594,7 +10594,7 @@
     },
     "/flowise/find/{instance}": {
       "get": {
-        "operationId": "fetchFlowiseBotSessions",
+        "operationId": "fetchFlowiseBotsSessions",
         "summary": "Recupera as sessões ativas do bot Flowise",
         "tags": [
           "Dify Controller"
