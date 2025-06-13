@@ -11583,12 +11583,12 @@
     },
     "/evolutionBot/find/{instance}": {
       "get": {
-        "operationId": "findEvo",
+        "operationId": "findEvoBots",
         "summary": "Find Bots Evo",
         "tags": [
           "OpenAI Controller"
         ],
-        "description": "Update evo bots.",
+        "description": "Find evo bots.",
         "security": [
           {
             "ApiKeyAuth": []
