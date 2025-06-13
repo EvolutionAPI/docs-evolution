@@ -11897,17 +11897,6 @@
         "operationId": "getEvoInfo",
         "summary": "Get information about your EvolutionAPI",
         "deprecated": false,
-        "parameters": [
-          {
-            "name": "instance",
-            "in": "path",
-            "required": true,
-            "description": "ID of the instance to connect",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "description": "Get information about your EvolutionAPI",
         "responses": {
           "200": {
@@ -11945,8 +11934,7 @@
                   "example": {
                     "status": 200,
                     "message": "Welcome to the Evolution API, it is working!",
-                    "version": "1.7.4",
-                    "swagger": "http://example.evolution-api.com/docs",
+                    "version": "2.2.3",
                     "manager": "http://example.evolution-api.com/manager",
                     "documentation": "https://doc.evolution-api.com"
                   }
