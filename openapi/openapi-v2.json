@@ -6958,8 +6958,8 @@
     },
     "/typebot/delete/:typebotId/{instance}": {
       "delete": {
-        "operationId": "changeTypebotStatus",
-        "summary": "Delete Status",
+        "operationId": "deleteTypebotStatus",
+        "summary": "Delete typebot status",
         "tags": [
           "Typebot Controller"
         ],
@@ -6989,7 +6989,7 @@
             }
           }
         ],
-        "description": "Delete typebot",
+        "description": "Delete typebot status",
         "responses": {
           "200": {
             "description": "Ok",
