@@ -5601,8 +5601,8 @@
     },
     "/group/revokeInviteCode/{instance}": {
       "post": {
-        "operationId": "fetchInviteCode",
-        "summary": "Fetch Group Invite Code",
+        "operationId": "revokeInviteCode",
+        "summary": "Revoke Group Invite Code",
         "tags": [
           "Group Controller"
         ],
