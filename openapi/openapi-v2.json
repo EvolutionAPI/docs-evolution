@@ -3505,7 +3505,7 @@
     },
     "/message/sendButtons/{instance}": {
       "post": {
-        "operationId": "sendList",
+        "operationId": "sendButtons",
         "summary": "Send Buttons",
         "tags": [
           "Message Controller"
