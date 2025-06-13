@@ -4883,8 +4883,8 @@
     },
     "/chat/fetchProfile/{instance}": {
       "post": {
-        "operationId": "fetchBusinessProfile",
-        "summary": "Fetch Business Profile",
+        "operationId": "fetchProfile",
+        "summary": "Fetch Profile",
         "tags": [
           "Chat Controller"
         ],
