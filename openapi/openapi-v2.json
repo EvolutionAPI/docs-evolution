@@ -11627,7 +11627,7 @@
     },
     "/evolutionBot/delete/:evolutionBotId/{instance}": {
       "delete": {
-        "operationId": "deleteBot",
+        "operationId": "deleteEvoBot",
         "summary": "Delete Bot Evolution",
         "tags": [
           "Group Controller"
