@@ -1536,10 +1536,10 @@
     },
     "/settings/find/{instance}": {
       "get": {
-        "operationId": "findWebhook",
-        "summary": "Find Webhook",
+        "operationId": "findSettings",
+        "summary": "Find Settings",
         "tags": [
-          "Webhook Controller"
+          "Settings Controller"
         ],
         "deprecated": false,
         "security": [
@@ -1558,7 +1558,7 @@
             }
           }
         ],
-        "description": "Fetch Webhook configuration",
+        "description": "Fetch Settings configuration",
         "responses": {
           "200": {
             "description": "Ok",
