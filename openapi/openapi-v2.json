@@ -6683,8 +6683,8 @@
     },
     "/typebot/fetchSettings/{instance}": {
       "get": {
-        "operationId": "findTypebot",
-        "summary": "Find Typebot",
+        "operationId": "findSettingsTypebot",
+        "summary": "Find Typebot settings",
         "tags": [
           "Typebot Controller"
         ],
