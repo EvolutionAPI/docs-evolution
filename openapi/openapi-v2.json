@@ -10886,7 +10886,7 @@
     },
     "/flowise/delete/:flowiseId/{instance}": {
       "delete": {
-        "operationId": "deleteBot",
+        "operationId": "deleteFlowiseBot",
         "summary": "Delete Bot Flowise",
         "tags": [
           "Group Controller"
