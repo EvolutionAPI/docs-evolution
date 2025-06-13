@@ -3913,7 +3913,7 @@
     },
     "/chat/markChatUnread/{instance}": {
       "post": {
-        "operationId": "markMessageAsRead",
+        "operationId": "markMessageAsUnread",
         "summary": "Mark Message As Unread",
         "tags": [
           "Chat Controller"
