@@ -1648,7 +1648,7 @@
                   },
                   "text": {
                     "type": "string",
-                    "description": "Test message to send"
+                    "description": "Text message to send"
                   },
                   "delay": {
                     "type": "integer",
