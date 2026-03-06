@@ -19,6 +19,10 @@ icon: docker
 A Evolution API v2 está pronta para o Docker e pode ser facilmente implantada com Docker no modo standalone ou swarm. 
 O repositório oficial do Evolution API contém todos os arquivos de composição necessários para instalar e executar a API.
 
+<Note>
+  <strong>Aviso Importante:</strong> A partir da versão <code>v2.3.0</code>, as imagens do Docker que antes eram provenientes de <code>deatendai/evolution-api</code> agora serão provenientes de <code>evoapicloud/evolution-api</code>.
+</Note>
+
 ## Docker Compose
 
 Implantar a Evolution API v2 usando o Docker Compose simplifica a configuração e o gerenciamento de seus contêineres Docker. 
@@ -46,7 +50,7 @@ version: '3.9'
 services:
   evolution-api:
     container_name: evolution_api
-    image: atendai/evolution-api:v2.1.1
+    image: evoapicloud/evolution-api:v2.3.0
     restart: always
     ports:
       - "8080:8080"
@@ -323,7 +327,7 @@ version: "3.7"
 
 services:
   evolution_v2:
-    image: atendai/evolution-api:v2.1.1
+    image: evoapicloud/evolution-api:v2.3.0
     volumes:
       - evolution_instances:/evolution/instances
     networks:
