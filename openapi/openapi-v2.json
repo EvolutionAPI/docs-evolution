@@ -4706,9 +4706,13 @@
                       }
                     }
                   },
-                  "limit": {
+                  "offset": {
                     "type": "integer",
                     "description": "Limit for the return"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "Page number of the returned results"
                   }
                 }
               }
